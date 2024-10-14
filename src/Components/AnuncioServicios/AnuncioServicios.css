@@ -1,0 +1,33 @@
+.main-container {
+    height: 80vh;
+    background: rgb(235, 234, 234);
+    margin-top: 180px;
+    position: relative;
+    margin-bottom: -90px !important;
+}
+
+.background-image {
+    position: absolute; /* Posición absoluta para la imagen */
+    top: -200px; /* La imagen estará pegada en la parte inferior */
+    left: 0; /* La imagen estará pegada en la esquina izquierda */
+    width: 100%; /* Ancho completo */
+    z-index: 0;
+}
+
+.content-container {
+    margin: auto; /* Centra el contenido horizontalmente */
+}
+.colorcad{
+    margin-top: 60px;
+    background: rgb(235, 234, 234);
+}
+
+.colorcad2{
+    margin: 9px;
+    border-color: none;
+    box-shadow: none;
+    background: rgb(235, 234, 234);
+}
+.imgCard{
+    margin-top: -30px !important;
+}

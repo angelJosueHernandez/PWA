@@ -1,0 +1,28 @@
+.aviso-privacidad {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .aviso-privacidad h1 {
+    color: #333;
+  }
+  
+  .aviso-privacidad p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+.titulo{
+    text-align: center;
+}
+.dos-columnas {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .columna {
+    width: 48%;
+  }
+  .tabla{
+    padding-right: 12%;
+  }

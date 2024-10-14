@@ -1,0 +1,43 @@
+.politicas-cookies {
+  max-width: 90vw; /* Cambiamos a unidades flexibles */
+  width: 100%; /* Para que ocupe todo el ancho disponible */
+  margin: 0 auto;
+  padding: 5vh 5vw; /* Ajustamos el padding con unidades flexibles */
+  font-size: 1rem; /* Tamaño de fuente flexible */
+  line-height: 1.8; /* Mejorar legibilidad */
+}
+
+.politicas-cookies h1 {
+  color: #333;
+  font-size: 2rem; /* Tamaño de título flexible */
+  text-align: center; /* Centramos los títulos */
+}
+
+.politicas-cookies h2, .politicas-cookies h3, .politicas-cookies h4 {
+  color: #333;
+  font-size: 1.5rem; /* Ajustamos el tamaño para pantallas más pequeñas */
+  margin-top: 2vh; /* Separación entre títulos */
+}
+
+.politicas-cookies p {
+  margin-bottom: 2vh; /* Ajustamos la separación con flexibilidad */
+  line-height: 1.8;
+  font-size: 1rem; /* Ajustamos el tamaño del texto */
+}
+
+.politicas-cookies ul {
+  padding-left: 1.5rem; /* Margen izquierdo para listas */
+  font-size: 1rem; /* Texto en las listas */
+}
+
+.politicas-cookies ul li {
+  margin-bottom: 1vh; /* Espaciado entre elementos de lista */
+}
+
+
+
+.titulo {
+  text-align: center;
+  font-size: 1.8rem; /* Tamaño flexible */
+}
+

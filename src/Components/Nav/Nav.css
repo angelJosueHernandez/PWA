@@ -1,0 +1,209 @@
+nav {
+    height: 65px;
+    display: grid;
+    place-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--color-bg-1);
+    z-index: 100;
+    border: 1px solid var(--color-dark-Ex);
+    
+}
+.menu-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Color de fondo para el hover */
+  }
+  .menu-item2:hover {
+    background-color: rgba(252, 0, 0, 0.1); /* Color de fondo para el hover */
+  }
+  
+.menuUser{
+    z-index: 9999 !important;
+}
+.colorM{
+    color: var(--color-dark);
+}
+.navShadow{
+    box-shadow: 0 0 .7rem rgba(0, 0, 0, 0.2);
+}
+.nav-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.nav-container .logo{
+    width: 120px;
+}
+.nav-links {
+    
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--color-dark);
+    text-transform: uppercase;
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: center; 
+    margin: -10px;
+}
+.icon-navs{
+    font-size: 15px ;
+}
+.nav-links .active {
+    color: var(--color-primary);
+}
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.nav-right a{
+    color: var(--color-dark);
+    font-size: 17px;
+}
+.menu-button{
+    display: none;
+}
+span{
+    margin: 10px;
+    font-size: 13px;
+}
+span .active{
+    color: var(--color-primary);
+}
+
+/*...................Max-width:1024px.................... */
+
+@media(max-width:1024px){
+    nav{
+        height: 50px;
+    }
+    .nav-container{
+        position: relative;
+        height: 100%;
+    }
+    .nav-container .logo{
+        width: 100px;
+    }
+    .nav-links{
+        flex-direction: column;
+        gap: 0;
+        width: 15rem;
+        transform: var(--transition);
+        top: 70px;
+        right: 0;
+        position: fixed;
+        perspective: 400px;
+   
+    }
+    .nav-links li{
+        height: 100%;
+        width: 100%;
+        animation: navAni 600ms forwards ease;
+        opacity: 0;
+        transform: rotateY(-90deg) ;
+        margin-left: 30px;
+    }
+    .nav-links a {
+        display: inline-block;
+        background: var(--color-bg-1);
+        height: 50px;
+        width: 90%;
+        margin-left: 90px;
+        display: flex;
+        padding-left: 30px;
+        align-items: center;
+        overflow: hidden;
+        box-shadow: -1rem 5rem 5rem rgb(0, 0, 0,0.4);
+        margin: .1px;
+ 
+    }
+    .MenuDes{
+        display: inline-block;
+            background: var(--color-bg-1);
+            height: 50px;
+            width: 90%;
+            margin-left: 90px;
+            display: flex;
+            padding-left: 30px;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: -1rem 5rem 5rem rgb(0, 0, 0,0.4);
+            margin: .1px;
+    }
+   
+    span{
+        margin: 9px;
+        font-size: 12px;
+    }
+    
+   
+     /*...................NavLinks-Animation.................... */
+     @keyframes navAni {
+        to{
+            transform: rotateY(0);
+            opacity: 1;
+        }
+    }
+    .nav-links li:nth-child(2){
+        animation-delay: 200ms;
+    }
+    .nav-links li:nth-child(3){
+        animation-delay: 400ms;
+    }
+    .nav-links li:nth-child(4){
+        animation-delay: 600ms;
+    }
+    .nav-links li:nth-child(5){
+        animation-delay: 800ms;
+    }
+    .nav-links li:nth-child(6){
+        animation-delay: 1000ms;
+    }
+    .nav-links li:nth-child(7){
+        animation-delay: 1200ms;
+    }
+    .nav-links li:nth-child(8){
+        animation-delay: 1400ms;
+    }
+    .nav-links li:nth-child(9){
+        animation-delay: 1600ms;
+    }
+    .menu-button{
+        display: flex;
+        color: var(--color-dark);
+        font-size: 18px;
+    }
+
+    /*...................NavLinksShowing And Hideing.................... */
+    .navLinksShow{
+        display: flex;
+    }
+    .navLinksHide{
+        display: none;
+    }
+}
+
+/*...................Max-width:600px.................... */
+
+@media(max-width:600px){
+.nav-links{
+    width: 14rem;
+}
+.nav-right{
+    gap: 5px;
+}
+span{
+    margin: 5px;
+    font-size: 12px;
+}
+.nombreAvatar{
+    margin-left: -10px !important;
+}
+}
+
+
+

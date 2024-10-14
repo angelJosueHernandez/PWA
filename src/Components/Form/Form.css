@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+
+
+.container2{
+    margin: 5px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 788px;
+    max-width: 300%;
+    min-height: 680px;
+    margin-bottom: 60px;
+    margin-top: 10px;
+}
+.cuenta2{
+    font-size: 14px !important;
+    line-height: 10px !important ;
+    letter-spacing: 0.3px !important;
+    margin: 5px 0 !important;
+}
+.container2.error-present {
+    min-height: 650px; /* Ajusta la altura según sea necesario */
+  }
+.container2 p{
+    font-size: 11px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 10px 0;
+}
+
+.container2 span{
+    font-size: 12px;
+}
+
+.container2 a{
+    color: #272727;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container2 .button2{
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+.container2 .verBoton{
+    left: 240px;
+    align-items: center;
+    position: absolute;
+    display: flex;
+}
+
+
+.container2 .button2.hidden{
+    background-color: transparent;
+    border-color: #000000;
+}
+
+
+.container2 .button{
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    cursor: pointer;
+}
+
+.container2 .button.hidden{
+    background-color: transparent;
+    border-color: #000000;
+}
+
+.container2 form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container2 input{
+    background-color: #eee;
+    border: none;
+    margin: 9px 0;
+    padding: 4px 15px;
+    font-size: 10px;
+    border-radius: 8px;
+    width: 180%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.social-icons{
+    margin: 20px 0;
+}
+
+.social-icons a{
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+}
+.title-form{
+    color: var(--color-black);
+    font-size: 38px !important;
+}
+.btn-google {
+    background: var(--color-dark-Ex) !important;
+    color: #000000 !important;
+}
+.cont-remen{
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: center; 
+    margin-left: 10px;
+    margin-top: 6.5px !important ;
+  
+}
+.cont-remen2{
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: center; 
+    margin-left: 10px;
+    gap: 8px;
+   
+  
+}
+.img-Login{
+    position: absolute;
+    width: 600px;
+    height: 490px;
+    margin-left: 790px;
+    top: 0px;
+}
+.img-Login4{
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-left: 760px;
+    top: 550px;
+}
+.feature-border{
+    position: absolute;
+    width: 340px;
+    background: var(--color-dark);
+    margin-left: 785px;
+    top: 433px;
+}
+.title-form2{
+    position: absolute;
+    width: 340px;
+    margin-left: 855px;
+    top: 510px;
+}
+.error-messageInicio{
+  margin-top: -6.5px !important ;  
+  color: red !important;
+}
+.erroresInicio{
+    margin: 12px;
+    margin-bottom: 16px !important;
+}
+.leading{
+    margin-bottom: -7px !important;
+    margin-top: 4.5px !important ; 
+}
+.olvidaste{
+    margin-top: 12px;
+  }
+.InputsCon{
+    margin-top: 13px;
+}
+
+
+@media (max-width: 450px) {
+    /* Para pantallas de celulares */
+    .form-container{
+    margin-top: -60px !important;
+    }
+    .container2 {
+      width: 90% !important;
+      height: 400px !important;
+      margin: 30px !important; /* Centrar el contenedor */
+      padding: 20px !important;
+      text-align: center !important; /* Centrar el texto */
+    }
+  
+    .titulo {
+      margin-top: 110px !important;
+      margin-left: 160px;
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+  text-overflow: ellipsis;
+    }
+  .span{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 150px;
+  }
+
+  
+    /* Ocultar la imagen de la chica */
+    .img-Login {
+      display: none !important;
+      visibility: hidden !important;
+    }
+  
+    .img-Login4 {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+  
+    /* Centrar el botón de Google */
+    
+  .logoGogle{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 180px;
+  }
+  .InputsCon{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 10px !important;
+  }
+  .InputsCon2{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 0px !important;
+  }
+    /* Centrar el botón de inicio de sesión */
+    .button2 {
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+        text-overflow: ellipsis;
+        margin-left: 175px;
+    margin-bottom: 13px;
+    }
+  .olvidaste{
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+    margin-left: 180px;
+    margin-bottom: 23px;
+  }
+    /* Asegurar que el captcha se alinee bien */
+    .cont-remen {
+      display: flex !important;
+      justify-content: center !important;
+      margin-left: 180px  !important;
+    }
+
+    /* Centrar el texto de cuenta y registro */
+    .cont-remen2 {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      margin-left: 180px !important;
+    }
+  
+ 
+    .feature-border{
+        display: none !important;
+        opacity: 0 !important;
+    }
+    .cuenta2{
+      
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+    text-overflow: ellipsis;
+   
+    }
+    .contrasena{
+        margin-left: 40px !important;
+        width: 190px !important;
+    }
+    .correo{
+        margin-left: 40px !important;
+        width: 190px !important;
+    }
+    .contra{
+        margin-left: 23px;
+    }
+  }
+  
+
+  
+
+@media (max-width: 360px) {
+    /* Para pantallas de celulares */
+    .form-container{
+    margin-top: -50px !important;
+    }
+    .container2 {
+      width: 90% !important;
+      height: 400px !important;
+      margin: 30px !important; /* Centrar el contenedor */
+      padding: 20px !important;
+      text-align: center !important; /* Centrar el texto */
+    }
+  
+    .titulo {
+      margin-top: 110px !important;
+      margin-left: 160px;
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
+  text-overflow: ellipsis;
+    }
+    .span{
+        margin-top: 23px;
+    }
+ 
+    .social-icons {
+      margin: 30px 0 !important;
+      display: flex !important; /* Asegurarse de que los íconos estén en línea */
+      justify-content: center !important; /* Centrar los íconos */
+    }
+  
+    .social-icons a {
+      border: 1px solid #ccc !important;
+      border-radius: 20% !important;
+      display: inline-flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 0 3px !important;
+      width: 20px !important;
+      height: 20px !important;
+    }
+  
+    /* Ocultar la imagen de la chica */
+    .img-Login {
+      display: none !important;
+    }
+  
+    .img-Login4 {
+      display: none !important;
+    }
+  
+    /* Centrar el botón de Google */
+    .btn-google {
+      display: block !important;
+      margin: 0 auto !important;
+    }
+  
+    /* Centrar el botón de inicio de sesión */
+    .button2 {
+      display: block !important;
+      margin: 0 auto !important;
+    }
+  
+    /* Asegurar que el captcha se alinee bien */
+    .cont-remen{
+        width: 90% !important; /* Ajusta el ancho que desees */
+        transform: scale(0.8) !important; /* Cambia el valor de scale según el tamaño deseado, por ejemplo 0.8 = 80% del tamaño original */
+        transform-origin: 0 0 !important;
+    }
+
+    /* Centrar el texto de cuenta y registro */
+    .cont-remen2 {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+  
+ 
+    .feature-border{
+        display: none !important;
+    }
+  }
+  

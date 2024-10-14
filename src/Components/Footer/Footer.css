@@ -1,0 +1,99 @@
+footer{
+    margin-top: 150px;
+    padding-top: 30px;
+    background: var(--color-bg-4);
+    padding-bottom: 0;
+    position: absolute;
+    z-index: 1;
+    width: 100%; /* Ancho completo */
+}
+.footer-container h4{  
+    color: var(--color-dark-Ex) !important;
+    margin-bottom: 22px;
+}
+.footer-container a{  
+    color: var(--color-dark-Ex) !important;
+}
+.footer-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 40px;
+}
+.param-links li{
+     margin-top: 10px;
+}
+.param-links li a{
+    text-transform: uppercase;
+    font-size: 10px;
+    transition: var(--transition);
+}
+.svg-container {
+    position: relative; /* Posición absoluta para la imagen */
+    bottom: 50px; /* La imagen estará pegada en la parte inferior */
+    left: 0; /* La imagen estará pegada en la esquina izquierda */
+    width: 100%; /* Ancho completo */
+    z-index: 0; /* Asegura que la imagen esté detrás del pie de página */
+  }
+
+.wawefooter{
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente para mantener la relación de aspecto */
+}
+
+.path-0{
+    animation:pathAnim-0 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes pathAnim-0{
+    0%{
+      d: path("M 0,400 L 0,150 C 121.89285714285714,127.46428571428572 243.78571428571428,104.92857142857143 362,114 C 480.2142857142857,123.07142857142857 594.7499999999999,163.75000000000003 721,170 C 847.2500000000001,176.24999999999997 985.2142857142858,148.07142857142858 1107,139 C 1228.7857142857142,129.92857142857142 1334.392857142857,139.96428571428572 1440,150 L 1440,400 L 0,400 Z");
+    }
+    25%{
+      d: path("M 0,400 L 0,150 C 143.21428571428572,141.32142857142856 286.42857142857144,132.64285714285714 407,149 C 527.5714285714286,165.35714285714286 625.5,206.75 731,198 C 836.5,189.25 949.5714285714284,130.35714285714286 1069,114 C 1188.4285714285716,97.64285714285714 1314.2142857142858,123.82142857142857 1440,150 L 1440,400 L 0,400 Z");
+    }
+    50%{
+      d: path("M 0,400 L 0,150 C 89.53571428571428,115.28571428571428 179.07142857142856,80.57142857142857 312,100 C 444.92857142857144,119.42857142857143 621.2499999999999,193 761,193 C 900.7500000000001,193 1003.9285714285713,119.42857142857143 1111,100 C 1218.0714285714287,80.57142857142857 1329.0357142857142,115.28571428571428 1440,150 L 1440,400 L 0,400 Z");
+    }
+    75%{
+      d: path("M 0,400 L 0,150 C 95.96428571428572,139.10714285714286 191.92857142857144,128.21428571428572 333,134 C 474.07142857142856,139.78571428571428 660.25,162.25 786,150 C 911.75,137.75 977.0714285714284,90.78571428571428 1076,85 C 1174.9285714285716,79.21428571428572 1307.4642857142858,114.60714285714286 1440,150 L 1440,400 L 0,400 Z");
+    }
+    100%{
+      d: path("M 0,400 L 0,150 C 121.89285714285714,127.46428571428572 243.78571428571428,104.92857142857143 362,114 C 480.2142857142857,123.07142857142857 594.7499999999999,163.75000000000003 721,170 C 847.2500000000001,176.24999999999997 985.2142857142858,148.07142857142858 1107,139 C 1228.7857142857142,129.92857142857142 1334.392857142857,139.96428571428572 1440,150 L 1440,400 L 0,400 Z");
+    }
+  }
+/*...................................Media Screen 1024px................................*/
+@media (max-width: 1024px){ 
+    .footer-container{
+        grid-template-columns: repeat(2,1fr);
+        text-align: center;
+    }  
+    .svg-container {
+        position: relative; /* Posición absoluta para la imagen */
+        bottom: -10px; /* La imagen estará pegada en la parte inferior */
+        left: 0; /* La imagen estará pegada en la esquina izquierda */
+        width: 100%; /* Ancho completo */
+        z-index: 0; /* Asegura que la imagen esté detrás del pie de página */
+      }
+    
+}
+
+/*...................................Media Screen 600px................................*/
+@media (max-width: 600px){ 
+    .footer-container{
+        grid-template-columns: repeat(2,1fr);
+ 
+    }  
+    .svg-container {
+        position: relative; /* Posición absoluta para la imagen */
+        bottom: -80px; /* La imagen estará pegada en la parte inferior */
+        left: 0; /* La imagen estará pegada en la esquina izquierda */
+        width: 100%; /* Ancho completo */
+        z-index: 0; /* Asegura que la imagen esté detrás del pie de página */
+      }
+}
+
+
+.Title{
+  color: white;
+}

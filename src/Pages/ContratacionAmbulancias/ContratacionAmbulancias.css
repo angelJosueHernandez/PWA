@@ -1,0 +1,74 @@
+
+.margText{
+  padding-top: 5px !important;
+}
+
+
+
+
+/* Spinner CSS */
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-top: 2px solid white !important;
+  border-radius: 50%;
+  width: 16px !important;
+  height: 16px !important;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  margin-right: 7px !important;
+  margin-top: 16px !important;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.btnCar{
+  height: 40px ;
+}
+
+
+
+@media screen and (max-width: 2024px) {
+  .ambu {
+    width: 240px !important;
+  }
+}
+
+
+@media screen and (max-width: 890px) {
+  .ambu {
+    width: 310px !important;
+  }
+  .spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-top: 2px solid white !important;
+    border-radius: 50%;
+    width: 15px !important;
+    height: 15px !important;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+    margin-right: 7px;
+    margin-top: 16.5px !important;
+  }
+}
+
+
+@media screen and (max-width: 470px) {
+  .ambu {
+    width: 170px !important;
+  }
+  .spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-top: 2px solid white !important;
+    border-radius: 50%;
+    width: 15px !important;
+    height: 15px !important;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+    margin-right: 7px;
+    margin-top: 16.5px !important;
+  }
+}

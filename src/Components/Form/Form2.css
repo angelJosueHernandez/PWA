@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+
+.container3{
+    margin:25px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 900px;
+    max-width: 70%;
+    min-height: 1070px;
+    margin-bottom: 60px;
+    margin-top: 15px;
+}
+
+
+.button-disabled {
+    background-color: rgba(160, 159, 159, 0.5) !important; /* Gris transparente */
+
+  }
+
+.container3.error-present {
+    min-height: 1130px;
+  }
+  
+.container3 p{
+    font-size: 11px;
+    line-height: 10px;
+    letter-spacing: 0.3px;
+    margin: 5px 0;
+}
+.cuenta{
+    font-size: 14px !important;
+    line-height: 10px !important ;
+    letter-spacing: 0.3px !important;
+    margin: 5px 0 !important;
+}
+
+.container3 span{
+    font-size: 12px;
+    
+}
+
+.container3 a{
+    color: #272727;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container3 .button{
+    background-color: var(--color-primary);
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    cursor: pointer;
+}
+
+.container3 .button.hidden{
+    background-color: transparent;
+    border-color: #000000;
+}
+
+.container3 form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 0;
+    height: 100%;
+    margin-top: -6px;
+    margin: 0 40px ;
+}
+
+.container3 input{
+    background-color: #eee;
+    border: none;
+    margin: 2px -5px ;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    width: 110%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.social-icons{
+    margin: 3px 0 !important;
+}
+
+.social-icons a{
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2px;
+    width: 40px;
+    height: 40px;
+}
+.title-form{
+    color: var(--color-black);
+}
+.btn-google {
+    background: var(--color-dark-Ex) !important;
+    color: #000000 !important;
+}
+.cont-remen{
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: center; 
+    margin-left: 10px;
+    padding-top: 13px;
+  
+}
+.cont-remen2{
+    display: inline-grid;
+    grid-template-columns: auto 1fr;
+    align-items: center; 
+    margin-left: 10px;
+    gap: 8px;
+   
+  
+}
+.input-error {
+    border-color: red !important;
+  }
+  
+
+  .img-Login2{
+      position: absolute;
+      width: 600px;
+      height: 690px;
+      margin-left: 800px;
+      top: 110px;
+  }
+  .img-Login3{
+      position: absolute;
+      width: auto;
+      height: auto;
+      margin-left: 900px;
+      top: 900px;
+  }
+
+  .title-form3{
+      position: absolute;
+      width: 340px;
+      margin-left: 1060px;
+      top: 850px;
+  }
+  
+.icon{
+    font-size: 17px !important;
+}
+.error-message{
+    margin-top: 3.6px !important;  
+    color: red !important;
+  
+  }
+  .errores{
+      margin-bottom: 20px;
+  }
+  
+ .tamano{
+    width: 72.2% !important; 
+    margin-left: 60px !important;
+ } 
+  
+.inputNumeroRegion{
+
+    margin: 6.7px -15px;
+    padding: 7px 5px;
+    border-radius: 8px 0 0 8px; /* redondea la esquina superior izquierda */
+    border-bottom:  none; /* Aplica el borde solo en la línea inferior */
+    border-top: none; /* Elimina el borde en la línea superior */
+    border-right: 1px solid #ccc !important; /* Elimina el borde en la línea derecha */
+    border-left: none; /* Elimina el borde en la línea izquierda */
+    width: 75px; /* Ancho predeterminado */
+}
+
+.inputTel{
+    border-radius: 8px !important;
+    background-color: #eee !important;
+    border: none !important;
+    margin: 8px -5px !important;
+    padding: 2px 7px 1px 85px !important; /* Ajusta el padding-bottom para separar la línea de escritura */
+    font-size: 12px !important;
+    width: 110% !important;
+    outline: none !important;
+    line-height: 2.5; /* Opcional: ajusta el espacio vertical entre líneas */
+}
+
+.error-container{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.error-messages2{
+    position: relative !important;
+    padding: -7px 3px !important;
+    margin-top: 6px !important;
+    color: red !important;
+}

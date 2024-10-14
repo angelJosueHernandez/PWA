@@ -1,0 +1,45 @@
+.donation-button {
+    background-color: #e61a20;
+    color: white;
+    padding: 10px 20px; /* Ajuste del tamaño */
+    border: 2px solid #e61a20;
+    border-radius: 50px; /* Bordes redondeados */
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: all 0.3s ease;
+    z-index: 10; /* Aseguramos que el botón esté por encima de otros elementos */
+  }
+  
+  .donation-button .icon {
+    margin-left: 8px;
+    font-size: 18px;
+  }
+  
+  .donation-button:hover {
+    background-color: white;
+    color: #e43238;
+    border-color: #e21a21;
+    cursor: pointer;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3); /* Sombra más intensa al hacer hover */
+    transform: scale(1.05); /* Efecto de agrandamiento */
+  }
+  
+  @media (max-width: 768px) {
+    .donation-button {
+      font-size: 12px;
+      padding: 8px 16px; /* Ajuste de tamaño para dispositivos móviles */
+    }
+  }
+  
+  @media (min-width: 1800px) {
+    .donation-button {
+      font-size: 20px;
+      padding: 12px 25px; /* Ajuste de tamaño para pantallas grandes */
+    }
+  }
+  

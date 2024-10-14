@@ -1,0 +1,95 @@
+/* custom-calendar.css */
+.calendar-container {
+    width: 100%;
+    max-width: 600px; /* Ajusta el tamaño máximo del calendario */
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente */
+    height: 630px !important;
+}
+
+.react-calendar {
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__tile {
+    height: 80px; /* Ajusta la altura de los tiles */
+}
+
+.react-calendar__month-view__weekdays {
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+.react-calendar__navigation button {
+    font-size: 1.5rem;
+    margin: 0 0.5rem; /* Agrega margen entre los botones de navegación */
+}
+
+.react-calendar__month-view__days__day {
+    flex-basis: calc(100% / 7); /* Hace que cada día ocupe más espacio */
+    padding: 0.5rem; /* Agrega padding a cada día */
+}
+
+.react-calendar__tile--active {
+    background-color: #006edc !important;
+    color: white !important;
+    border-radius: 100%; /* Ajusta el radio del borde para hacer el círculo más pequeño */
+    width: 30px; /* Ajusta el ancho del círculo */
+    height: 75px; /* Ajusta la altura del círculo */
+}
+
+.react-calendar__tile--now {
+    background-color: #ff553b !important;
+    border-radius: 100%; /* Ajusta el radio del borde para hacer el círculo más pequeño */
+    width: 30px; /* Ajusta el ancho del círculo */
+    height: 75px; /* Ajusta la altura del círculo */
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .calendar-container {
+        max-width: 100%; /* Asegura que el calendario ocupe todo el ancho en pantallas pequeñas */
+    }
+
+    .react-calendar__tile {
+        height: 60px; /* Reduce la altura de los tiles en pantallas pequeñas */
+    }
+
+    .react-calendar__navigation button {
+        font-size: 1.2rem; /* Reduce el tamaño de los botones de navegación en pantallas pequeñas */
+        margin: 0 0.25rem; /* Reduce el margen entre los botones de navegación en pantallas pequeñas */
+    }
+}
+
+
+@media (max-width: 890px) {
+    .calendario{
+        align-items: center;
+    }
+    .calendar-container {
+        max-width: 70%; /* Asegura que el calendario ocupe todo el ancho en pantallas pequeñas */
+     margin-left: 125px;
+    }
+
+    .react-calendar__tile {
+        height: 60px; /* Reduce la altura de los tiles en pantallas pequeñas */
+    }
+
+    .react-calendar__navigation button {
+        font-size: 1.2rem; /* Reduce el tamaño de los botones de navegación en pantallas pequeñas */
+        margin: 0 0.25rem; /* Reduce el margen entre los botones de navegación en pantallas pequeñas */
+    }
+}
+
+
+
+@media (max-width: 480px) {
+    .calendar-container {
+        max-width: 100%; 
+        margin-left:0px;
+    }
+   
+}

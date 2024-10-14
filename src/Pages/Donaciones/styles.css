@@ -1,0 +1,14 @@
+.paypal-button-container {
+    position: relative;
+    z-index: 1; /* Ajusta este valor si es necesario */
+  }
+  .contRep{
+    margin-left: 110px;
+  }
+
+  .error-message{
+    margin-top: 3.6px !important;  
+    color: red !important;
+  
+  }
+  
