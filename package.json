@@ -43,7 +43,8 @@
     "styled-components": "^4.0.0",
     "swiper": "^11.0.5",
     "universal-cookie": "^7.1.0",
-    "use-react-countries": "^2.0.0"
+    "use-react-countries": "^2.0.0",
+    "vite-plugin-pwa": "^0.20.5"
   },
   "devDependencies": {
     "@types/react": "^17.0.45",

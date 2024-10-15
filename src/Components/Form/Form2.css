@@ -10,7 +10,7 @@
     overflow: hidden;
     width: 900px;
     max-width: 70%;
-    min-height: 1070px;
+    min-height: 1000px;
     margin-bottom: 60px;
     margin-top: 15px;
 }
@@ -22,7 +22,7 @@
   }
 
 .container3.error-present {
-    min-height: 1130px;
+    min-height: 1060px;
   }
   
 .container3 p{
@@ -81,16 +81,7 @@
     margin: 0 40px ;
 }
 
-.container3 input{
-    background-color: #eee;
-    border: none;
-    margin: 2px -5px ;
-    padding: 4px 12px;
-    font-size: 12px;
-    border-radius: 8px;
-    width: 110%;
-    outline: none;
-}
+
 
 .form-container{
     position: absolute;
@@ -126,11 +117,11 @@
     background: var(--color-dark-Ex) !important;
     color: #000000 !important;
 }
-.cont-remen{
+.remen{
     display: inline-grid;
     grid-template-columns: auto 1fr;
     align-items: center; 
-    margin-left: 10px;
+    margin-left: 10px !important;
     padding-top: 13px;
   
 }
@@ -199,17 +190,7 @@
     width: 75px; /* Ancho predeterminado */
 }
 
-.inputTel{
-    border-radius: 8px !important;
-    background-color: #eee !important;
-    border: none !important;
-    margin: 8px -5px !important;
-    padding: 2px 7px 1px 85px !important; /* Ajusta el padding-bottom para separar la línea de escritura */
-    font-size: 12px !important;
-    width: 110% !important;
-    outline: none !important;
-    line-height: 2.5; /* Opcional: ajusta el espacio vertical entre líneas */
-}
+
 
 .error-container{
   position: absolute;
@@ -223,3 +204,152 @@
     margin-top: 6px !important;
     color: red !important;
 }
+
+
+.inputs2 {
+    background-color: #eee;
+    margin: 8px -5px !important;
+    padding: 2px 7px 1px 15px !important; /* Ajusta el padding si es necesario */
+    font-size: 12px !important;
+    border-radius: 8px !important;
+    width: 110% !important;
+    outline: none !important;
+    line-height: 2.3; /* Para mantener consistencia en el espacio entre las líneas */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    color: #000000;
+}
+
+.inputTel{
+    border-radius: 8px !important;
+    background-color: #eee !important;
+    border: none !important;
+    margin: 8px -5px !important;
+    padding: 2px 7px 1px 85px !important; /* Ajusta el padding-bottom para separar la línea de escritura */
+    font-size: 12px !important;
+    width: 110% !important;
+    outline: none !important;
+    line-height: 2.5; /* Opcional: ajusta el espacio vertical entre líneas */
+}
+
+
+
+
+
+.input-error {
+    border: 1px solid red !important;
+}
+
+
+
+
+
+/* Revisión de diseño para que sea más responsivo en todas las pantallas */
+@media (max-width: 1024px) {
+    .container3 {
+        width: 100%; /* Asegurarse de que ocupa todo el ancho */
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .img-Login3{
+        display: none !important;
+    }
+    .container3 {
+        padding: 10px; /* Reducir padding en pantallas pequeñas */
+    }
+
+    .form-container .grid {
+        grid-template-columns: 1fr 1fr; /* Asegurar dos columnas en pantallas pequeñas */
+        gap: 10px; /* Espacio menor entre columnas */
+    }
+
+    /* Ajustar el tamaño de los inputs y botones en pantallas pequeñas */
+    .inputs2, .inputTel, .button {
+        font-size: 14px; /* Ajustar tamaño de fuente */
+    }
+    
+    .inputs2 {
+        padding: 10px; /* Ajustar padding */
+    }
+
+    .error-message {
+        font-size: 12px; /* Ajustar tamaño del texto de error */
+    }
+}
+
+@media (max-width: 576px) {
+
+    .container3 {
+        margin-top: 30px; /* Reducir padding en pantallas pequeñas */
+        width: 90%;
+        height: 1100px !important;
+        margin-bottom: -20px;
+    }
+
+    .img-Login3, .img-Login2{
+        display: none !important;
+    }
+    .form-container{
+        margin-top: 5px !important;
+        margin-left: 80px !important;
+    }
+
+
+    .formularioInpus{
+        
+        margin-top: 10px;
+        height: 400px;
+        grid-template-columns: 1fr 1fr; /* Asegurar dos columnas en pantallas pequeñas */
+    }
+    
+    .inputs2 {
+        font-size: 12px;
+    }
+    /* Ajustes para que se mantenga en dos columnas en pantallas pequeñas */
+.form-container .grid {
+    gap: 26px; /* Espacio entre columnas */
+}
+
+/* Forzar el texto en una sola línea */
+.container3 span,
+.container3 p,
+.container3 a {
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+
+    text-overflow: ellipsis; /* Mostrar "..." si el texto es demasiado largo */
+}
+
+
+      .Google{
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        text-overflow: ellipsis;
+      }
+    
+      /* Centrar el botón de inicio de sesión */
+      .button2 {
+        display: block !important;
+        margin: 0 auto !important;
+      }
+    
+      /* Asegurar que el captcha se alinee bien */
+      .cont-remen{
+          width: 90% ; /* Ajusta el ancho que desees */
+          transform: scale(0.8) ; /* Cambia el valor de scale según el tamaño deseado, por ejemplo 0.8 = 80% del tamaño original */
+          transform-origin: 0 0;
+          margin-left: 15px !important;
+      }
+  
+      /* Centrar el texto de cuenta y registro */
+      .cont-remen2 {
+        margin-left: 10px !important;
+      }
+     .Por{
+        font-size: 10px !important;
+     }
+   
+      .feature-border{
+          display: none !important;
+      }
+    }

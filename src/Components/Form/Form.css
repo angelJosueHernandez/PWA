@@ -42,7 +42,7 @@
     margin: 15px 0 10px;
 }
 
-.container2 .button2{
+.container2 .button2Login{
     background-color: var(--color-primary);
     color: #fff;
     font-size: 12px;
@@ -111,7 +111,7 @@
     outline: none;
 }
 
-.form-container{
+.form-containerLogin{
     position: absolute;
     top: 0;
     height: 100%;
@@ -146,21 +146,20 @@
     background: var(--color-dark-Ex) !important;
     color: #000000 !important;
 }
-.cont-remen{
+.cont-remenLogin{
     display: inline-grid;
     grid-template-columns: auto 1fr;
     align-items: center; 
-    margin-left: 10px;
-    margin-top: 6.5px !important ;
+    margin-left: 20px;
+    margin-top: 15px !important ;
   
 }
-.cont-remen2{
+.cont-remen2Login{
     display: inline-grid;
     grid-template-columns: auto 1fr;
     align-items: center; 
     margin-left: 10px;
     gap: 8px;
-   
   
 }
 .img-Login{
@@ -193,6 +192,7 @@
 .error-messageInicio{
   margin-top: -6.5px !important ;  
   color: red !important;
+  margin-left: -12px !important;
 }
 .erroresInicio{
     margin: 12px;
@@ -212,10 +212,12 @@
 
 @media (max-width: 450px) {
     /* Para pantallas de celulares */
-    .form-container{
+    .form-containerLogin{
+      
     margin-top: -60px !important;
     }
     .container2 {
+      margin-top: 20px !important;
       width: 90% !important;
       height: 400px !important;
       margin: 30px !important; /* Centrar el contenedor */
@@ -232,7 +234,6 @@
     }
   .span{
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
     margin-left: 150px;
   }
@@ -254,24 +255,23 @@
     
   .logoGogle{
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
     margin-left: 180px;
   }
   .InputsCon{
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
     margin-left: 10px !important;
+    
+  
   }
   .InputsCon2{
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
     margin-left: 0px !important;
   }
     /* Centrar el botón de inicio de sesión */
-    .button2 {
+    .button2Login {
         white-space: nowrap; /* Evita que el texto se divida en varias líneas */
         overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
         text-overflow: ellipsis;
@@ -280,20 +280,20 @@
     }
   .olvidaste{
     white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
     margin-left: 180px;
     margin-bottom: 23px;
   }
     /* Asegurar que el captcha se alinee bien */
-    .cont-remen {
+    .cont-remenLogin {
       display: flex !important;
       justify-content: center !important;
       margin-left: 180px  !important;
+      margin-top: 20px !important;
     }
 
     /* Centrar el texto de cuenta y registro */
-    .cont-remen2 {
+    .cont-remen2Login {
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
@@ -308,17 +308,18 @@
     .cuenta2{
       
         white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden;    /* Oculta el desbordamiento del contenido que no cabe en el contenedor */
     text-overflow: ellipsis;
    
     }
     .contrasena{
-        margin-left: 40px !important;
-        width: 190px !important;
+      margin-left: 20px !important;
+      width: 210px !important;
+      height: 30px !important;
     }
     .correo{
-        margin-left: 40px !important;
-        width: 190px !important;
+        margin-left: 20px !important;
+        width: 210px !important;
+        height: 30px !important;
     }
     .contra{
         margin-left: 23px;
@@ -330,7 +331,7 @@
 
 @media (max-width: 360px) {
     /* Para pantallas de celulares */
-    .form-container{
+    .form-containerLogin{
     margin-top: -50px !important;
     }
     .container2 {
@@ -385,13 +386,14 @@
     }
   
     /* Centrar el botón de inicio de sesión */
-    .button2 {
-      display: block !important;
-      margin: 0 auto !important;
+    .button2Login {
+      width: 230px !important;
+      margin-bottom: 20px !important;
     }
   
     /* Asegurar que el captcha se alinee bien */
-    .cont-remen{
+    .cont-remenLogin{
+        margin-top: 10px !important;
         width: 90% !important; /* Ajusta el ancho que desees */
         transform: scale(0.8) !important; /* Cambia el valor de scale según el tamaño deseado, por ejemplo 0.8 = 80% del tamaño original */
         transform-origin: 0 0 !important;

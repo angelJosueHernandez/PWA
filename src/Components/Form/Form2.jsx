@@ -95,7 +95,7 @@ export default function Form2() {
     setErrorPresent(anyError);
   }, [nombreError, apellidoPError, apellidoMError, emailError, passwordError, passwordError2, telefonoError]);
 
-  const containerClass = `container3 ${errorPresent ? 'error-present' : ''}`;
+  const containerClass = `container3 ${errorPresent ? 'error-present2' : ''}`;
 
   const captcha = useRef(null); 
 
@@ -484,7 +484,7 @@ const showLoader = () => {
                 
               <div className="border-b border-gray-900/10 pb-12">
 
-<div className="mt-1 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6">
+<div className="mt-1 formularioInpus grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-6">
 <div className="sm:col-span-3">
     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Nombre</label>
     <div className="mt-2">
@@ -494,7 +494,7 @@ const showLoader = () => {
             onChange={(e) => setNombre(e.target.value)}
             onBlur={() => validateNombre(nombre)}
             required
-           type="text" autoComplete="nombre" className=" {nombreError ? 'input-error' : ''} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+           type="text" autoComplete="nombre" className=" {nombreError ? 'input-error' : ''} inputs2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
            {nombreError && <p className="error-message">{nombreError}</p> }
 
            
@@ -509,7 +509,7 @@ const showLoader = () => {
             value={ApellidoP}
             onChange={(e) => setApellidoP(e.target.value)}
             onBlur={() => validateApellidoP(ApellidoP)}
-            type="text"  autoComplete="given-name" className="{apellidoPError ? 'input-error' : ''} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            type="text"  autoComplete="given-name" className="{apellidoPError ? 'input-error' : ''} inputs2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             {apellidoPError && <p className="error-message">{apellidoPError}</p>}
     </div>
   </div>
@@ -523,7 +523,7 @@ const showLoader = () => {
             value={ApellidoM}
             onChange={(e) => setApellidoM(e.target.value)}
             onBlur={() => validateApellidoM(ApellidoM)}
-            autoComplete="family-name" className=" {apellidoMError ? 'input-error' : ''} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            autoComplete="family-name" className=" {apellidoMError ? 'input-error' : ''} inputs2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             {apellidoMError && <p className="error-message">{apellidoMError}</p>}
     </div>
   </div>
@@ -609,7 +609,7 @@ const showLoader = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => validateEmail(email)}
-            type="email" autoComplete="email" className=" {emailError ? 'input-error' : ''} block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+            type="email" autoComplete="email" className=" {emailError ? 'input-error' : ''} inputs2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
             {emailError && <p className="error-message">{emailError}</p>}
     </div>
   </div>
@@ -630,7 +630,7 @@ const showLoader = () => {
       onChange={handlePasswordChange}
       onBlur={() => validatePassword(password)}
       autoComplete="password" 
-      className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError ? 'input-error' : ''} ${passwordError ? 'input-error-padding' : ''}`}
+      className={`block  inputs2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError ? 'input-error' : ''} ${passwordError ? 'input-error-padding' : ''}`}
     />
     <button
       type="button"
@@ -676,7 +676,7 @@ const showLoader = () => {
             onChange={(e) => setPassword2(e.target.value)}
             onBlur={() => validatePassword2(password2)}
             autoComplete="password2" 
-            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError2 ? 'input-error' : ''}`}
+            className={`block  inputs2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError2 ? 'input-error' : ''}`}
           />
           <button
             type="button"
@@ -702,7 +702,7 @@ const showLoader = () => {
       )}
 </div>
 </div>
-<div className='cont-remen'>
+<div className='remen'>
                <ReCAPTCHA
                   ref={captcha}
                 //sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
@@ -712,7 +712,7 @@ const showLoader = () => {
                </div>
 
 <br />
-<span>Por favor Lea y Acepte nuestros terminos y condiciones</span><br />
+<span className=' Por'>Por favor Lea y Acepte nuestros terminos y condiciones</span><br />
    
 <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
             <div className="flex h-6 items-center">
@@ -724,7 +724,7 @@ const showLoader = () => {
                   'flex h-6 w-11 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
                 )}
               >
-                <span className="sr-only">Aceptar políticas</span>
+                <span className="sr-only ">Aceptar políticas</span>
                 <span
                   aria-hidden="true"
                   className={classNames(
@@ -774,14 +774,16 @@ const showLoader = () => {
           </Switch.Group>
         
           <button 
-          className={`button ${buttonDisabled ? 'button-disabled' : ''}`} 
+          className={`button ${buttonDisabled ? 'button-disabled2' : ''}`} 
           type="submit" 
           disabled={buttonDisabled}
         >
           Registrarse
         </button>
+  
 
-              <button type='button' className='flex items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-4 rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 btn-google'>
+  <div className='Google'>
+              <button type='button' className='flex  items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-4 rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 btn-google'>
              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.26644 9.76453C6.19903 6.93863 8.85469 4.90909 12.0002 4.90909C13.6912 4.90909 15.2184 5.50909 16.4184 6.49091L19.9093 3C17.7821 1.14545 15.0548 0 12.0002 0C7.27031 0 3.19799 2.6983 1.24023 6.65002L5.26644 9.76453Z" fill="#EA4335"/>
                                 <path d="M16.0406 18.0142C14.9508 18.718 13.5659 19.0926 11.9998 19.0926C8.86633 19.0926 6.21896 17.0785 5.27682 14.2695L1.2373 17.3366C3.19263 21.2953 7.26484 24.0017 11.9998 24.0017C14.9327 24.0017 17.7352 22.959 19.834 21.0012L16.0406 18.0142Z" fill="#34A853"/>
@@ -791,9 +793,10 @@ const showLoader = () => {
             Registrarse con Google
             
           </button>
+          </div>
           <div className='cont-remen2'>
-          <p className='cuenta'> Ya tienes una Cuenta,</p>
-          <Link to={'/Login'} >
+          <p className='cuenta2'> Ya tienes una Cuenta,</p>
+          <Link to={'/Iniciar Sesion'} >
           Inicia Sesion
           </Link>
         </div>
@@ -810,34 +813,4 @@ const showLoader = () => {
       );
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

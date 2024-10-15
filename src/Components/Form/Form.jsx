@@ -263,13 +263,12 @@ export default function Form() {
 
   return (
     <div className={containerClass} id="container">
-      <div className="form-container sign-in">
+      <div className="form-containerLogin sign-in">
         <form onSubmit={handleSubmit}>
           <div className='tituloScreen'>
           <h3 className='title-form titulo'>Inicio de Sesión</h3></div>
           
           <span className='span'>Introduce tu Correo y Contraseña</span>
-         
           <div className="mt-1 grid grid-cols-1 gap-x-1gap-y-4 sm:grid-cols-6">
             <div className="sm:col-span-4">
               <label htmlFor="email" className="block text-sm font-medium leading text-gray-900">Correo</label>
@@ -327,7 +326,7 @@ export default function Form() {
             </div>
           </div>
  
-          <div className='cont-remen'>
+          <div className='cont-remenLogin'>
             <ReCAPTCHA
               ref={captcha}
              sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
@@ -340,7 +339,8 @@ export default function Form() {
             Olvidaste tu Contraseña?
           </Link>
           </div>
-          <button className='button2' type="submit" >Iniciar Sesión</button>
+          <div className='BotonIniciar'>
+          <button className='button2Login' type="submit" >Iniciar Sesión</button></div>
           <div className='logoGogle'>
           <button type='button' onClick={google} className='flex items-center justify-center gap-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-4 rounded-xl text-gray-700 font-semibold text-lg border-2 border-gray-100 btn-google'>
              <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -353,7 +353,7 @@ export default function Form() {
             
           </button>
           </div>
-          <div className='cont-remen2'>
+          <div className='cont-remen2Login'>
            
             <Link className='cuenta2' to={'/Registro'} >
             <p className=''>¿No tienes una Cuenta? Regístrate</p> 
