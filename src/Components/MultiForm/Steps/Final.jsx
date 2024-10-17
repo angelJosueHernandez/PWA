@@ -27,7 +27,7 @@ export default function Final() {
         Has terminado Correctamente el proceso. 
       </div>
       
-      <a className="mt-10" href="/Login">
+      <a className="mt-10" href="/Iniciar Sesion">
       <button
           className='bg-red-600 text-white uppercase py-2 px-4 rounded-md font-semibold cursor-pointer border border-transparent transition duration-200 ease-in-out'
           style={{

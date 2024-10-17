@@ -329,8 +329,8 @@ export default function Form() {
           <div className='cont-remenLogin'>
             <ReCAPTCHA
               ref={captcha}
-             sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
-               //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb
+             sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
+               //sitekey=6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf
               onChange={handleChangeCaptcha}
             />
           </div>

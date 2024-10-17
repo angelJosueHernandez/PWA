@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Router from './Router/Router';
 import SplashScreen from '../src/Components/SplashScreen/SplashScreen';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
-
+import { message } from 'antd';
 
 
 export default function App() {
@@ -29,6 +29,48 @@ export default function App() {
     }
   }, []);
 
+
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+
+ useEffect(() => {
+    // Mostrar el mensaje de conexión
+    const showMessage = (type, content) => {
+      message[type]({
+        content,
+        duration: 2, // Duración del mensaje en segundos
+        style: {
+          marginTop: '10vh', // Ajuste opcional para la posición
+        },
+      });
+    };
+
+    // Evento para cuando la conexión se pierde
+    const handleOffline = () => {
+      setIsOnline(false);
+      showMessage('error', 'No hay conexión a Internet');
+    };
+
+    // Evento para cuando la conexión se recupera
+    const handleOnline = () => {
+      setIsOnline(true);
+      showMessage('success', '¡Estamos de nuevo online!');
+    };
+
+    // Añadir los listeners para online y offline
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Limpiar los listeners al desmontar el componente
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+
+
+
+  
   return (
     <>
       {showSplash ? (

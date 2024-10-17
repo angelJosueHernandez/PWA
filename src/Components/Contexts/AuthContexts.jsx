@@ -34,6 +34,8 @@ export const AuthProvider = ({ children }) => {
   const [citasLoaded, setCitasLoaded] = useState(false);
   const [contratacionLoaded, setContratacionLoaded] = useState(false);
 
+  
+
   useEffect(() => {
     // Simula la verificación inicial del estado de autenticación
     const checkAuth = async () => {

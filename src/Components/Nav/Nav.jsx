@@ -112,16 +112,18 @@ export default function Nav() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 100); // 5 minutos
+    const interval = setInterval(fetchData, 1000); // 5 minutos
 
     return () => clearInterval(interval);
   }, [setIsAuthenticated]);
 
   const handleLogout = () => {
-    message.loading('Cerrando Sesión', 3.5)
+    
+    localStorage.setItem('Autentificado', 'false');
+    message.loading('Cerrando Sesión', 1.5)
       .then(() => {
-        setIsAuthenticated(false);
         document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        setIsAuthenticated(false);
         navigate('/Iniciar Sesion');
       });
   };

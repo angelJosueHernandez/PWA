@@ -9,16 +9,16 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: "Mi Aplicación de Emergencia",
-        short_name: "Emergencia",
-        description: "Aplicación de emergencia para situaciones críticas.",
+        name: "Cruz Roja Huejutla",
+        short_name: "Cruz Roja Huejutla",
+        description: "Aplicación de emergencia Cruz Roja Huejutla.",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#ffffff",
         icons: [
           {
-            src: "/vite.svg",
+            src: "/icon2.svg",
             sizes: "any",
             type: "image/svg+xml"
           }

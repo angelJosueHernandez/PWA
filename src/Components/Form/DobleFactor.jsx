@@ -425,8 +425,8 @@ const showLoader = () => {
           <div className='cont-remen'>
             <ReCAPTCHA
               ref={captcha}
-              //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb
-             sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              //sitekey=6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf
+             sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
           </div>
@@ -444,24 +444,3 @@ const showLoader = () => {
 }
 
 
-
-
-{/* <div className="sm:col-span-4">
-              <label htmlFor="tokenUser" className="block text-sm font-medium leading text-gray-900">Token</label>
-              <div className="mt-3">
-                <input
-                  id="tokenUser"
-                  name="tokenUser"
-                  value={tokenUser}
-                  onChange={(e) => setTokenUser(e.target.value)}
-                  onBlur={() => validateToken(tokenUser)}
-                  required
-                  type="text"
-                  autoComplete="tokenUser"
-                  className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${tokenError ? 'input-error' : ''}`} />
-              </div>
-              <div className="erroresInicio">
-              {tokenError && <p className="error-messageInicio absolute  left-30">{tokenError}</p>}
-              </div>
-
-            </div> */}
