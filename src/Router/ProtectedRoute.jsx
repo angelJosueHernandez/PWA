@@ -7,7 +7,7 @@ import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
 
 const ProtectorRutas = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
-
+ console.log(isAuthenticated)
   if (loading) {
     // Puedes mostrar un componente de carga aquí si es necesario
     return <DefaultSkeleton/>;

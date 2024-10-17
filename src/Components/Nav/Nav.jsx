@@ -112,7 +112,7 @@ export default function Nav() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 1000); // 5 minutos
+    const interval = setInterval(fetchData, 500); // 5 minutos
 
     return () => clearInterval(interval);
   }, [setIsAuthenticated]);
