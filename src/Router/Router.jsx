@@ -75,16 +75,16 @@ export default function Router() {
         <Route path="Conocenos" element={<Conocenos/>} />
 
         {/* Rutas protegidas */}
-        <Route element={<ProtectorRutas />}>
+       
           <Route path="Perfil" element={<Perfil />} />
           <Route path="ContratacionAmbulancias" element={<ContratacionAmbulancias />} />
-        </Route>
+       
 
         {/* Rutas de autenticación */}
-        <Route element={<AuthRoute />}>
+      
           <Route path="Iniciar Sesion" element={<Login />} />
           <Route path="Registro" element={<Registrer />} />
-        </Route>
+     
 
         {/* Ruta para cualquier otro caso */}
         <Route path="*" element={<NotFound />} />
