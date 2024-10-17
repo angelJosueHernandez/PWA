@@ -217,7 +217,7 @@ const showLoader = () => {
       }
   
       fetch(
-        "http://localhost:3000/user/" + email,
+        "https://api-beta-mocha-59.vercel.app/user/" + email,
         {
           method: "POST",
           credentials: 'include',
@@ -235,7 +235,7 @@ const showLoader = () => {
           .then((valid) => {
             if (valid) {
               fetch(
-                "http://localhost:3000/user",
+                "https://api-beta-mocha-59.vercel.app/user",
                 {
                   method: "POST",
                   credentials: 'include',

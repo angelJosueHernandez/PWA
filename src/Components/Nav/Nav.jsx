@@ -74,7 +74,7 @@ export default function Nav() {
       const token = Cookies.get('jwt');
       if (token) {
         try {
-          fetch('http://localhost:3000/verifyToken', {
+          fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"

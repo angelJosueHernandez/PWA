@@ -70,7 +70,7 @@ export default function Citas() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/usuario/${correoCookieUser}`)
+    fetch(`https://api-beta-mocha-59.vercel.app/usuario/${correoCookieUser}`)
       .then(response => response.json())
       .then(data => {
         setNombre(data.nombre);
@@ -91,7 +91,7 @@ export default function Citas() {
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const response = await fetch('http://localhost:3000/servicios-excluidos');
+        const response = await fetch('https://api-beta-mocha-59.vercel.app/servicios-excluidos');
         if (!response.ok) {
           throw new Error('Error al obtener los datos');
         }
@@ -111,7 +111,7 @@ export default function Citas() {
     const token = Cookies.get('jwt');
     if (token) {
       try {
-        fetch('http://localhost:3000/verifyToken', {
+        fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -149,7 +149,7 @@ export default function Citas() {
       const fetchAvailableHorarios = async () => {
         try {
           const dateInMexico = moment.tz(selectedDate, 'America/Mexico_City').format('YYYY-MM-DD');
-          const response = await fetch(`http://localhost:3000/horas-disponibles/${dateInMexico}`);
+          const response = await fetch(`https://api-beta-mocha-59.vercel.app/horas-disponibles/${dateInMexico}`);
           if (!response.ok) {
             throw new Error('Error al obtener los horarios disponibles');
           }
@@ -263,7 +263,7 @@ export default function Citas() {
       console.log(citaData)
 
       try {
-        const response = await fetch('http://localhost:3000/crearCita', {
+        const response = await fetch('https://api-beta-mocha-59.vercel.app/crearCita', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

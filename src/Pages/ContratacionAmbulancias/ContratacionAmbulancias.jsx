@@ -47,14 +47,14 @@ export default function ContratacionForm() {
   const [ambulanciaSeleccionadaError, setAmbulanciaSeleccionadaError] = useState(''); 
 
   useEffect(() => {
-    fetch('http://localhost:3000/tipoContratacion')
+    fetch('https://api-beta-mocha-59.vercel.app/tipoContratacion')
       .then(response => response.json())
       .then(data => setTipoContratacionOptions(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/usuario/${correoCookieUser}`)
+    fetch(`https://api-beta-mocha-59.vercel.app/usuario/${correoCookieUser}`)
       .then(response => response.json())
       .then(data => {
         setNombre(data.nombre);
@@ -65,7 +65,7 @@ export default function ContratacionForm() {
   }, [correoCookieUser]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/ambulancias-disponibles')
+    fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles')
       .then(response => response.json())
       .then(data => {
         if (data.length > 0) {
@@ -243,7 +243,7 @@ export default function ContratacionForm() {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/CrearContratacion', {
+      const response = await fetch('https://api-beta-mocha-59.vercel.app/CrearContratacion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -258,7 +258,7 @@ export default function ContratacionForm() {
         
       }
 
-      await fetch('http://localhost:3000/enviar-correo-contratacion', {
+      await fetch('https://api-beta-mocha-59.vercel.app/enviar-correo-contratacion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

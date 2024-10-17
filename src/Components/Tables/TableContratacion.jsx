@@ -19,7 +19,7 @@ export default function TableContratacion() {
 
   const fetchContratacionData = () => {
     if (idCookieUser) {
-      fetch(`http://localhost:3000/Contratacion/${idCookieUser}`)
+      fetch(`https://api-beta-mocha-59.vercel.app/Contratacion/${idCookieUser}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error al cargar contrataciones');
@@ -69,7 +69,7 @@ export default function TableContratacion() {
     const { fecha, horario, ID_Contratacion } = editContratacionData;
     try {
       const horarioFormateado = moment(horario, 'HH:mm').format('HH:mm:ss');
-      const response = await fetch(`http://localhost:3000/actualizarFechaContratacion/${ID_Contratacion}`, {
+      const response = await fetch(`https://api-beta-mocha-59.vercel.app/actualizarFechaContratacion/${ID_Contratacion}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export default function TableContratacion() {
 
   const handleCancel = async (ID_Contratacion) => {
     try {
-      const response = await fetch(`http://localhost:3000/cancelarContratacion/${ID_Contratacion}`, {
+      const response = await fetch(`https://api-beta-mocha-59.vercel.app/cancelarContratacion/${ID_Contratacion}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -183,7 +183,7 @@ const showLoader = () => {
         tokenUsuario: tokenUser
       };
   
-      fetch(`http://localhost:3000/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
+      fetch(`https://api-beta-mocha-59.vercel.app/verificacionTokenIdentificacion/${encodeURIComponent(correoGuardar)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -358,7 +358,7 @@ const showLoader = () => {
     };
   
     fetch(
-      `http://localhost:3000/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
+      `https://api-beta-mocha-59.vercel.app/enviarverificacionCorreo/${encodeURIComponent(correoGuardar)}`,
       {
         method: "POST",
         headers: {

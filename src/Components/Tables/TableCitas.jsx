@@ -17,7 +17,7 @@ export default function TableCitas() {
 
     useEffect(() => {
       if (idCookieUser) {
-        fetch(`http://localhost:3000/MiPerfil/${idCookieUser}`)
+        fetch(`https://api-beta-mocha-59.vercel.app/MiPerfil/${idCookieUser}`)
           .then(response => response.json())
           .then(data => setUserData(data))
           .catch(error => console.error('Error fetching user profile:', error));
@@ -26,7 +26,7 @@ export default function TableCitas() {
 
   useEffect(() => {
       if (userData.correo) {
-        fetch(`http://localhost:3000/citasPagina/correo?correo=${userData.correo}`)
+        fetch(`https://api-beta-mocha-59.vercel.app/citasPagina/correo?correo=${userData.correo}`)
           .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -48,7 +48,7 @@ export default function TableCitas() {
 
   useEffect(() => {
       // Obtener los tipos de servicios
-      fetch('http://localhost:3000/tiposServicios/')
+      fetch('https://api-beta-mocha-59.vercel.app/tiposServicios/')
         .then(response => response.json())
         .then(data => setTiposServicios(data))
         .catch(error => console.error('Error fetching tipos de servicios:', error));
@@ -58,7 +58,7 @@ export default function TableCitas() {
   useEffect(() => {
       const interval = setInterval(() => {
           if (userData.correo) {
-              fetch(`http://localhost:3000/citasPagina/correo?correo=${userData.correo}`)
+              fetch(`https://api-beta-mocha-59.vercel.app/citasPagina/correo?correo=${userData.correo}`)
               .then(response => {
                 if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -99,7 +99,7 @@ export default function TableCitas() {
       try {
         const horarioFormateado = moment(horario, 'HH:mm').format('HH:mm:ss');
         console.log("Datos enviados:", { fecha, horario: horarioFormateado, ID_Cita, ID_Servicio });
-        const response = await fetch(`http://localhost:3000/actualizarFechaCitas/${ID_Cita}`, {
+        const response = await fetch(`https://api-beta-mocha-59.vercel.app/actualizarFechaCitas/${ID_Cita}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ export default function TableCitas() {
     
       const handleCancel = async (ID_Cita) => {
         try {
-          const response = await fetch(`http://localhost:3000/cancelarCitas/${ID_Cita}`, {
+          const response = await fetch(`https://api-beta-mocha-59.vercel.app/cancelarCitas/${ID_Cita}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

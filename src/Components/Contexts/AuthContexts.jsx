@@ -82,7 +82,7 @@ export const AuthProvider = ({ children }) => {
 
       if (token) {
         try {
-          const response = await fetch('http://localhost:3000/verifyToken', {
+          const response = await fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

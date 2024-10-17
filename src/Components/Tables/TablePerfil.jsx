@@ -17,7 +17,7 @@ export default function TablePerfil() {
 
     useEffect(() => {
       if (idCookieUser) {
-        fetch(`http://localhost:3000/MiPerfil/${idCookieUser}`)
+        fetch(`https://api-beta-mocha-59.vercel.app/MiPerfil/${idCookieUser}`)
           .then(response => response.json())
           .then(data => {
             setUserData(data);
@@ -31,7 +31,7 @@ export default function TablePerfil() {
     const handleUpdate = async () => {
       setErrorMsg('');
       try {
-        const response = await fetch(`http://localhost:3000/actualizarContacto/${idCookieUser}`, {
+        const response = await fetch(`https://api-beta-mocha-59.vercel.app/actualizarContacto/${idCookieUser}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
