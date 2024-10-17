@@ -5,7 +5,7 @@ import { useAuth } from '../Components/Contexts/AuthContexts';
 const AuthRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
-  if (isAuthenticated) {
+  if (isAuthenticated == true) {
     return <Navigate to='/Perfil' />;
   }
 

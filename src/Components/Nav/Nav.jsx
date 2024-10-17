@@ -112,13 +112,13 @@ export default function Nav() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 500); // 5 minutos
+    const interval = setInterval(fetchData, 100); // 5 minutos
 
     return () => clearInterval(interval);
   }, [setIsAuthenticated]);
 
   const handleLogout = () => {
-    message.loading('Cerrando Sesión', 2.5)
+    message.loading('Cerrando Sesión', 3.5)
       .then(() => {
         setIsAuthenticated(false);
         document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
