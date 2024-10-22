@@ -288,7 +288,7 @@ export default function Citas() {
 
         if (response.ok) {
           sendNotification('Servicio contratado con éxito', {
-            body: 'Tu contratación ha sido procesada.',
+            body: 'Tu servicio ha sido procesado verificar tu correo para darle seguimiento.',
             icon: '/icon.png', // Icono de la notificación
             tag: 'service-contratado' // Identificador único
           });
