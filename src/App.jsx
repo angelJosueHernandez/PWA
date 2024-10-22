@@ -9,6 +9,7 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(false); // Estado para controlar el SplashScreen
   const [startPageAnimation, setStartPageAnimation] = useState(false); // Estado para controlar la animación de la página
   const [isOnline, setIsOnline] = useState(navigator.onLine); // Estado para la conexión a internet
+  const [wasOffline, setWasOffline] = useState(false); // Estado para saber si estábamos offline previamente
 
   useEffect(() => {
     // Verificar si la página fue recargada
@@ -49,10 +50,14 @@ export default function App() {
           method: 'HEAD',
           mode: 'no-cors'
         });
-        setIsOnline(true); // Si la solicitud tiene éxito, hay conexión a Internet
-        showMessage('success', '¡Estamos de nuevo online!');
+        if (wasOffline) {
+          setIsOnline(true); // Si estábamos offline y la solicitud tiene éxito, hay conexión a Internet
+          showMessage('success', '¡Estamos de nuevo online!');
+          setWasOffline(false); // Resetear el estado de "offline"
+        }
       } catch (error) {
         setIsOnline(false); // Si hay un error, no hay conexión a Internet
+        setWasOffline(true); // Marcar que estuvimos offline
         showMessage('error', 'No hay conexión a Internet');
       }
     };
@@ -60,6 +65,7 @@ export default function App() {
     // Evento para cuando la conexión se pierde
     const handleOffline = () => {
       setIsOnline(false);
+      setWasOffline(true);
       showMessage('error', 'No hay conexión a Internet');
     };
 
@@ -80,7 +86,7 @@ export default function App() {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, []);
+  }, [wasOffline]);
 
   return (
     <>
