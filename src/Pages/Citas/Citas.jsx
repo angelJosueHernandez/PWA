@@ -42,6 +42,21 @@ const CustomCalendar = ({ onChange, value }) => {
 };
 
 export default function Citas() {
+
+
+
+  function sendNotification(title, options) {
+    if (Notification.permission === 'granted') {
+      navigator.serviceWorker.getRegistration().then(reg => {
+        if (reg) {
+          reg.showNotification(title, options);
+        }
+      });
+    }
+  }
+
+  
+
   const { idCookieUser, correoCookieUser } = useAuth();
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
@@ -272,6 +287,11 @@ export default function Citas() {
         });
 
         if (response.ok) {
+          sendNotification('Servicio contratado con éxito', {
+            body: 'Tu contratación ha sido procesada.',
+            icon: '/icon.png', // Icono de la notificación
+            tag: 'service-contratado' // Identificador único
+          });
           message.success('Cita registrada exitosamente', 3);
           navigate('/Perfil');
         } else {

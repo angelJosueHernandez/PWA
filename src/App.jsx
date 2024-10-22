@@ -6,6 +6,21 @@ import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import { message } from 'antd';
 
 export default function App() {
+
+
+  useEffect(() => {
+    // Solicitar permiso de notificaciones al cargar la aplicación
+    if ('Notification' in window && 'serviceWorker' in navigator) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          console.log('Permiso de notificaciones concedido');
+        }
+      });
+    }
+  }, []);
+
+  
+  
   const [showSplash, setShowSplash] = useState(false); // Estado para controlar el SplashScreen
   const [startPageAnimation, setStartPageAnimation] = useState(false); // Estado para controlar la animación de la página
   const [isOnline, setIsOnline] = useState(navigator.onLine); // Estado para la conexión a internet
