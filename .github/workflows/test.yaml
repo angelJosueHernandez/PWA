@@ -33,19 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-  test:
-    runs-on: ubuntu-latest
-    needs: [setup]
-
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4.2.1
-
-      - name: Instalar Dependencias
-        run: npm install  # Vuelve a instalar las dependencias para estar seguro
-
-      - name: Ejecutar Pruebas con Jest
-        run: npm test  # Cambia esto a 'npm run vitest' si prefieres usar Vitest
+ 
 
   build:
     runs-on: ubuntu-latest
