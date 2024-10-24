@@ -217,11 +217,19 @@ export default function Citas() {
       ...prevData,
       [name]: value,
     }));
+  
+    // Si el campo modificado es la fecha, también actualiza `selectedDate`.
+    if (name === 'fecha') {
+      const dateInMexico = moment.tz(value, 'America/Mexico_City').toDate();
+      setSelectedDate(dateInMexico);
+    }
+  
     setTouchedFields((prevTouched) => ({
       ...prevTouched,
       [name]: true,
     }));
   };
+  
 
   const handleDateChange = (date) => {
     const dateInMexico = moment.tz(date, 'America/Mexico_City').format('YYYY-MM-DD');
