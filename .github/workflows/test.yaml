@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout Código
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v2
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
 
@@ -26,14 +26,12 @@ jobs:
         run: npm install
 
       - name: Configurar Caché
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
- 
 
   build:
     runs-on: ubuntu-latest
@@ -41,7 +39,7 @@ jobs:
 
     steps:
       - name: Checkout Código
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v2
 
       - name: Instalar Dependencias
         run: npm install
@@ -53,7 +51,7 @@ jobs:
         run: ls -la ./dist
 
       - name: Subir Artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: build-artifact
           path: ./dist
@@ -63,13 +61,14 @@ jobs:
     needs: [build]
 
     steps:
-      - name: Notificar Despliegue Exitoso
-        uses: 8398a7/action-slack@v3
+      - name: Enviar correo de notificación
+        uses: dawidd6/action-send-mail@v3
         with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author
-          payload: |
-            {
-              "text": "El commit se ha construido correctamente.",
-              "channel": "#ci-notifications"
-            }
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Despliegue exitoso de tu aplicación"
+          body: "El commit se ha construido y desplegado correctamente."
+          to: "20210672@uthh.edu.mx"  # Reemplaza con el correo de destino
+          from: ${{ secrets.MAIL_USERNAME }}
