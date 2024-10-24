@@ -18,18 +18,20 @@ jobs:
         uses: actions/checkout@v4.2.1
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3 # Actualizamos a v3 para mayor compatibilidad
         with:
-          node-version: '14'
+          node-version: '16'  # Node.js 16 recomendado para Vite y React
 
       - name: Instalar Dependencias
         run: npm install
 
       - name: Configurar Caché
-        uses: actions/cache@v2
+        uses: actions/cache@v3 # Actualizamos a v3 para evitar deprecaciones
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
   build:
     runs-on: ubuntu-latest
@@ -39,27 +41,27 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v4.2.1
 
-      - name: Compilar Proyecto
-        run: npm run build
+      - name: Compilar Proyecto con Vite
+        run: npm run build  # Vite usa este comando para construir el proyecto
 
       - name: Subir Artefacto
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Actualizamos a v3 para evitar el error de deprecación
         with:
           name: build-artifact
-          path: ./build
+          path: ./dist  # Asegúrate de que sea el directorio de salida de Vite
 
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
 
-    if: github.ref == 'refs/heads/main'  # Solo se despliega si es la rama main
+    if: github.ref == 'refs/heads/main'  # Solo se despliega en la rama main
 
     steps:
       - name: Checkout Código
         uses: actions/checkout@v4.2.1
 
       - name: Desplegar a Vercel
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}  # Asegúrate de tener configurado el token en los secretos
 
   notify:
     runs-on: ubuntu-latest
