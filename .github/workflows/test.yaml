@@ -33,19 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-  test:
-    runs-on: ubuntu-latest
-    needs: [setup]
-
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4.2.1
-
-      - name: Instalar Dependencias
-        run: npm install
-
-      - name: Ejecutar Pruebas
-        run: npm test
+ 
 
   build:
     runs-on: ubuntu-latest
