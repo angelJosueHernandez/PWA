@@ -38,4 +38,10 @@ export default defineConfig({
       },
     }),
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom', // Simula el DOM en un entorno de pruebas
+    setupFiles: './src/setupTests.js', // O .ts, si usas TypeScript
+    exclude: ['node_modules', 'dist'], // Excluye estas carpetas de las pruebas
+  },
 });
