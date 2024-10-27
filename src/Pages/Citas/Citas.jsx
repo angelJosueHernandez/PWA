@@ -56,6 +56,21 @@ export default function Citas() {
   }
 
   
+  async function scheduleReminderNotification(date, time) {
+    const appointmentDate = moment(date + ' ' + time, 'YYYY-MM-DD HH:mm').subtract(1, 'day');
+    const reminderTime = appointmentDate.toDate();
+
+    if ('serviceWorker' in navigator && 'showNotification' in ServiceWorkerRegistration.prototype) {
+      const reg = await navigator.serviceWorker.ready;
+      reg.showNotification('Recordatorio de Cita', {
+        body: `No olvides tu cita programada para el ${moment(date).format('LL')} a las ${time}`,
+        tag: 'cita-reminder',
+        icon: '/icon.png'
+      });
+    }
+  }
+
+
 
   const { idCookieUser, correoCookieUser } = useAuth();
   const [nombre, setNombre] = useState('');
@@ -295,11 +310,12 @@ export default function Citas() {
         });
 
         if (response.ok) {
-          sendNotification('Servicio contratado con éxito', {
-            body: 'Tu servicio ha sido procesado verificar tu correo para darle seguimiento.',
-            icon: '/icon.png', // Icono de la notificación
-            tag: 'service-contratado' // Identificador único
+        sendNotification('Servicio contratado con éxito', {
+            body: `Tu servicio está programado para el ${formData.fecha} a las ${horarioSeleccionado}.`,
+            icon: '/icon.png',
+            tag: 'service-contratado'
           });
+          scheduleReminderNotification(formData.fecha, horarioSeleccionado);
           message.success('Cita registrada exitosamente', 3);
           navigate('/Perfil');
         } else {

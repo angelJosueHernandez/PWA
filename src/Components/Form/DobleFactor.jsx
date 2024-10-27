@@ -425,7 +425,7 @@ const showLoader = () => {
           <div className='cont-remen'>
             <ReCAPTCHA
               ref={captcha}
-              //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb
+              //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb    
              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
               onChange={handleChangeCaptcha}
             />
