@@ -7,9 +7,7 @@ import { message } from 'antd';
 
 export default function App() {
 
-
   useEffect(() => {
-    // Solicitar permiso de notificaciones al cargar la aplicación
     if ('Notification' in window && 'serviceWorker' in navigator) {
       Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
@@ -19,97 +17,91 @@ export default function App() {
     }
   }, []);
 
-  
-  
-  const [showSplash, setShowSplash] = useState(false); // Estado para controlar el SplashScreen
-  const [startPageAnimation, setStartPageAnimation] = useState(false); // Estado para controlar la animación de la página
-  const [isOnline, setIsOnline] = useState(navigator.onLine); // Estado para la conexión a internet
-  const [wasOffline, setWasOffline] = useState(false); // Estado para saber si estábamos offline previamente
+  const [showSplash, setShowSplash] = useState(false);
+  const [startPageAnimation, setStartPageAnimation] = useState(false);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [wasOffline, setWasOffline] = useState(false);
 
   useEffect(() => {
-    // Verificar si la página fue recargada
     const isPageReloaded = window.performance.getEntriesByType("navigation")[0].type === "reload";
 
-    // Solo mostrar el SplashScreen si la página fue recargada o es la primera vez que se visita
     if (isPageReloaded || !sessionStorage.getItem('splashShown')) {
       setShowSplash(true);
       const timer = setTimeout(() => {
-        setShowSplash(false); // Ocultar el SplashScreen después de 7.5 segundos
-        setStartPageAnimation(true); // Iniciar la animación de la página principal
-        sessionStorage.setItem('splashShown', 'true'); // Guardar que el SplashScreen ya se mostró
+        setShowSplash(false);
+        setStartPageAnimation(true);
+        sessionStorage.setItem('splashShown', 'true');
       }, 7500);
 
-      return () => clearTimeout(timer); // Limpiar el temporizador cuando el componente se desmonte
+      return () => clearTimeout(timer);
     } else {
-      setStartPageAnimation(true); // Iniciar la animación si no hay splash que mostrar
+      setStartPageAnimation(true);
     }
   }, []);
 
   useEffect(() => {
-    // Mostrar el mensaje de conexión
     const showMessage = (type, content) => {
       message[type]({
         content,
-        duration: 2, // Duración del mensaje en segundos
+        duration: 2,
         style: {
-          marginTop: '10vh', // Ajuste opcional para la posición
+          marginTop: '10vh',
         },
       });
     };
 
-    // Función para verificar si hay conexión real a Internet
     const checkInternetConnection = async () => {
       try {
-        // Realizar una solicitud pequeña a un recurso conocido
-        const response = await fetch('https://www.google.com/favicon.ico', {
+        await fetch('https://www.google.com/favicon.ico', {
           method: 'HEAD',
           mode: 'no-cors'
         });
         if (wasOffline) {
-          setIsOnline(true); // Si estábamos offline y la solicitud tiene éxito, hay conexión a Internet
+          setIsOnline(true);
           showMessage('success', '¡Estamos de nuevo online!');
-          setWasOffline(false); // Resetear el estado de "offline"
+          setWasOffline(false);
         }
       } catch (error) {
-        setIsOnline(false); // Si hay un error, no hay conexión a Internet
-        setWasOffline(true); // Marcar que estuvimos offline
-        showMessage('error', 'No hay conexión a Internet');
+        setIsOnline(false);
+        if (!wasOffline) {
+          showMessage('error', 'No hay conexión a Internet');
+          setWasOffline(true);
+        }
       }
     };
 
-    // Evento para cuando la conexión se pierde
     const handleOffline = () => {
-      setIsOnline(false);
-      setWasOffline(true);
-      showMessage('error', 'No hay conexión a Internet');
+      if (isOnline) {
+        setIsOnline(false);
+        showMessage('error', 'No hay conexión a Internet');
+        setWasOffline(true);
+      }
     };
 
-    // Evento para cuando la conexión se recupera (se ejecuta una verificación real)
     const handleOnline = () => {
-      checkInternetConnection(); // Verificar si realmente hay conexión
+      if (wasOffline) {
+        checkInternetConnection();
+      }
     };
 
-    // Añadir los listeners para online y offline
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Al montar, verificar si hay conexión real
     checkInternetConnection();
 
-    // Limpiar los listeners al desmontar el componente
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [wasOffline]);
+  }, [wasOffline, isOnline]);
 
   return (
     <>
       {showSplash ? (
-        <SplashScreen /> // Mostrar el SplashScreen
+        <SplashScreen />
       ) : (
         <div className={`main-content ${startPageAnimation ? 'fade-in' : ''}`}>
-          <Router /> {/* Mostrar el contenido de la aplicación */}
+          <Router />
         </div>
       )}
     </>
