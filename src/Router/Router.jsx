@@ -30,7 +30,6 @@ import { DefaultSkeleton } from '../Pages/Servicios/DefaultSkeleton';
 import Conocenos from '../Pages/Conocenos/Conocenos';
 import ScrollToTop from '../Components/ScrollToTop/ScrollToTop';
 
-
 export default function Router() {
   const { loading } = useAuth(); // Asegúrate de que la ruta del contexto sea correcta
 
@@ -50,15 +49,26 @@ export default function Router() {
 
   if (loading) {
     // Puedes mostrar un componente de carga global aquí si lo deseas
-    return <div> <br /><br /><DefaultSkeleton/> </div>;
+    return (
+      <div>
+        {' '}
+        <br />
+        <br />
+        <DefaultSkeleton />{' '}
+      </div>
+    );
   }
 
   return (
     <BrowserRouter>
-     <ScrollToTop />
-      {showCookieBanner && <CookieBanner className="" onAccept={handleAcceptCookies} />}
+      <ScrollToTop />
+      {showCookieBanner && (
+        <CookieBanner className="" onAccept={handleAcceptCookies} />
+      )}
       <Nav />
-      <div className="mPan"><Breadcrumbs /></div>
+      <div className="mPan">
+        <Breadcrumbs />
+      </div>
       <Routes>
         {/* Rutas públicas */}
         <Route path="/" element={<Home />} />
@@ -72,19 +82,20 @@ export default function Router() {
         <Route path="DobleFactor" element={<DobleFactor />} />
         <Route path="Citas" element={<Citas />} />
         <Route path="Donaciones" element={<Donaciones />} />
-        <Route path="Conocenos" element={<Conocenos/>} />
+        <Route path="Conocenos" element={<Conocenos />} />
 
         {/* Rutas protegidas */}
-       
-          <Route path="Perfil" element={<Perfil />} />
-          <Route path="ContratacionAmbulancias" element={<ContratacionAmbulancias />} />
-       
+
+        <Route path="Perfil" element={<Perfil />} />
+        <Route
+          path="ContratacionAmbulancias"
+          element={<ContratacionAmbulancias />}
+        />
 
         {/* Rutas de autenticación */}
-      
-          <Route path="Iniciar Sesion" element={<Login />} />
-          <Route path="Registro" element={<Registrer />} />
-     
+
+        <Route path="Iniciar Sesion" element={<Login />} />
+        <Route path="Registro" element={<Registrer />} />
 
         {/* Ruta para cualquier otro caso */}
         <Route path="*" element={<NotFound />} />

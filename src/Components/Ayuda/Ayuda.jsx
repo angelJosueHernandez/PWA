@@ -6,13 +6,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
-import { GoArrowRight, GoArrowLeft } from "react-icons/go";
+import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
 import headerShape from '../../assets/header-shape.svg';
 import { Link } from 'react-router-dom';
 
 export default function Ayuda() {
-
-
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState('');
   const [routeUrl, setRouteUrl] = useState('');
@@ -33,7 +31,7 @@ export default function Ayuda() {
         },
         (error) => {
           alert('Error obteniendo ubicación: ' + error.message);
-        }
+        },
       );
     } else {
       alert('Geolocalización no es soportada por este navegador.');
@@ -41,9 +39,11 @@ export default function Ayuda() {
   };
 
   const getAddress = (latitude, longitude) => {
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`)
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
         if (data.address) {
           const address = `${data.address.road || ''}, ${data.address.neighbourhood || ''}, ${data.address.city || ''}, ${data.address.state || ''}, ${data.address.country || ''}`;
           setAddress(address);
@@ -52,7 +52,7 @@ export default function Ayuda() {
           alert('No se pudo obtener la dirección.');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al obtener la dirección:', error);
         alert('Error al obtener la dirección.');
       });
@@ -135,36 +135,43 @@ export default function Ayuda() {
     <header>
       <div className="header-container">
         <Swiper spaceBetween={50} slidesPerView={1} navigation pagination>
-          {
-            headerBooks2.map(({ title, info, img, btnLink }, index) => (
-              <SwiperSlide key={index}>
-                <div className="header-wrapper container">
-                  <div className="header-left">
-                    <h1 className="text-animated">Necesitas Ayuda</h1>
-                    <p className='leading-loose lg:text-[14px]' dangerouslySetInnerHTML={{ __html: info }}></p>
-                    <button
-                      className={`btn-border2 ${isLoading ? 'loading' : ''}`}
-                      onClick={handleClick}
-                      disabled={isLoading} // Deshabilitar el botón mientras está cargando
-                    >
-                      {isLoading ? (
-                        <div className="loading-container">
-                          
-                          <div className="loading-message">Tomando datos...</div>
-                          <div className="loading-bar">
-                            <div className="fill"></div>
-                          </div>
+          {headerBooks2.map(({ title, info, img, btnLink }, index) => (
+            <SwiperSlide key={index}>
+              <div className="header-wrapper container">
+                <div className="header-left">
+                  <h1 className="text-animated">Necesitas Ayuda</h1>
+                  <p
+                    className="leading-loose lg:text-[14px]"
+                    dangerouslySetInnerHTML={{ __html: info }}
+                  ></p>
+                  <button
+                    className={`btn-border2 ${isLoading ? 'loading' : ''}`}
+                    onClick={handleClick}
+                    disabled={isLoading} // Deshabilitar el botón mientras está cargando
+                  >
+                    {isLoading ? (
+                      <div className="loading-container">
+                        <div className="loading-message">Tomando datos...</div>
+                        <div className="loading-bar">
+                          <div className="fill"></div>
                         </div>
-                      ) : 'Ayuda'}
-                    </button>
-                  </div>
-                  <div className="header-right ">
-                    <img className='lg:drop-shadow-[0_25px_25px_rgba(0,0,0,0.35)] drop-shadow-[0_15px_15px_rgba(0,0,0,0.35)] imgLogD' src={img} alt="" /> {/* Imagen animada */}
-                  </div>
+                      </div>
+                    ) : (
+                      'Ayuda'
+                    )}
+                  </button>
                 </div>
-              </SwiperSlide>
-            ))
-          }
+                <div className="header-right ">
+                  <img
+                    className="lg:drop-shadow-[0_25px_25px_rgba(0,0,0,0.35)] drop-shadow-[0_15px_15px_rgba(0,0,0,0.35)] imgLogD"
+                    src={img}
+                    alt=""
+                  />{' '}
+                  {/* Imagen animada */}
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
         <div className="header-shape">
           <img src={headerShape} alt="" />
@@ -188,54 +195,54 @@ export default function Ayuda() {
       </div>
 
       {modalIsOpen && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-out">
-    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl transition-all transform duration-300 ease-in-out scale-100 modal-container">
-      
-      {/* Icono de advertencia */}
-      <div className="text-center mb-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-10 w-10 text-red-600 mx-auto"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M12 2a10 10 0 110 20 10 10 0 010-20zm0 13a1 1 0 100 2 1 1 0 000-2zm-1-7v6h2V8h-2z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-out">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl transition-all transform duration-300 ease-in-out scale-100 modal-container">
+            {/* Icono de advertencia */}
+            <div className="text-center mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-10 w-10 text-red-600 mx-auto"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12 2a10 10 0 110 20 10 10 0 010-20zm0 13a1 1 0 100 2 1 1 0 000-2zm-1-7v6h2V8h-2z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
 
-      {/* Título del modal */}
-      <h2 className="text-2xl lg:text-3xl font-bold text-center text-red-700 mb-4">Confirmación de Envío</h2>
+            {/* Título del modal */}
+            <h2 className="text-2xl lg:text-3xl font-bold text-center text-red-700 mb-4">
+              Confirmación de Envío
+            </h2>
 
-      {/* Texto de advertencia */}
-      <p className="text-gray-700 text-center mb-6">
-        Estás a punto de enviar tu ubicación a nuestro número de Emergencia. Si realizas una peticion falsa, podrías recibir una penalización ciudadana.
-      </p>
+            {/* Texto de advertencia */}
+            <p className="text-gray-700 text-center mb-6">
+              Estás a punto de enviar tu ubicación a nuestro número de
+              Emergencia. Si realizas una peticion falsa, podrías recibir una
+              penalización ciudadana.
+            </p>
 
-    
-      {/* Botones */}
-      <div className="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-4">
-        <button
-          className="w-full md:w-auto px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-md hover:shadow-lg"
-          onClick={handleConfirm}
-        >
-          Confirmar
-        </button>
-        <button
-          className="w-full md:w-auto px-6 py-2 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400 transition-all ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-md hover:shadow-lg"
-          onClick={() => setModalIsOpen(false)}
-        >
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
+            {/* Botones */}
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-4">
+              <button
+                className="w-full md:w-auto px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-all ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-md hover:shadow-lg"
+                onClick={handleConfirm}
+              >
+                Confirmar
+              </button>
+              <button
+                className="w-full md:w-auto px-6 py-2 bg-gray-300 text-gray-800 rounded-full hover:bg-gray-400 transition-all ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-gray-400 shadow-md hover:shadow-lg"
+                onClick={() => setModalIsOpen(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

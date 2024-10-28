@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FloatButton, Modal } from 'antd';
-import './MapNav.css'
+import './MapNav.css';
 
 const MapNav = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,14 +14,18 @@ const MapNav = () => {
   };
 
   const handleCancel = () => {
-    setIsModalVisible(false);   
+    setIsModalVisible(false);
   };
 
   return (
-    <div className='map-nav'>
-      <FloatButton className='map-nav' type="primary" shape="circle" size="large" onClick={showModal}>
-        
-      </FloatButton>
+    <div className="map-nav">
+      <FloatButton
+        className="map-nav"
+        type="primary"
+        shape="circle"
+        size="large"
+        onClick={showModal}
+      ></FloatButton>
       <Modal
         title="Imagen"
         open={isModalVisible}

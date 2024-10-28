@@ -1,23 +1,21 @@
-.serv{
-  margin-top: -23px ;
+.serv {
+  margin-top: -23px;
 }
 
-.filtros{
+.filtros {
   margin-top: 33px;
   margin-bottom: -23px !important;
 }
 
-.imgAm{
+.imgAm {
   height: 170px;
   width: 170px;
 }
 
-
-
-.bus{
+.bus {
   border-radius: 20px !important;
-  padding-left: 40px !important; 
-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1)
+  padding-left: 40px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .custom-select {

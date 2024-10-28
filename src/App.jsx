@@ -6,10 +6,9 @@ import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import { message } from 'antd';
 
 export default function App() {
-
   useEffect(() => {
     if ('Notification' in window && 'serviceWorker' in navigator) {
-      Notification.requestPermission().then(permission => {
+      Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
           console.log('Permiso de notificaciones concedido');
         }
@@ -23,7 +22,8 @@ export default function App() {
   const [wasOffline, setWasOffline] = useState(false);
 
   useEffect(() => {
-    const isPageReloaded = window.performance.getEntriesByType("navigation")[0].type === "reload";
+    const isPageReloaded =
+      window.performance.getEntriesByType('navigation')[0].type === 'reload';
 
     if (isPageReloaded || !sessionStorage.getItem('splashShown')) {
       setShowSplash(true);
@@ -54,7 +54,7 @@ export default function App() {
       try {
         await fetch('https://www.google.com/favicon.ico', {
           method: 'HEAD',
-          mode: 'no-cors'
+          mode: 'no-cors',
         });
         if (wasOffline) {
           setIsOnline(true);
@@ -107,6 +107,3 @@ export default function App() {
     </>
   );
 }
-
-
-

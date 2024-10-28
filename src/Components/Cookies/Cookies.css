@@ -1,25 +1,25 @@
 .cookie-banner-container {
-    height: auto;
-    width: 85%;
-    max-width: 850px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 40px 20px;
-    box-sizing: border-box;
-    z-index: 50 !important;
-    animation: show-cookies 1s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.5s ease-in-out;
-    font-family: 'Arial', sans-serif;
+  height: auto;
+  width: 85%;
+  max-width: 850px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  z-index: 50 !important;
+  animation: show-cookies 1s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease-in-out;
+  font-family: 'Arial', sans-serif;
 }
 
 .cookie-banner-container.hide {
@@ -28,85 +28,94 @@
 }
 
 @keyframes show-cookies {
-    0% {
-        transform: translate(-50%, 100%);
-    }
-    100% {
-        transform: translate(-50%, 0%);
-    }
+  0% {
+    transform: translate(-50%, 100%);
+  }
+  100% {
+    transform: translate(-50%, 0%);
+  }
 }
 
-.cookie1, .cookie2, .cookie3, .cookie4, .cookie5, .cookie6, .cookie7, .cookie8, .cookie9, .cookie10 {
-    height: 40px;
-    width: auto;
-    display: flex;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 1; /* Galletas debajo del contenido */
-    animation: go-down 1.5s;
+.cookie1,
+.cookie2,
+.cookie3,
+.cookie4,
+.cookie5,
+.cookie6,
+.cookie7,
+.cookie8,
+.cookie9,
+.cookie10 {
+  height: 40px;
+  width: auto;
+  display: flex;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Galletas debajo del contenido */
+  animation: go-down 1.5s;
 }
 
 @keyframes go-down {
-    0% {
-        transform: translate(-50%, -260%);
-    }
-    40% {
-        transform: translate(-50%, -260%);
-    }
+  0% {
+    transform: translate(-50%, -260%);
+  }
+  40% {
+    transform: translate(-50%, -260%);
+  }
 }
 
 .title {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    line-height: 1.5;
-    color: #333;
-    z-index: 2; /* Título encima de las galletas */
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: #333;
+  z-index: 2; /* Título encima de las galletas */
 }
 
 .cookie-info {
-    text-align: center;
-    margin-bottom: 1rem;
-    font-size: 14px;
-    color: #333;
-    line-height: 1.8;
-    z-index: 2; /* Texto encima de las galletas */
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.8;
+  z-index: 2; /* Texto encima de las galletas */
 }
 
 .confirm-button {
-    margin-top: 10px;
-    padding: 10px 40px;
-    background-color: #ff4757;
-    text-decoration: none;
-    color: white;
-    border-radius: 25px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    z-index: 2; /* Botón encima de las galletas */
+  margin-top: 10px;
+  padding: 10px 40px;
+  background-color: #ff4757;
+  text-decoration: none;
+  color: white;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  z-index: 2; /* Botón encima de las galletas */
 }
 
 .confirm-button:hover {
-    background-color: #ff6b81;
+  background-color: #ff6b81;
 }
 
 .second-button {
-    color: #555;
-    font-size: 13px;
-    margin-top: 15px;
-    text-decoration: underline;
-    cursor: pointer;
-    z-index: 2; /* Enlace encima de las galletas */
+  color: #555;
+  font-size: 13px;
+  margin-top: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+  z-index: 2; /* Enlace encima de las galletas */
 }
 
 .second-button:hover {
-    color: #333;
+  color: #333;
 }
 
 /* Para asegurar que todo se adapta de forma fluida sin media queries */
 .cookie-banner-container * {
-    max-width: 100%;
-    box-sizing: border-box;
+  max-width: 100%;
+  box-sizing: border-box;
 }

@@ -55,7 +55,9 @@ export default function TableContratacion() {
   }, [idCookieUser, setContratacionLoaded]);
 
   const handleEditContratacion = (item) => {
-    const fechaFormateada = moment(item.fecha, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    const fechaFormateada = moment(item.fecha, 'DD/MM/YYYY').format(
+      'YYYY-MM-DD',
+    );
     const horaFormateada = moment(item.horario, 'hh:mm A').format('HH:mm');
     setEditContratacionData({
       fecha: fechaFormateada,
@@ -69,19 +71,28 @@ export default function TableContratacion() {
     const { fecha, horario, ID_Contratacion } = editContratacionData;
     try {
       const horarioFormateado = moment(horario, 'HH:mm').format('HH:mm:ss');
-      const response = await fetch(`https://api-beta-mocha-59.vercel.app/actualizarFechaContratacion/${ID_Contratacion}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://api-beta-mocha-59.vercel.app/actualizarFechaContratacion/${ID_Contratacion}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ fecha, horario: horarioFormateado }),
         },
-        body: JSON.stringify({ fecha, horario: horarioFormateado }),
-      });
+      );
       const result = await response.json();
       if (response.ok) {
         const updatedContratacion = contratacionData.map((item) =>
           item.ID_Contratacion === ID_Contratacion
-            ? { ...item, fecha: moment(fecha).format('DD/MM/YYYY'), horario: moment(horarioFormateado, 'HH:mm:ss').format('hh:mm A') }
-            : item
+            ? {
+                ...item,
+                fecha: moment(fecha).format('DD/MM/YYYY'),
+                horario: moment(horarioFormateado, 'HH:mm:ss').format(
+                  'hh:mm A',
+                ),
+              }
+            : item,
         );
         setContratacionData(updatedContratacion);
         setEditModalOpen(false);
@@ -106,18 +117,23 @@ export default function TableContratacion() {
 
   const handleCancel = async (ID_Contratacion) => {
     try {
-      const response = await fetch(`https://api-beta-mocha-59.vercel.app/cancelarContratacion/${ID_Contratacion}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://api-beta-mocha-59.vercel.app/cancelarContratacion/${ID_Contratacion}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ estado: 'Cancelado' }),
         },
-        body: JSON.stringify({ estado: 'Cancelado' }),
-      });
+      );
 
       const result = await response.json();
       if (response.ok) {
         const updatedContratacion = contratacionData.map((item) =>
-          item.ID_Contratacion === ID_Contratacion ? { ...item, estado: 'Cancelado' } : item
+          item.ID_Contratacion === ID_Contratacion
+            ? { ...item, estado: 'Cancelado' }
+            : item,
         );
         setContratacionData(updatedContratacion);
       } else {
@@ -130,7 +146,10 @@ export default function TableContratacion() {
 
   return (
     <div>
-      <AlertVariants alertType={alertType} alertMessage={showAlert ? alertMessage : ''} />
+      <AlertVariants
+        alertType={alertType}
+        alertMessage={showAlert ? alertMessage : ''}
+      />
 
       <div className="other-container">
         {isEditModalOpen && (
@@ -146,7 +165,12 @@ export default function TableContratacion() {
                   <input
                     type="date"
                     value={editContratacionData.fecha}
-                    onChange={(e) => setEditContratacionData({ ...editContratacionData, fecha: e.target.value })}
+                    onChange={(e) =>
+                      setEditContratacionData({
+                        ...editContratacionData,
+                        fecha: e.target.value,
+                      })
+                    }
                   />
                 </label>
                 <label>
@@ -154,7 +178,12 @@ export default function TableContratacion() {
                   <input
                     type="time"
                     value={editContratacionData.horario}
-                    onChange={(e) => setEditContratacionData({ ...editContratacionData, horario: e.target.value })}
+                    onChange={(e) =>
+                      setEditContratacionData({
+                        ...editContratacionData,
+                        horario: e.target.value,
+                      })
+                    }
                   />
                 </label>
               </div>
@@ -162,32 +191,50 @@ export default function TableContratacion() {
                 <button className="save-button" onClick={handleSaveEdit}>
                   Guardar
                 </button>
-                <button className="cancel-button" onClick={() => setEditModalOpen(false)}>
+                <button
+                  className="cancel-button"
+                  onClick={() => setEditModalOpen(false)}
+                >
                   Cancelar
                 </button>
               </div>
             </div>
           </div>
         )}
-
         <h3>Contratación de Ambulancias</h3> <br />
         <div className="tabla-container">
           <table className="w-full min-w-max table-auto text-left">
             <thead>
               <tr>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Motivo</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Destino</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Fecha</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Horario</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Estado</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Editar</th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">Cancelar</th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Motivo
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Destino
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Fecha
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Horario
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Estado
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Editar
+                </th>
+                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Cancelar
+                </th>
               </tr>
             </thead>
             <tbody>
               {contratacionData.length === 0 ? (
                 <tr>
-                  <td colSpan="7" className="p-4 text-[13px]">No hay datos de contratación de ambulancias.</td>
+                  <td colSpan="7" className="p-4 text-[13px]">
+                    No hay datos de contratación de ambulancias.
+                  </td>
                 </tr>
               ) : (
                 contratacionData.map((item, index) => (
@@ -198,12 +245,18 @@ export default function TableContratacion() {
                     <td className="p-4">{item.horario}</td>
                     <td className="p-4">{item.estado}</td>
                     <td className="p-4">
-                      <button className="button-edit" onClick={() => handleEditContratacion(item)}>
+                      <button
+                        className="button-edit"
+                        onClick={() => handleEditContratacion(item)}
+                      >
                         Editar
                       </button>
                     </td>
                     <td className="p-4">
-                      <button className="button-cancel" onClick={() => handleCancel(item.ID_Contratacion)}>
+                      <button
+                        className="button-cancel"
+                        onClick={() => handleCancel(item.ID_Contratacion)}
+                      >
                         Cancelar
                       </button>
                     </td>

@@ -1,9 +1,9 @@
-
 .imgG {
   mask-image: linear-gradient(
-    to bottom, /* Degradado de arriba hacia abajo */
-    rgba(0, 0, 0, 1) 90%, /* Parte sólida en el 90% de la imagen */
-    rgba(0, 0, 0, 0) 100% /* Transición a transparente solo en el último 10% */
+    to bottom,
+    /* Degradado de arriba hacia abajo */ rgba(0, 0, 0, 1) 90%,
+    /* Parte sólida en el 90% de la imagen */ rgba(0, 0, 0, 0) 100%
+      /* Transición a transparente solo en el último 10% */
   );
   -webkit-mask-image: linear-gradient(
     to bottom,
@@ -12,14 +12,12 @@
   );
 }
 
-
 .text-gray-700 {
   color: #4a4a4a;
 }
 
 .ambulancia-flotante {
   animation: float 6s ease-in-out infinite;
-
 }
 
 @keyframes float {
@@ -34,31 +32,19 @@
   }
 }
 
-
 .mask-image-gradient {
   margin-top: -20px;
   mask-image: radial-gradient(
-    circle, 
-    rgba(0, 0, 0, 1) 60%, 
+    circle,
+    rgba(0, 0, 0, 1) 60%,
     rgba(0, 0, 0, 0) 100%
   );
   -webkit-mask-image: radial-gradient(
-    circle, 
-    rgba(0, 0, 0, 1) 40%, 
+    circle,
+    rgba(0, 0, 0, 1) 40%,
     rgba(0, 0, 0, 0) 80%
   );
 }
 
-
-
-
 @media (max-width: 640px) {
-
 }
-
-
-
-
-
-
-

@@ -2,20 +2,16 @@ import React, { useState, useContext } from 'react';
 import { useAuth } from '../../Contexts/AuthContexts';
 
 const Details = () => {
-
   const [tokenIngresado, setTokenIngresado] = useState('');
   const [error, setError] = useState('');
 
   const { setToken } = useAuth();
 
   const handleTokenBlur = () => {
-   
     if (tokenIngresado.trim() !== '') {
       setToken(tokenIngresado);
     }
   };
-
- 
 
   return (
     <div>
@@ -30,7 +26,6 @@ const Details = () => {
           placeholder="Token"
           className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
         />
-        
       </div>
       {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>

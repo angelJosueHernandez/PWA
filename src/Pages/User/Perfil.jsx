@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import TableContratacion from '../../Components/Tables/TableContratacion';
 import TableCitas from '../../Components/Tables/TableCitas';
 import TablePerfil from '../../Components/Tables/TablePerfil';
-import './Perfil.css'
+import './Perfil.css';
 
 export default function Perfil() {
   const { isAuthenticated, loading, user, avatarColor } = useAuth();
@@ -31,7 +31,7 @@ export default function Perfil() {
 
   return (
     <div>
-      <div className='contenedorPerfil'>
+      <div className="contenedorPerfil">
         <TablePerfil />
         <TableCitas />
         <TableContratacion />

@@ -4,9 +4,9 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './custom-calendar.css';
-import './Citas.css'
+import './Citas.css';
 import { useAuth } from '../../Components/Contexts/AuthContexts';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import { message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +19,9 @@ const holidays = [
 ];
 
 const isHoliday = (date) => {
-  return holidays.some(holiday => 
-    date.getMonth() === holiday.month && date.getDate() === holiday.day
+  return holidays.some(
+    (holiday) =>
+      date.getMonth() === holiday.month && date.getDate() === holiday.day,
   );
 };
 
@@ -41,9 +42,11 @@ const CustomCalendar = ({ onChange, value }) => {
   );
 };
 
-
 async function scheduleReminderNotification(date, time) {
-  const appointmentDate = moment(date + ' ' + time, 'YYYY-MM-DD HH:mm').subtract(1, 'day');
+  const appointmentDate = moment(
+    date + ' ' + time,
+    'YYYY-MM-DD HH:mm',
+  ).subtract(1, 'day');
   const reminderTime = appointmentDate.toDate();
 
   // Almacena la fecha de recordatorio en el localStorage
@@ -56,12 +59,15 @@ function checkReminder() {
   const now = new Date();
 
   if (now >= reminderTime) {
-    if ('serviceWorker' in navigator && 'showNotification' in ServiceWorkerRegistration.prototype) {
-      navigator.serviceWorker.ready.then(reg => {
+    if (
+      'serviceWorker' in navigator &&
+      'showNotification' in ServiceWorkerRegistration.prototype
+    ) {
+      navigator.serviceWorker.ready.then((reg) => {
         reg.showNotification('Recordatorio de Cita', {
           body: `No olvides tu cita programada para mañana.`,
           icon: '/icon.png',
-          tag: 'cita-reminder'
+          tag: 'cita-reminder',
         });
         localStorage.removeItem('reminderTime'); // Elimina el recordatorio una vez que se ha mostrado
       });
@@ -69,15 +75,10 @@ function checkReminder() {
   }
 }
 
-
-
 export default function Citas() {
-
-
-
   function sendNotification(title, options) {
     if (Notification.permission === 'granted') {
-      navigator.serviceWorker.getRegistration().then(reg => {
+      navigator.serviceWorker.getRegistration().then((reg) => {
         if (reg) {
           reg.showNotification(title, options);
         }
@@ -89,9 +90,6 @@ export default function Citas() {
     const intervalId = setInterval(checkReminder, 3600000); // cada hora
     return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
   }, []);
-
-
-
 
   const { idCookieUser, correoCookieUser } = useAuth();
   const [nombre, setNombre] = useState('');
@@ -122,27 +120,29 @@ export default function Citas() {
 
   useEffect(() => {
     fetch(`https://api-beta-mocha-59.vercel.app/usuario/${correoCookieUser}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setNombre(data.nombre);
         setApellido_Paterno(data.apellidoP);
         setApellido_Materno(data.apellidoM);
         setCorreo(correoCookieUser);
-        setFormData(prevData => ({
+        setFormData((prevData) => ({
           ...prevData,
           nombre: data.nombre,
           apellidoPaterno: data.apellidoP,
           apellidoMaterno: data.apellidoM,
-          correo: correoCookieUser
+          correo: correoCookieUser,
         }));
       })
-      .catch(error => console.error('Error fetching user data:', error));
+      .catch((error) => console.error('Error fetching user data:', error));
   }, [correoCookieUser]);
 
   useEffect(() => {
     const fetchServicios = async () => {
       try {
-        const response = await fetch('https://api-beta-mocha-59.vercel.app/servicios-excluidos');
+        const response = await fetch(
+          'https://api-beta-mocha-59.vercel.app/servicios-excluidos',
+        );
         if (!response.ok) {
           throw new Error('Error al obtener los datos');
         }
@@ -163,27 +163,27 @@ export default function Citas() {
     if (token) {
       try {
         fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({ token }),
-          credentials: 'include'
+          credentials: 'include',
         })
-        .then(response => response.json())
-        .then(result => {
-          if (result.mensaje === "Token válido") {
-            const decodedToken = jwtDecode(token);
-            setLogeo(decodedToken.IsAuthenticated);
-            setUserId(decodedToken.id);
-          } else {
+          .then((response) => response.json())
+          .then((result) => {
+            if (result.mensaje === 'Token válido') {
+              const decodedToken = jwtDecode(token);
+              setLogeo(decodedToken.IsAuthenticated);
+              setUserId(decodedToken.id);
+            } else {
+              setLogeo(false);
+            }
+          })
+          .catch((error) => {
+            console.error('Error al verificar el token:', error);
             setLogeo(false);
-          }
-        })
-        .catch(error => {
-          console.error('Error al verificar el token:', error);
-          setLogeo(false);
-        });
+          });
       } catch (error) {
         console.error('Error al decodificar el token JWT:', error);
         setLogeo(false);
@@ -193,14 +193,24 @@ export default function Citas() {
 
   useEffect(() => {
     validateForm();
-  }, [formData, selectedDate, selectedHorario, selectedServicio, isFormDisabled]);
+  }, [
+    formData,
+    selectedDate,
+    selectedHorario,
+    selectedServicio,
+    isFormDisabled,
+  ]);
 
   useEffect(() => {
     if (selectedDate) {
       const fetchAvailableHorarios = async () => {
         try {
-          const dateInMexico = moment.tz(selectedDate, 'America/Mexico_City').format('YYYY-MM-DD');
-          const response = await fetch(`https://api-beta-mocha-59.vercel.app/horas-disponibles/${dateInMexico}`);
+          const dateInMexico = moment
+            .tz(selectedDate, 'America/Mexico_City')
+            .format('YYYY-MM-DD');
+          const response = await fetch(
+            `https://api-beta-mocha-59.vercel.app/horas-disponibles/${dateInMexico}`,
+          );
           if (!response.ok) {
             throw new Error('Error al obtener los horarios disponibles');
           }
@@ -227,11 +237,14 @@ export default function Citas() {
     if (!formData.fecha) {
       newErrors.fecha = 'La fecha es obligatoria';
     } else {
-      const selected = moment.tz(formData.fecha, 'America/Mexico_City').startOf('day');
+      const selected = moment
+        .tz(formData.fecha, 'America/Mexico_City')
+        .startOf('day');
       if (selected.isBefore(today)) {
         newErrors.fecha = 'Fecha inválida';
       } else if (selected.isSame(today)) {
-        newErrors.fecha = 'Debes elegir una fecha con al menos un día de anticipación';
+        newErrors.fecha =
+          'Debes elegir una fecha con al menos un día de anticipación';
       } else if (selected.day() === 0 || selected.day() === 6) {
         newErrors.fecha = 'No se puede seleccionar sábados o domingos';
       } else if (isHoliday(selected.toDate())) {
@@ -242,8 +255,8 @@ export default function Citas() {
     setErrors(newErrors);
     setIsFormValid(
       Object.keys(newErrors).length === 0 &&
-      !isFormDisabled &&
-      selectedHorario !== null
+        !isFormDisabled &&
+        selectedHorario !== null,
     );
   };
 
@@ -253,22 +266,23 @@ export default function Citas() {
       ...prevData,
       [name]: value,
     }));
-  
+
     // Si el campo modificado es la fecha, también actualiza `selectedDate`.
     if (name === 'fecha') {
       const dateInMexico = moment.tz(value, 'America/Mexico_City').toDate();
       setSelectedDate(dateInMexico);
     }
-  
+
     setTouchedFields((prevTouched) => ({
       ...prevTouched,
       [name]: true,
     }));
   };
-  
 
   const handleDateChange = (date) => {
-    const dateInMexico = moment.tz(date, 'America/Mexico_City').format('YYYY-MM-DD');
+    const dateInMexico = moment
+      .tz(date, 'America/Mexico_City')
+      .format('YYYY-MM-DD');
     setSelectedDate(date);
     setFormData((prevData) => ({
       ...prevData,
@@ -299,10 +313,15 @@ export default function Citas() {
       navigate('/Iniciar Sesion');
     } else {
       const horarioSeleccionado = selectedHorario ? selectedHorario.time : '';
-      const servicioSeleccionado = selectedServicio ? selectedServicio.ID_Servicio : '';
+      const servicioSeleccionado = selectedServicio
+        ? selectedServicio.ID_Servicio
+        : '';
 
       if (!horarioSeleccionado || !servicioSeleccionado) {
-        message.error('Por favor seleccione un horario y un servicio válido', 3);
+        message.error(
+          'Por favor seleccione un horario y un servicio válido',
+          3,
+        );
         return;
       }
 
@@ -316,25 +335,28 @@ export default function Citas() {
         fecha: formData.fecha,
         horario: horarioSeleccionado,
         ID_Servicio: servicioSeleccionado,
-        correo: formData.correo
+        correo: formData.correo,
       };
 
-      console.log(citaData)
+      console.log(citaData);
 
       try {
-        const response = await fetch('https://api-beta-mocha-59.vercel.app/crearCita', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const response = await fetch(
+          'https://api-beta-mocha-59.vercel.app/crearCita',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(citaData),
           },
-          body: JSON.stringify(citaData),
-        });
+        );
 
         if (response.ok) {
-        sendNotification('Servicio contratado con éxito', {
+          sendNotification('Servicio contratado con éxito', {
             body: `Tu servicio está programado para el ${formData.fecha} a las ${horarioSeleccionado}.`,
             icon: '/icon.png',
-            tag: 'service-contratado'
+            tag: 'service-contratado',
           });
           scheduleReminderNotification(formData.fecha, horarioSeleccionado);
           message.success('Cita registrada exitosamente', 3);
@@ -358,13 +380,15 @@ export default function Citas() {
         <CustomCalendar onChange={handleDateChange} value={selectedDate} />
       </div>
       <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-2xl">
-        <h2 className="text-[50px] text-red-700 text-center mb-6">Sacar Cita</h2>
+        <h2 className="text-[50px] text-red-700 text-center mb-6">
+          Sacar Cita
+        </h2>
         <div className="text-[12px] text-red-800 mb-4 text-center">
-       
-        Las citas deben sacarse con al menos un día de anticipación.
+          Las citas deben sacarse con al menos un día de anticipación.
         </div>
         <div className="text-[12px] text-red-800 mb-4 text-center">
-        Para sacar una cita necesita <strong> Iniciar Sesion en su cuenta</strong> 
+          Para sacar una cita necesita{' '}
+          <strong> Iniciar Sesion en su cuenta</strong>
         </div>
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-wrap lg:flex-nowrap justify-between space-y-4 lg:space-y-0 lg:space-x-4">
@@ -380,28 +404,40 @@ export default function Citas() {
                 className={`w-full px-2 py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.nombre && touchedFields.nombre ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
-                {errors.nombre && touchedFields.nombre && <div className="text-red-500 text-[11px] mt-1">{errors.nombre}</div>}
+                {errors.nombre && touchedFields.nombre && (
+                  <div className="text-red-500 text-[11px] mt-1">
+                    {errors.nombre}
+                  </div>
+                )}
               </div>
             </div>
-          
-           <div className="w-[9rem] margin lg:w-1/3">
-              <label className="block  text-gray-700 text-sm">Apellido Paterno</label>
+
+            <div className="w-[9rem] margin lg:w-1/3">
+              <label className="block  text-gray-700 text-sm">
+                Apellido Paterno
+              </label>
               <input
                 type="text"
                 name="apellidoPaterno"
                 placeholder="Apellido Paterno"
                 value={formData.apellidoPaterno}
                 onChange={handleInputChange}
-                 readOnly
+                readOnly
                 className={`w-full px-2 py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.apellidoPaterno && touchedFields.apellidoPaterno ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
-                {errors.apellidoPaterno && touchedFields.apellidoPaterno && <div className="text-red-500 text-[11px] mt-1">{errors.apellidoPaterno}</div>}
+                {errors.apellidoPaterno && touchedFields.apellidoPaterno && (
+                  <div className="text-red-500 text-[11px] mt-1">
+                    {errors.apellidoPaterno}
+                  </div>
+                )}
               </div>
             </div>
-           
+
             <div className="w-[9rem] lg:w-1/3">
-              <label className="block text-gray-700 text-sm">Apellido Materno</label>
+              <label className="block text-gray-700 text-sm">
+                Apellido Materno
+              </label>
               <input
                 type="text"
                 name="apellidoMaterno"
@@ -412,7 +448,11 @@ export default function Citas() {
                 className={`w-full px-2  py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.apellidoMaterno && touchedFields.apellidoMaterno ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
-                {errors.apellidoMaterno && touchedFields.apellidoMaterno && <div className="text-red-500 text-[11px] mt-1">{errors.apellidoMaterno}</div>}
+                {errors.apellidoMaterno && touchedFields.apellidoMaterno && (
+                  <div className="text-red-500 text-[11px] mt-1">
+                    {errors.apellidoMaterno}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -425,11 +465,13 @@ export default function Citas() {
                 placeholder="Correo"
                 value={formData.correo}
                 onChange={handleInputChange}
-               readOnly
+                readOnly
                 className={`w-full px-2 py-1 mt-1 border rounded-md focus:outline-none focus:ring-none focus:ring-none text-[12px] h-[33px] ${errors.correo && touchedFields.correo ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
-                {errors.correo && touchedFields.correo && <p className="text-red-500 text-xs mt-1">{errors.correo}</p>}
+                {errors.correo && touchedFields.correo && (
+                  <p className="text-red-500 text-xs mt-1">{errors.correo}</p>
+                )}
               </div>
             </div>
             <div className="w-[7.8rem] lg:w-1/3">
@@ -442,60 +484,103 @@ export default function Citas() {
                 className={`w-full px-2 py-1 mt-1 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 text-[12px] h-[33px] ${errors.fecha && touchedFields.fecha ? 'border-red-500' : ''}`}
               />
               <div className="h-4">
-                {errors.fecha && touchedFields.fecha && <div className="text-red-500 text-[11px] mt-1">{errors.fecha}</div>}
+                {errors.fecha && touchedFields.fecha && (
+                  <div className="text-red-500 text-[11px] mt-1">
+                    {errors.fecha}
+                  </div>
+                )}
               </div>
             </div>
             <div className="w-[11rem]  lg:w-1/3">
-              <label className="block  text-gray-700 text-sm">Horarios Disponibles</label>
-              <Listbox value={selectedHorario} onChange={setSelectedHorario} disabled={!availableHorarios.length}>
+              <label className="block  text-gray-700 text-sm">
+                Horarios Disponibles
+              </label>
+              <Listbox
+                value={selectedHorario}
+                onChange={setSelectedHorario}
+                disabled={!availableHorarios.length}
+              >
                 <div className="relative mt-2 mb-3">
                   <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1 pl-2 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm h-[33px] flex items-center justify-between">
-                    <span className="block truncate">{selectedHorario ? selectedHorario.name : 'Seleccione un horario'}</span>
+                    <span className="block truncate">
+                      {selectedHorario
+                        ? selectedHorario.name
+                        : 'Seleccione un horario'}
+                    </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                      <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
+                      <ChevronUpDownIcon
+                        aria-hidden="true"
+                        className="h-5 w-5 text-gray-400"
+                      />
                     </span>
                   </Listbox.Button>
                   <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                    {availableHorarios.length ? availableHorarios.map((horario) => (
-                      <Listbox.Option
-                        key={horario.time}
-                        value={horario}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-3 pr-9 ${
-                            active ? 'bg-indigo-600 text-white' : 'text-gray-900'
-                          }`
-                        }
-                      >
-                        {({ selected }) => (
-                          <>
-                            <span className={`block truncate ${selected ? 'font-semibold' : 'font-normal'}`}>
-                              {horario.name}
-                            </span>
-                            {selected ? (
-                              <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                                <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                    {availableHorarios.length ? (
+                      availableHorarios.map((horario) => (
+                        <Listbox.Option
+                          key={horario.time}
+                          value={horario}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-3 pr-9 ${
+                              active
+                                ? 'bg-indigo-600 text-white'
+                                : 'text-gray-900'
+                            }`
+                          }
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={`block truncate ${selected ? 'font-semibold' : 'font-normal'}`}
+                              >
+                                {horario.name}
                               </span>
-                            ) : null}
-                          </>
-                        )}
-                      </Listbox.Option>
-                    )) : <div className="py-2 pl-3 pr-9 text-gray-500">No hay horarios disponibles</div>}
+                              {selected ? (
+                                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
+                                  <CheckIcon
+                                    aria-hidden="true"
+                                    className="h-5 w-5"
+                                  />
+                                </span>
+                              ) : null}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))
+                    ) : (
+                      <div className="py-2 pl-3 pr-9 text-gray-500">
+                        No hay horarios disponibles
+                      </div>
+                    )}
                   </Listbox.Options>
                 </div>
               </Listbox>
               <div className="h-4">
-                {errors.horario && touchedFields.horario && <p className="text-red-500 text-xs mt-1">{errors.horario}</p>}
+                {errors.horario && touchedFields.horario && (
+                  <p className="text-red-500 text-xs mt-1">{errors.horario}</p>
+                )}
               </div>
             </div>
           </div>
           <div>
             <label className="block text-gray-700 text-sm">Servicio</label>
-            <Listbox value={selectedServicio} onChange={handleServicioChange} disabled={isFormDisabled}>
+            <Listbox
+              value={selectedServicio}
+              onChange={handleServicioChange}
+              disabled={isFormDisabled}
+            >
               <div className="relative mt-1">
                 <Listbox.Button className="relative  cursor-default rounded-md bg-white py-1 pl-2 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm h-[33px] w-3/5 lg:w-1/2 flex items-center justify-between">
-                  <span className="block truncate">{selectedServicio ? selectedServicio.tipo_Servicio : 'Seleccionar servicio'}</span>
+                  <span className="block truncate">
+                    {selectedServicio
+                      ? selectedServicio.tipo_Servicio
+                      : 'Seleccionar servicio'}
+                  </span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
+                    <ChevronUpDownIcon
+                      aria-hidden="true"
+                      className="h-5 w-5 text-gray-400"
+                    />
                   </span>
                 </Listbox.Button>
                 <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-4/5 lg:w-1/2  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
@@ -511,12 +596,17 @@ export default function Citas() {
                     >
                       {({ selected }) => (
                         <>
-                          <span className={`block truncate ${selected ? 'font-semibold' : 'font-normal'}`}>
+                          <span
+                            className={`block truncate ${selected ? 'font-semibold' : 'font-normal'}`}
+                          >
                             {servicio.tipo_Servicio}
                           </span>
                           {selected ? (
                             <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600">
-                              <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                              <CheckIcon
+                                aria-hidden="true"
+                                className="h-5 w-5"
+                              />
                             </span>
                           ) : null}
                         </>
@@ -527,12 +617,16 @@ export default function Citas() {
               </div>
             </Listbox>
             <div className="h-4">
-              {errors.servicio && touchedFields.servicio && <p className="text-red-500 text-xs mt-1">{errors.servicio}</p>}
+              {errors.servicio && touchedFields.servicio && (
+                <p className="text-red-500 text-xs mt-1">{errors.servicio}</p>
+              )}
             </div>
           </div>
           {indicacionesPrevias && (
             <div>
-              <label className="block text-gray-900 text-sm">Indicaciones Previas</label>
+              <label className="block text-gray-900 text-sm">
+                Indicaciones Previas
+              </label>
               <textarea
                 readOnly
                 value={indicacionesPrevias}
@@ -550,7 +644,7 @@ export default function Citas() {
             </button>
           </div>
         </form>
-      </div>  
+      </div>
     </div>
   );
 }

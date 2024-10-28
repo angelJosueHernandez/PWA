@@ -8,14 +8,13 @@ vi.mock('workbox-background-sync', () => ({
 }));
 
 vi.mock('workbox-precaching', () => ({
-    precacheAndRoute: vi.fn(),
-    PrecacheController: vi.fn().mockImplementation(() => ({
-      addToCacheList: vi.fn(),
-      install: vi.fn().mockResolvedValue(undefined),
-      activate: vi.fn().mockResolvedValue(undefined),
-    })),
-  }));
-  
+  precacheAndRoute: vi.fn(),
+  PrecacheController: vi.fn().mockImplementation(() => ({
+    addToCacheList: vi.fn(),
+    install: vi.fn().mockResolvedValue(undefined),
+    activate: vi.fn().mockResolvedValue(undefined),
+  })),
+}));
 
 // Mocks para eventos del Service Worker
 class ExtendableEvent extends Event {
@@ -101,8 +100,8 @@ beforeAll(() => {
       new Response(JSON.stringify({ message: 'mock response' }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
-      })
-    )
+      }),
+    ),
   );
 });
 
@@ -124,44 +123,49 @@ describe('Service Worker', () => {
   it('debería registrar eventos fetch, sync y push', async () => {
     const installEvent = new ExtendableEvent('install');
     const activateEvent = new ExtendableEvent('activate');
-    
+
     await self.dispatchEvent(installEvent);
     await self.dispatchEvent(activateEvent);
-    
-    expect(self.addEventListener).toHaveBeenCalledWith('fetch', expect.any(Function));
-    expect(self.addEventListener).toHaveBeenCalledWith('sync', expect.any(Function));
-    expect(self.addEventListener).toHaveBeenCalledWith('push', expect.any(Function));
+
+    expect(self.addEventListener).toHaveBeenCalledWith(
+      'fetch',
+      expect.any(Function),
+    );
+    expect(self.addEventListener).toHaveBeenCalledWith(
+      'sync',
+      expect.any(Function),
+    );
+    expect(self.addEventListener).toHaveBeenCalledWith(
+      'push',
+      expect.any(Function),
+    );
   });
 
   it('debería mostrar notificación al recibir un evento push', async () => {
     const pushEvent = new PushEvent('push', {
       data: { title: 'Test Push', body: 'This is a test' },
     });
-    
+
     await self.dispatchEvent(pushEvent);
 
     expect(self.registration.showNotification).toHaveBeenCalledWith(
       'Test Push',
       expect.objectContaining({
-        body: 'This is a test'
-      })
+        body: 'This is a test',
+      }),
     );
   });
-
 
   it('debería registrar el Service Worker', async () => {
     // Simulamos el evento de instalación
     const installEvent = new ExtendableEvent('install');
-    
+
     await self.dispatchEvent(installEvent);
-    
+
     // Verificamos que el evento de instalación se despachó
     expect(self.dispatchEvent).toHaveBeenCalledWith(installEvent);
-  
+
     // En caso de registrar sincronización, verifica:
     // expect(self.registration.sync.register).toHaveBeenCalled();
   });
-  
-
-
 });

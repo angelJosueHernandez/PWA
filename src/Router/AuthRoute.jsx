@@ -6,7 +6,7 @@ const AuthRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (isAuthenticated == true) {
-    return <Navigate to='/Perfil' />;
+    return <Navigate to="/Perfil" />;
   }
 
   return children ? children : <Outlet />;

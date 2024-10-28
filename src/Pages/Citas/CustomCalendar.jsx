@@ -55,7 +55,8 @@ const CustomCalendar = ({ onChange, value }) => {
       next2Label={null}
       prev2Label={null}
       tileDisabled={({ date, view }) =>
-        view === 'month' && (date.getDay() === 0 || date.getDay() === 6 || isHoliday(date))
+        view === 'month' &&
+        (date.getDay() === 0 || date.getDay() === 6 || isHoliday(date))
       }
     />
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Navbar,
   MobileNav,
@@ -11,7 +11,7 @@ import {
   Avatar,
   Card,
   IconButton,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 import {
   CubeTransparentIcon,
   UserCircleIcon,
@@ -24,37 +24,37 @@ import {
   PowerIcon,
   RocketLaunchIcon,
   Bars2Icon,
-} from "@heroicons/react/24/solid";
- 
+} from '@heroicons/react/24/solid';
+
 // profile menu component
 const profileMenuItems = [
   {
-    label: "My Profile",
+    label: 'My Profile',
     icon: UserCircleIcon,
   },
   {
-    label: "Edit Profile",
+    label: 'Edit Profile',
     icon: Cog6ToothIcon,
   },
   {
-    label: "Inbox",
+    label: 'Inbox',
     icon: InboxArrowDownIcon,
   },
   {
-    label: "Help",
+    label: 'Help',
     icon: LifebuoyIcon,
   },
   {
-    label: "Sign Out",
+    label: 'Sign Out',
     icon: PowerIcon,
   },
 ];
- 
+
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
- 
+
   const closeMenu = () => setIsMenuOpen(false);
- 
+
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
@@ -73,7 +73,7 @@ function ProfileMenu() {
           <ChevronDownIcon
             strokeWidth={2.5}
             className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? "rotate-180" : ""
+              isMenuOpen ? 'rotate-180' : ''
             }`}
           />
         </Button>
@@ -87,19 +87,19 @@ function ProfileMenu() {
               onClick={closeMenu}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
-                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                  : ""
+                  ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
+                  : ''
               }`}
             >
               {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
                 strokeWidth: 2,
               })}
               <Typography
                 as="span"
                 variant="small"
                 className="font-normal"
-                color={isLastItem ? "red" : "inherit"}
+                color={isLastItem ? 'red' : 'inherit'}
               >
                 {label}
               </Typography>
@@ -110,29 +110,29 @@ function ProfileMenu() {
     </Menu>
   );
 }
- 
+
 // nav list menu
 const navListMenuItems = [
   {
-    title: "@material-tailwind/html",
+    title: '@material-tailwind/html',
     description:
-      "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
+      'Learn how to use @material-tailwind/html, packed with rich components and widgets.',
   },
   {
-    title: "@material-tailwind/react",
+    title: '@material-tailwind/react',
     description:
-      "Learn how to use @material-tailwind/react, packed with rich components for React.",
+      'Learn how to use @material-tailwind/react, packed with rich components for React.',
   },
   {
-    title: "Material Tailwind PRO",
+    title: 'Material Tailwind PRO',
     description:
-      "A complete set of UI Elements for building faster websites in less time.",
+      'A complete set of UI Elements for building faster websites in less time.',
   },
 ];
- 
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
- 
+
   const renderItems = navListMenuItems.map(({ title, description }) => (
     <a href="#" key={title}>
       <MenuItem>
@@ -145,19 +145,19 @@ function NavListMenu() {
       </MenuItem>
     </a>
   ));
- 
+
   return (
     <React.Fragment>
       <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
           <Typography as="a" href="#" variant="small" className="font-normal">
             <MenuItem className="hidden items-center gap-2 font-medium text-blue-gray-900 lg:flex lg:rounded-full">
-              <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
-              Pages{" "}
+              <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{' '}
+              Pages{' '}
               <ChevronDownIcon
                 strokeWidth={2}
                 className={`h-3 w-3 transition-transform ${
-                  isMenuOpen ? "rotate-180" : ""
+                  isMenuOpen ? 'rotate-180' : ''
                 }`}
               />
             </MenuItem>
@@ -178,8 +178,8 @@ function NavListMenu() {
         </MenuList>
       </Menu>
       <MenuItem className="flex items-center gap-2 font-medium text-blue-gray-900 lg:hidden">
-        <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
-        Pages{" "}
+        <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{' '}
+        Pages{' '}
       </MenuItem>
       <ul className="ml-6 flex w-full flex-col gap-1 lg:hidden">
         {renderItems}
@@ -187,23 +187,23 @@ function NavListMenu() {
     </React.Fragment>
   );
 }
- 
+
 // nav list component
 const navListItems = [
   {
-    label: "Account",
+    label: 'Account',
     icon: UserCircleIcon,
   },
   {
-    label: "Blocks",
+    label: 'Blocks',
     icon: CubeTransparentIcon,
   },
   {
-    label: "Docs",
+    label: 'Docs',
     icon: CodeBracketSquareIcon,
   },
 ];
- 
+
 function NavList() {
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
@@ -218,7 +218,7 @@ function NavList() {
           className="font-medium text-blue-gray-500"
         >
           <MenuItem className="flex items-center gap-2 lg:rounded-full">
-            {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
+            {React.createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
             <span className="text-gray-900"> {label}</span>
           </MenuItem>
         </Typography>
@@ -226,19 +226,19 @@ function NavList() {
     </ul>
   );
 }
- 
+
 export function ComplexNavbar() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
- 
+
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
- 
+
   React.useEffect(() => {
     window.addEventListener(
-      "resize",
+      'resize',
       () => window.innerWidth >= 960 && setIsNavOpen(false),
     );
   }, []);
- 
+
   return (
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
@@ -261,7 +261,7 @@ export function ComplexNavbar() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
- 
+
         <Button size="sm" variant="text">
           <span>Log In</span>
         </Button>

@@ -23,17 +23,28 @@ export default function ContratacionForm() {
 
   useEffect(() => {
     fetch('https://api-beta-mocha-59.vercel.app/tipoContratacion')
-      .then(response => response.json())
-      .then(data => setTipoContratacionOptions(data))
-      .catch(error => console.error('Error fetching data:', error));
+      .then((response) => response.json())
+      .then((data) => setTipoContratacionOptions(data))
+      .catch((error) => console.error('Error fetching data:', error));
   }, []);
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validar que todos los campos requeridos estén completos
-    if (!nombre || !apellido_Paterno || !apellido_Materno || !inicio_Traslado || !escala || !destino_Traslado || !motivo || !material_especifico || !fecha || !horario || !ID_Tipo_Contratacion) {
+    if (
+      !nombre ||
+      !apellido_Paterno ||
+      !apellido_Materno ||
+      !inicio_Traslado ||
+      !escala ||
+      !destino_Traslado ||
+      !motivo ||
+      !material_especifico ||
+      !fecha ||
+      !horario ||
+      !ID_Tipo_Contratacion
+    ) {
       setErrorMessage('Por favor, complete todos los campos.');
       return;
     }
@@ -54,14 +65,17 @@ export default function ContratacionForm() {
 
     console.log('Enviando datos:', requestBody); // Depuración
 
-    fetch('https://api-beta-mocha-59.vercel.app/CrearContratacionSinRegistrar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    fetch(
+      'https://api-beta-mocha-59.vercel.app/CrearContratacionSinRegistrar',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
       },
-      body: JSON.stringify(requestBody),
-    })
-      .then(response => {
+    )
+      .then((response) => {
         if (!response.ok) {
           return response.json().then((data) => {
             throw new Error(data.msg || 'Error en la solicitud');
@@ -69,11 +83,11 @@ export default function ContratacionForm() {
         }
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         setSuccessMessage('Registro realizado de manera exitosa');
         setErrorMessage('');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
         setSuccessMessage('');
         setErrorMessage(`Error: ${error.message}`);
@@ -228,13 +242,20 @@ export default function ContratacionForm() {
               >
                 <option value="">Seleccione un tipo</option>
                 {tipoContratacionOptions.map((tipo) => (
-                  <option key={tipo.ID_Tipo_Contratacion} value={tipo.ID_Tipo_Contratacion}>{tipo.tipo}</option>
+                  <option
+                    key={tipo.ID_Tipo_Contratacion}
+                    value={tipo.ID_Tipo_Contratacion}
+                  >
+                    {tipo.tipo}
+                  </option>
                 ))}
               </select>
             </div>
           </div>
           <div className="button-container">
-            <button className="button2" type="submit">Enviar</button>
+            <button className="button2" type="submit">
+              Enviar
+            </button>
           </div>
         </form>
         {successMessage && <p className="success-message">{successMessage}</p>}

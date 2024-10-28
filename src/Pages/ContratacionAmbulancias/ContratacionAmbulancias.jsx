@@ -29,9 +29,7 @@ export default function ContratacionForm() {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [ambulanciaError, setAmbulanciaError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false); 
-
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [nombreError, setNombreError] = useState('');
   const [apellidoPaternoError, setApellidoPaternoError] = useState('');
@@ -44,44 +42,46 @@ export default function ContratacionForm() {
   const [fechaError, setFechaError] = useState('');
   const [horarioError, setHorarioError] = useState('');
   const [tipoContratacionError, setTipoContratacionError] = useState('');
-  const [ambulanciaSeleccionadaError, setAmbulanciaSeleccionadaError] = useState(''); 
+  const [ambulanciaSeleccionadaError, setAmbulanciaSeleccionadaError] =
+    useState('');
 
   useEffect(() => {
     fetch('https://api-beta-mocha-59.vercel.app/tipoContratacion')
-      .then(response => response.json())
-      .then(data => setTipoContratacionOptions(data))
-      .catch(error => console.error('Error fetching data:', error));
+      .then((response) => response.json())
+      .then((data) => setTipoContratacionOptions(data))
+      .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
   useEffect(() => {
     fetch(`https://api-beta-mocha-59.vercel.app/usuario/${correoCookieUser}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setNombre(data.nombre);
         setApellido_Paterno(data.apellidoP);
         setApellido_Materno(data.apellidoM);
       })
-      .catch(error => console.error('Error fetching user data:', error));
+      .catch((error) => console.error('Error fetching user data:', error));
   }, [correoCookieUser]);
 
   useEffect(() => {
     fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.length > 0) {
           setAmbulanciasDisponibles(data);
         } else {
-
           setAmbulanciaError('Por el momento no hay ambulancias disponibles');
         }
       })
-      .catch(error => console.error('Error fetching ambulances:', error));
+      .catch((error) => console.error('Error fetching ambulances:', error));
   }, []);
 
   const validateNombre = (value) => {
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
-      setNombreError('No se permiten caracteres especiales solo letras y espacios.');
+      setNombreError(
+        'No se permiten caracteres especiales solo letras y espacios.',
+      );
     } else {
       setNombreError('');
     }
@@ -91,7 +91,9 @@ export default function ContratacionForm() {
   const validateApellidoPaterno = (value) => {
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
-      setApellidoPaternoError('No se permiten caracteres especiales solo letras y espacios.');
+      setApellidoPaternoError(
+        'No se permiten caracteres especiales solo letras y espacios.',
+      );
     } else {
       setApellidoPaternoError('');
     }
@@ -101,7 +103,9 @@ export default function ContratacionForm() {
   const validateApellidoMaterno = (value) => {
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
-      setApellidoMaternoError('No se permiten caracteres especiales solo letras y espacios.');
+      setApellidoMaternoError(
+        'No se permiten caracteres especiales solo letras y espacios.',
+      );
     } else {
       setApellidoMaternoError('');
     }
@@ -174,8 +178,7 @@ export default function ContratacionForm() {
     const [hour, minute] = value.split(':');
     const formattedHorario = `${hour}:${minute}:00`; // Formato 'HH:mm:ss'
     setHorario(formattedHorario);
-};
-
+  };
 
   const validateTipoContratacion = (value) => {
     setID_Tipo_Contratacion(value);
@@ -219,11 +222,9 @@ export default function ContratacionForm() {
       return;
     }
 
-    setIsSubmitting(true); 
-    message.loading('Verficando...',7);
-    setTimeout(() => {
-    }, 1000);
- 
+    setIsSubmitting(true);
+    message.loading('Verficando...', 7);
+    setTimeout(() => {}, 1000);
 
     const requestBody = {
       nombre,
@@ -239,44 +240,51 @@ export default function ContratacionForm() {
       ID_Usuario,
       ID_Tipo_Contratacion,
       ambulanciaSeleccionada,
-      correo: correoCookieUser
+      correo: correoCookieUser,
     };
 
     try {
-      const response = await fetch('https://api-beta-mocha-59.vercel.app/CrearContratacion', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://api-beta-mocha-59.vercel.app/CrearContratacion',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
         },
-        body: JSON.stringify(requestBody),
-      });
+      );
 
       if (!response.ok) {
         const data = await response.json();
-        setIsSubmitting(true); 
+        setIsSubmitting(true);
         throw new Error(data.msg || 'Error en la solicitud');
-        
       }
 
-      await fetch('https://api-beta-mocha-59.vercel.app/enviar-correo-contratacion', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await fetch(
+        'https://api-beta-mocha-59.vercel.app/enviar-correo-contratacion',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nombre,
+            apellido_Paterno,
+            apellido_Materno,
+            correo: correoCookieUser,
+          }),
         },
-        body: JSON.stringify({
-          nombre,
-          apellido_Paterno,
-          apellido_Materno,
-          correo: correoCookieUser
-        }),
-      });
+      );
 
-      message.success('Solicitud enviada correctamente a revisión, por favor cheque su correo para llevar el seguimiento correcto del proceso de contratación.');
+      message.success(
+        'Solicitud enviada correctamente a revisión, por favor cheque su correo para llevar el seguimiento correcto del proceso de contratación.',
+      );
       navigate('/Perfil');
-      setSuccessMessage('Registro realizado de manera exitosa',10);
+      setSuccessMessage('Registro realizado de manera exitosa', 10);
       setErrorMessage('');
     } catch (error) {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
       setSuccessMessage('');
       message.warning({
         content: ` ${error.message}`,
@@ -289,27 +297,44 @@ export default function ContratacionForm() {
     }
   };
 
-  console.log(horario)
+  console.log(horario);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-white-100 p-4">
       <div className="bg-white shadow-lg rounded-lg p-8 flex flex-col lg:flex-row lg:space-x-8 w-full max-w-6xl">
-        <form onSubmit={handleSubmit} className={`w-full lg:w-2/3 ${ambulanciaError ? 'opacity-80 pointer-events-none' : ''}`}>
-          <h3 className="text-[50px] flex justify-center items-center mb-4 text-red-800">Contratación de Ambulancias</h3>
+        <form
+          onSubmit={handleSubmit}
+          className={`w-full lg:w-2/3 ${ambulanciaError ? 'opacity-80 pointer-events-none' : ''}`}
+        >
+          <h3 className="text-[50px] flex justify-center items-center mb-4 text-red-800">
+            Contratación de Ambulancias
+          </h3>
           <div className="text-[13px] text-red-600 mb-4">
-            <strong>Nota: Para la contratacion del servicio tome encuenta solicitarla 3 dias antes ya que pasara por un proceso de revision su solicitud.</strong>
+            <strong>
+              Nota: Para la contratacion del servicio tome encuenta solicitarla
+              3 dias antes ya que pasara por un proceso de revision su
+              solicitud.
+            </strong>
           </div>
           <p className="text-[13px] text-gray-600 mb-2">
-            <strong>Nota: Rellene los campos que faltan.</strong> <br /><br />
+            <strong>Nota: Rellene los campos que faltan.</strong> <br />
+            <br />
           </p>
 
           {ambulanciaError && (
-            <div className="text-red-800 font-bold text-center mb-4">{ambulanciaError}</div>
+            <div className="text-red-800 font-bold text-center mb-4">
+              {ambulanciaError}
+            </div>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="ID_Tipo_Contratacion" className="block text-sm font-medium text-gray-700">Tipo Contratación</label>
+                <label
+                  htmlFor="ID_Tipo_Contratacion"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Tipo Contratación
+                </label>
                 <InfoPopover content="Seleccione el tipo de contratación del servicio de ambulancia." />
               </div>
               <select
@@ -322,14 +347,28 @@ export default function ContratacionForm() {
               >
                 <option value="">Seleccione un tipo</option>
                 {tipoContratacionOptions.map((tipo) => (
-                  <option key={tipo.ID_Tipo_Contratacion} value={tipo.ID_Tipo_Contratacion}>{tipo.tipo}</option>
+                  <option
+                    key={tipo.ID_Tipo_Contratacion}
+                    value={tipo.ID_Tipo_Contratacion}
+                  >
+                    {tipo.tipo}
+                  </option>
                 ))}
               </select>
-              {tipoContratacionError && <p className="text-red-600 text-[11px] mt-1">{tipoContratacionError}</p>}
+              {tipoContratacionError && (
+                <p className="text-red-600 text-[11px] mt-1">
+                  {tipoContratacionError}
+                </p>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="ambulanciaSeleccionada" className="block text-sm font-medium text-gray-700">Ambulancia</label>
+                <label
+                  htmlFor="ambulanciaSeleccionada"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Ambulancia
+                </label>
                 <InfoPopover content="Seleccione una ambulancia disponible para el traslado." />
               </div>
               <select
@@ -343,14 +382,28 @@ export default function ContratacionForm() {
               >
                 <option value="">Seleccione una ambulancia</option>
                 {ambulanciasDisponibles.map((ambulancia) => (
-                  <option key={ambulancia.AmbulanciaID} value={ambulancia.AmbulanciaID}>{ambulancia.NumeroAmbulancia}</option>
+                  <option
+                    key={ambulancia.AmbulanciaID}
+                    value={ambulancia.AmbulanciaID}
+                  >
+                    {ambulancia.NumeroAmbulancia}
+                  </option>
                 ))}
               </select>
-              {ambulanciaSeleccionadaError && <p className="text-red-600 text-[11px] mt-1">{ambulanciaSeleccionadaError}</p>}
+              {ambulanciaSeleccionadaError && (
+                <p className="text-red-600 text-[11px] mt-1">
+                  {ambulanciaSeleccionadaError}
+                </p>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="nombre" className="block text-sm font-medium text-gray-700">Nombre</label>
+                <label
+                  htmlFor="nombre"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Nombre
+                </label>
                 <InfoPopover content="Ingrese su nombre completo tal como aparece en su identificación oficial." />
               </div>
               <input
@@ -364,11 +417,20 @@ export default function ContratacionForm() {
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 readOnly // Hace que el campo sea de solo lectura
               />
-              {nombreError && <div className="text-red-600 text-[11px] mt-1">{nombreError}</div>}
+              {nombreError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {nombreError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="apellido_Paterno" className="block text-sm font-medium text-gray-700">Apellido Paterno</label>
+                <label
+                  htmlFor="apellido_Paterno"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Apellido Paterno
+                </label>
                 <InfoPopover content="Ingrese su apellido paterno tal como aparece en su identificación oficial." />
               </div>
               <input
@@ -382,11 +444,20 @@ export default function ContratacionForm() {
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 readOnly // Hace que el campo sea de solo lectura
               />
-              {apellidoPaternoError && <div className="text-red-600 text-[11px] mt-1">{apellidoPaternoError}</div>}
+              {apellidoPaternoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {apellidoPaternoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="apellido_Materno" className="block text-sm font-medium text-gray-700">Apellido Materno</label>
+                <label
+                  htmlFor="apellido_Materno"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Apellido Materno
+                </label>
                 <InfoPopover content="Ingrese su apellido materno tal como aparece en su identificación oficial." />
               </div>
               <input
@@ -400,11 +471,20 @@ export default function ContratacionForm() {
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 readOnly // Hace que el campo sea de solo lectura
               />
-              {apellidoMaternoError && <div className="text-red-600 text-[11px] mt-1">{apellidoMaternoError}</div>}
+              {apellidoMaternoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {apellidoMaternoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-2 lg:col-span-3">
               <div className="flex items-center justify-between">
-                <label htmlFor="motivo" className="block text-sm font-medium text-gray-700">Motivo</label>
+                <label
+                  htmlFor="motivo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Motivo
+                </label>
                 <InfoPopover content="Describa el motivo del traslado (por ejemplo, consulta médica, tratamiento, etc.)." />
               </div>
               <Textarea
@@ -415,11 +495,20 @@ export default function ContratacionForm() {
                 required
                 className="mt-1 h-32 border margText border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-[12px]"
               />
-              {motivoError && <div className="text-red-600 text-[11px] mt-1">{motivoError}</div>}
+              {motivoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {motivoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-2 lg:col-span-3">
               <div className="flex items-center justify-between">
-                <label htmlFor="material_especifico" className="block text-sm font-medium text-gray-700">Material Específico</label>
+                <label
+                  htmlFor="material_especifico"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Material Específico
+                </label>
                 <InfoPopover content="Indique si se requiere algún material específico durante el traslado (por ejemplo, oxígeno, camilla, etc.)." />
               </div>
               <Textarea
@@ -430,11 +519,20 @@ export default function ContratacionForm() {
                 required
                 className="mt-1 h-32 border margText border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-[12px]"
               />
-              {materialEspecificoError && <div className="text-red-600 text-[11px] mt-1">{materialEspecificoError}</div>}
+              {materialEspecificoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {materialEspecificoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="inicio_Traslado" className="block text-sm font-medium text-gray-700">Inicio Traslado</label>
+                <label
+                  htmlFor="inicio_Traslado"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Inicio Traslado
+                </label>
                 <InfoPopover content="Ingrese el lugar de inicio del traslado (por ejemplo, su dirección actual). Para la contratación de eventos, coloque el lugar del evento." />
               </div>
               <input
@@ -447,11 +545,20 @@ export default function ContratacionForm() {
                 autoComplete="inicio_Traslado"
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
               />
-              {inicioTrasladoError && <div className="text-red-600 text-[11px] mt-1">{inicioTrasladoError}</div>}
+              {inicioTrasladoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {inicioTrasladoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="escala" className="block text-sm font-medium text-gray-700">Escala</label>
+                <label
+                  htmlFor="escala"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Escala
+                </label>
                 <InfoPopover content="Ingrese las escalas o paradas intermedias durante el traslado. Para la contratación de eventos, coloque 'No aplica'." />
               </div>
               <input
@@ -464,11 +571,20 @@ export default function ContratacionForm() {
                 autoComplete="escala"
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
               />
-              {escalaError && <div className="text-red-600 text-[11px] mt-1">{escalaError}</div>}
+              {escalaError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {escalaError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="destino_Traslado" className="block text-sm font-medium text-gray-700">Destino Traslado</label>
+                <label
+                  htmlFor="destino_Traslado"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Destino Traslado
+                </label>
                 <InfoPopover content="Ingrese el destino final del traslado (por ejemplo, la dirección del hospital). Para la contratación de eventos, coloque 'No aplica'." />
               </div>
               <input
@@ -481,11 +597,20 @@ export default function ContratacionForm() {
                 autoComplete="destino_Traslado"
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
               />
-              {destinoTrasladoError && <div className="text-red-600 text-[11px] mt-1">{destinoTrasladoError}</div>}
+              {destinoTrasladoError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {destinoTrasladoError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="fecha" className="block text-sm font-medium text-gray-700">Fecha</label>
+                <label
+                  htmlFor="fecha"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Fecha
+                </label>
                 <InfoPopover content="Seleccione la fecha en la que se realizará el traslado." />
               </div>
               <input
@@ -498,11 +623,20 @@ export default function ContratacionForm() {
                 autoComplete="fecha"
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
               />
-              {fechaError && <div className="text-red-600 text-[11px] mt-1">{fechaError}</div>}
+              {fechaError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {fechaError}
+                </div>
+              )}
             </div>
             <div className="form-group col-span-1 md:col-span-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="horario" className="block text-sm font-medium text-gray-700">Horario</label>
+                <label
+                  htmlFor="horario"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Horario
+                </label>
                 <InfoPopover content="Seleccione el horario en el que se realizará el traslado (horas y minutos)." />
               </div>
               <input
@@ -516,25 +650,40 @@ export default function ContratacionForm() {
                 className="mt-1 p-2 text-[12px] border border-gray-300 rounded-md w-full bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
                 step="60"
               />
-              {horarioError && <div className="text-red-600 text-[11px] mt-1">{horarioError}</div>}
+              {horarioError && (
+                <div className="text-red-600 text-[11px] mt-1">
+                  {horarioError}
+                </div>
+              )}
             </div>
           </div>
           <div className="flex justify-center mt-4">
-        <button
-          className={`bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed btnCar' : ''}`}
-          type="submit"
-          disabled={isSubmitting}
-        >
-          {isSubmitting && <span className="spinner"></span>} {/* Spinner */}
-          {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
-        </button>
-      </div>
+            <button
+              className={`bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 flex items-center justify-center ${isSubmitting ? 'opacity-50 cursor-not-allowed btnCar' : ''}`}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <span className="spinner"></span>}{' '}
+              {/* Spinner */}
+              {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
+            </button>
+          </div>
 
-          {successMessage && <div className="text-red-600 text-[11px] mt-1">{successMessage}</div>}
-          {errorMessage && <div className="text-red-600 text-[11px] mt-1">{errorMessage}</div>}
+          {successMessage && (
+            <div className="text-red-600 text-[11px] mt-1">
+              {successMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="text-red-600 text-[11px] mt-1">{errorMessage}</div>
+          )}
         </form>
         <div className="w-full lg:w-1/3 flex justify-center items-center mt-4 lg:mt-0">
-          <img src={ambulanceImage} alt="Ambulancia" className="max-w-full ambu" />
+          <img
+            src={ambulanceImage}
+            alt="Ambulancia"
+            className="max-w-full ambu"
+          />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, UserPlusIcon } from '@heroicons/react/24/solid';
 import {
   Card,
   CardHeader,
@@ -15,73 +15,73 @@ import {
   Avatar,
   IconButton,
   Tooltip,
-} from "@material-tailwind/react";
- 
+} from '@material-tailwind/react';
+
 const TABS = [
   {
-    label: "All",
-    value: "all",
+    label: 'All',
+    value: 'all',
   },
   {
-    label: "Monitored",
-    value: "monitored",
+    label: 'Monitored',
+    value: 'monitored',
   },
   {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: 'Unmonitored',
+    value: 'unmonitored',
   },
 ];
- 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
- 
+
+const TABLE_HEAD = ['Member', 'Function', 'Status', 'Employed', ''];
+
 const TABLE_ROWS = [
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
+    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg',
+    name: 'John Michael',
+    email: 'john@creative-tim.com',
+    job: 'Manager',
+    org: 'Organization',
     online: true,
-    date: "23/04/18",
+    date: '23/04/18',
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
+    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg',
+    name: 'Alexa Liras',
+    email: 'alexa@creative-tim.com',
+    job: 'Programator',
+    org: 'Developer',
     online: false,
-    date: "23/04/18",
+    date: '23/04/18',
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
+    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg',
+    name: 'Laurent Perrier',
+    email: 'laurent@creative-tim.com',
+    job: 'Executive',
+    org: 'Projects',
     online: false,
-    date: "19/09/17",
+    date: '19/09/17',
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
+    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg',
+    name: 'Michael Levi',
+    email: 'michael@creative-tim.com',
+    job: 'Programator',
+    org: 'Developer',
     online: true,
-    date: "24/12/08",
+    date: '24/12/08',
   },
   {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
+    img: 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg',
+    name: 'Richard Gran',
+    email: 'richard@creative-tim.com',
+    job: 'Manager',
+    org: 'Executive',
     online: false,
-    date: "04/10/21",
+    date: '04/10/21',
   },
 ];
- 
+
 export function MembersTable() {
   return (
     <Card className="h-full w-full">
@@ -147,9 +147,9 @@ export function MembersTable() {
               ({ img, name, email, job, org, online, date }, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
- 
+                  ? 'p-4'
+                  : 'p-4 border-b border-blue-gray-50';
+
                 return (
                   <tr key={name}>
                     <td className={classes}>
@@ -196,8 +196,8 @@ export function MembersTable() {
                         <Chip
                           variant="ghost"
                           size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
+                          value={online ? 'online' : 'offline'}
+                          color={online ? 'green' : 'blue-gray'}
                         />
                       </div>
                     </td>

@@ -22,9 +22,6 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Instalar Dependencias
-        run: npm install
-
       - name: Configurar Caché
         uses: actions/cache@v3
         with:
@@ -33,9 +30,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-  test:
+  lint-and-format:
     runs-on: ubuntu-latest
     needs: [setup]
+
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4.2.1
+
+      - name: Instalar Dependencias
+        run: npm install
+
+      - name: Ejecutar ESLint
+        run: npm run lint  # Asegúrate de tener el script "lint" configurado en tu package.json
+
+      - name: Ejecutar Prettier
+        run: npm run format  # Asegúrate de tener el script "format" configurado en tu package.json
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [lint-and-format]
 
     steps:
       - name: Checkout Código

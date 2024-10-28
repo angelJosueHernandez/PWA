@@ -1,238 +1,227 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-
-
-.container2{
-    margin: 300px;
-    background-color: #fff;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    position: relative;
-    overflow: hidden;
-    width: 788px;
-    max-width: 300%;
-    min-height: 680px;
-    margin-bottom: 60px;
-    margin-top: 20px;
+.container2 {
+  margin: 300px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: 788px;
+  max-width: 300%;
+  min-height: 680px;
+  margin-bottom: 60px;
+  margin-top: 20px;
 }
-.cuenta2{
-    font-size: 14px !important;
-    line-height: 10px !important ;
-    letter-spacing: 0.3px !important;
-    margin: 5px 0 !important;
+.cuenta2 {
+  font-size: 14px !important;
+  line-height: 10px !important ;
+  letter-spacing: 0.3px !important;
+  margin: 5px 0 !important;
 }
 .container2.error-present {
-    min-height: 650px; /* Ajusta la altura según sea necesario */
-  }
-.container2 p{
-    font-size: 11px;
-    line-height: 20px;
-    letter-spacing: 0.3px;
-    margin: 10px 0;
+  min-height: 650px; /* Ajusta la altura según sea necesario */
+}
+.container2 p {
+  font-size: 11px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 10px 0;
 }
 
-.container2 span{
-    font-size: 12px;
+.container2 span {
+  font-size: 12px;
 }
 
-.container2 a{
-    color: #272727;
-    font-size: 13px;
-    text-decoration: none;
-    margin: 15px 0 10px;
+.container2 a {
+  color: #272727;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0 10px;
 }
 
-.container2 .button2{
-    background-color: var(--color-primary);
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
+.container2 .button2 {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
-
-.container2 .verBoton{
-    left: 240px;
-    align-items: center;
-    position: absolute;
-    display: flex;
+.container2 .verBoton {
+  left: 240px;
+  align-items: center;
+  position: absolute;
+  display: flex;
 }
 
-
-.container2 .button2.hidden{
-    background-color: transparent;
-    border-color: #000000;
+.container2 .button2.hidden {
+  background-color: transparent;
+  border-color: #000000;
 }
 
-
-.container2 .button{
-    background-color: var(--color-primary);
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 14px;
-    cursor: pointer;
+.container2 .button {
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 14px;
+  cursor: pointer;
 }
 
-.container2 .button.hidden{
-    background-color: transparent;
-    border-color: #000000;
+.container2 .button.hidden {
+  background-color: transparent;
+  border-color: #000000;
 }
 
-.container2 form{
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    height: 100%;
+.container2 form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
 }
 
-.container2 input{
-    background-color: #eee;
-    border: none;
-    margin: 9px 0;
-    padding: 4px 15px;
-    font-size: 10px;
-    border-radius: 8px;
-    width: 180%;
-    outline: none;
+.container2 input {
+  background-color: #eee;
+  border: none;
+  margin: 9px 0;
+  padding: 4px 15px;
+  font-size: 10px;
+  border-radius: 8px;
+  width: 180%;
+  outline: none;
 }
 
-.form-container{
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
 }
 
-.sign-in{
-    left: 0;
-    width: 50%;
-    z-index: 2;
+.sign-in {
+  left: 0;
+  width: 50%;
+  z-index: 2;
 }
 
-.social-icons{
-    margin: 20px 0;
+.social-icons {
+  margin: 20px 0;
 }
 
-.social-icons a{
-    border: 1px solid #ccc;
-    border-radius: 20%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 3px;
-    width: 40px;
-    height: 40px;
+.social-icons a {
+  border: 1px solid #ccc;
+  border-radius: 20%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 3px;
+  width: 40px;
+  height: 40px;
 }
-.title-form{
-    color: var(--color-black);
-    font-size: 38px !important;
+.title-form {
+  color: var(--color-black);
+  font-size: 38px !important;
 }
 .btn-google {
-    background: var(--color-dark-Ex) !important;
-    color: #000000 !important;
+  background: var(--color-dark-Ex) !important;
+  color: #000000 !important;
 }
-.cont-remen{
-    display: inline-grid;
-    grid-template-columns: auto 1fr;
-    align-items: center; 
-    margin-left: 10px;
-    margin-top: 6.5px !important ;
-  
+.cont-remen {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 6.5px !important ;
 }
-.cont-remen2{
-    display: inline-grid;
-    grid-template-columns: auto 1fr;
-    align-items: center; 
-    margin-left: 10px;
-    gap: 8px;
-   
-  
+.cont-remen2 {
+  display: inline-grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  margin-left: 10px;
+  gap: 8px;
 }
-.img-Login{
-    position: absolute;
-    width: 600px;
-    height: 490px;
-    margin-left: 790px;
-    top: 0px;
+.img-Login {
+  position: absolute;
+  width: 600px;
+  height: 490px;
+  margin-left: 790px;
+  top: 0px;
 }
-.img-Login4{
-    position: absolute;
-    width: auto;
-    height: auto;
-    margin-left: 760px;
-    top: 550px;
+.img-Login4 {
+  position: absolute;
+  width: auto;
+  height: auto;
+  margin-left: 760px;
+  top: 550px;
 }
-.feature-border{
-    position: absolute;
-    width: 340px;
-    background: var(--color-dark);
-    margin-left: 785px;
-    top: 433px;
+.feature-border {
+  position: absolute;
+  width: 340px;
+  background: var(--color-dark);
+  margin-left: 785px;
+  top: 433px;
 }
-.title-form2{
-    position: absolute;
-    width: 340px;
-    margin-left: 855px;
-    top: 510px;
+.title-form2 {
+  position: absolute;
+  width: 340px;
+  margin-left: 855px;
+  top: 510px;
 }
-.error-messageInicio{
-  margin-top: -6.5px !important ;  
+.error-messageInicio {
+  margin-top: -6.5px !important ;
   color: red !important;
 }
 
-.leading{
-    margin-bottom: -7px !important;
-    margin-top: 4.5px !important ; 
+.leading {
+  margin-bottom: -7px !important;
+  margin-top: 4.5px !important ;
 }
 
-
-.button5{
-
-    color: var(--color-dark);
-    font-size: 10px;
-    padding: 5px 10px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    font-weight: 100;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
+.button5 {
+  color: var(--color-dark);
+  font-size: 10px;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
 }
 .otp-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .otpInput {
-    /* Agrega estilos según sea necesario */
-    margin: 5px !important; /* Espacio entre cada input */
-    width: 40px !important;
-    height: 40px !important;
-    border: 1.5px solid #dbdada !important; /* Cambia el color del borde */
-  }
- /* Estilo para resaltar cuando el input está enfocado */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.otpInput {
+  /* Agrega estilos según sea necesario */
+  margin: 5px !important; /* Espacio entre cada input */
+  width: 40px !important;
+  height: 40px !important;
+  border: 1.5px solid #dbdada !important; /* Cambia el color del borde */
+}
+/* Estilo para resaltar cuando el input está enfocado */
 .otpInput:focus {
-    border-color: #69a3b4 !important; /* Cambia el color del borde cuando el input está enfocado */
-  }
-  
-  
-  /* Estilo para resaltar al pasar el cursor */
-  .otpInput:hover {
-    background-color: #dbdada !important; /* Cambia el color de fondo al pasar el cursor */
-  }
+  border-color: #69a3b4 !important; /* Cambia el color del borde cuando el input está enfocado */
+}
+
+/* Estilo para resaltar al pasar el cursor */
+.otpInput:hover {
+  background-color: #dbdada !important; /* Cambia el color de fondo al pasar el cursor */
+}

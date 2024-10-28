@@ -1,10 +1,6 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
-
-
-
 
 const AuthContext = createContext();
 
@@ -34,8 +30,6 @@ export const AuthProvider = ({ children }) => {
   const [citasLoaded, setCitasLoaded] = useState(false);
   const [contratacionLoaded, setContratacionLoaded] = useState(false);
 
-  
-
   useEffect(() => {
     // Simula la verificación inicial del estado de autenticación
     const checkAuth = async () => {
@@ -43,25 +37,27 @@ export const AuthProvider = ({ children }) => {
 
       if (token) {
         try {
-          const response = await fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const response = await fetch(
+            'https://api-beta-mocha-59.vercel.app/verifyToken',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ token }),
+              credentials: 'include',
             },
-            body: JSON.stringify({ token }),
-            credentials: 'include',
-          });
+          );
 
           const result = await response.json();
 
-          if (result.mensaje === "Token válido") {
+          if (result.mensaje === 'Token válido') {
             const decodedToken = jwtDecode(token);
             setIsAuthenticated(decodedToken.IsAuthenticated);
             setCorreoCookieUser(decodedToken.correo);
             setIdCookieUser(decodedToken.id);
             setNombreCookieUser(decodedToken.nombre);
             setUser(decodedToken.nombre);
-
           } else {
             setIsAuthenticated(false);
           }
@@ -79,50 +75,50 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-
-
   return (
-    <AuthContext.Provider value={{
-      isAuthenticated,
-      setIsAuthenticated,
-      user,
-      setUser,
-      avatarColor,
-      setAvatarColor,
-      token,
-      setToken,
-      metodo,
-      setMetodo,
-      contraActualizar,
-      setContraActualizar,
-      contraActualizar2,
-      setContraActualizar2,
-      correo,
-      setCorreo,
-      numero,
-      setNumero,
-      isMethodSelected,
-      setIsMethodSelected,
-      contraCo,
-      setContraCo,
-      contraCo2,
-      setContraCo2,
-      correoGuardar,
-      setCorreoGuardar,
-      correoCookieUser,
-      setCorreoCookieUser,
-      idCookieUser,
-      setIdCookieUser,
-      nombreCookieUser,
-      setNombreCookieUser,
-      loading,
-      perfilLoaded, 
-      setPerfilLoaded, 
-      citasLoaded, 
-      setCitasLoaded,
-      contratacionLoaded, 
-      setContratacionLoaded
-    }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        user,
+        setUser,
+        avatarColor,
+        setAvatarColor,
+        token,
+        setToken,
+        metodo,
+        setMetodo,
+        contraActualizar,
+        setContraActualizar,
+        contraActualizar2,
+        setContraActualizar2,
+        correo,
+        setCorreo,
+        numero,
+        setNumero,
+        isMethodSelected,
+        setIsMethodSelected,
+        contraCo,
+        setContraCo,
+        contraCo2,
+        setContraCo2,
+        correoGuardar,
+        setCorreoGuardar,
+        correoCookieUser,
+        setCorreoCookieUser,
+        idCookieUser,
+        setIdCookieUser,
+        nombreCookieUser,
+        setNombreCookieUser,
+        loading,
+        perfilLoaded,
+        setPerfilLoaded,
+        citasLoaded,
+        setCitasLoaded,
+        contratacionLoaded,
+        setContratacionLoaded,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

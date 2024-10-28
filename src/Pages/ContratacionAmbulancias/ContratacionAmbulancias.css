@@ -1,10 +1,6 @@
-
-.margText{
+.margText {
   padding-top: 5px !important;
 }
-
-
-
 
 /* Spinner CSS */
 .spinner {
@@ -20,23 +16,23 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-
-.btnCar{
-  height: 40px ;
+.btnCar {
+  height: 40px;
 }
-
-
 
 @media screen and (max-width: 2024px) {
   .ambu {
     width: 240px !important;
   }
 }
-
 
 @media screen and (max-width: 890px) {
   .ambu {
@@ -54,7 +50,6 @@
     margin-top: 16.5px !important;
   }
 }
-
 
 @media screen and (max-width: 470px) {
   .ambu {

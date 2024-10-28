@@ -51,7 +51,9 @@ const SplashScreen = () => {
   }
 
   return (
-    <div className={`splash-screen ${startAnimation ? 'animate' : ''} ${startExitAnimation ? 'fade-out' : ''}`}>
+    <div
+      className={`splash-screen ${startAnimation ? 'animate' : ''} ${startExitAnimation ? 'fade-out' : ''}`}
+    >
       <div className="logo-container">
         <img src={logo} alt="LogoScreen" className="LogoScreen" />
         {/* Spinner Circular */}

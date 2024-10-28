@@ -1,4 +1,3 @@
-
 import './slider.css';
 import React, { useEffect, useRef, useState } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
@@ -19,11 +18,17 @@ SwiperCore.use([Autoplay, Navigation, Pagination]);
 
 const SwiperDemo = () => {
   return (
-    <section className="Featured" style={{ marginTop: '30px', marginBottom: '-100px' }}>
+    <section
+      className="Featured"
+      style={{ marginTop: '30px', marginBottom: '-100px' }}
+    >
       <div className="container featurers-book-cotnainer">
         {/*....................Title Props............... */}
-        <TitleTypeOne TitleTop={'CADA GRANITO DE AYUDA CUENTA, FALTAS TU!!'} Title={'Colectas'} />
-        
+        <TitleTypeOne
+          TitleTop={'CADA GRANITO DE AYUDA CUENTA, FALTAS TU!!'}
+          Title={'Colectas'}
+        />
+
         {/*....................Swiper............... */}
         <br />
         <br />
@@ -46,12 +51,18 @@ const SwiperDemo = () => {
         </Swiper>
 
         {/*....................Botón de Donaciones............... */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px', zIndex: 1 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: '20px',
+            zIndex: 1,
+          }}
+        >
           <a href="/donaciones" className="donation-button">
             Ir a Donar <span className="icon">💖</span>
           </a>
         </div>
-
       </div>
     </section>
   );

@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function Mensaje() {
-  return (
-    <div>Mensaje</div>
-  )
+  return <div>Mensaje</div>;
 }

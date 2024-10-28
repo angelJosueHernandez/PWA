@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import './TitleTypeOne.css'
+import './TitleTypeOne.css';
 
 //import Victor Image........................//
-import victor from '../../assets/victor.png'
+import victor from '../../assets/victor.png';
 
-export default function TitleTypeOne({ClassName, Title, TitleTop}) {
+export default function TitleTypeOne({ ClassName, Title, TitleTop }) {
   return (
     <div className={`titleTypeOne ${ClassName}`}>
-        <small>{TitleTop}</small>
-        <div className="headeing-H">
-            <div className="line"></div>
-            <h2>{Title}</h2>
-            <div className="line"></div>
-        </div>
-        <img src={victor} alt='' className='victor'/>
+      <small>{TitleTop}</small>
+      <div className="headeing-H">
+        <div className="line"></div>
+        <h2>{Title}</h2>
+        <div className="line"></div>
+      </div>
+      <img src={victor} alt="" className="victor" />
     </div>
-  )
+  );
 }

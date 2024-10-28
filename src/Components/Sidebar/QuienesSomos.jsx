@@ -1,15 +1,17 @@
-import React from 'react'
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
-import quienes_somos from '../../assets/img/quienes_somos.png'
-import servicios from '../../assets/img/servicios.png'
-import seguro from '../../assets/img/seguro.png'
-import programas from '../../assets/img/programas.png'
-
+import React from 'react';
+import {
+  CloudArrowUpIcon,
+  LockClosedIcon,
+  ServerIcon,
+} from '@heroicons/react/20/solid';
+import quienes_somos from '../../assets/img/quienes_somos.png';
+import servicios from '../../assets/img/servicios.png';
+import seguro from '../../assets/img/seguro.png';
+import programas from '../../assets/img/programas.png';
 
 const QuienesSomos = () => {
   return (
-    
-      <div className="p-4 bg-white">
+    <div className="p-4 bg-white">
       <div className="relative isolate overflow-hidden bg-white px-6 py-2 sm:py-15 lg:overflow-visible lg:px-0">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <svg
@@ -34,14 +36,21 @@ const QuienesSomos = () => {
                 strokeWidth={0}
               />
             </svg>
-            <rect fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" width="100%" height="100%" strokeWidth={0} />
+            <rect
+              fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"
+              width="100%"
+              height="100%"
+              strokeWidth={0}
+            />
           </svg>
         </div>
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
-                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">¿Quiénes somos?</h1>
+                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                  ¿Quiénes somos?
+                </h1>
               </div>
             </div>
           </div>
@@ -56,36 +65,55 @@ const QuienesSomos = () => {
             <div className="lg:pr-4">
               <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
                 <p>
-                  La Cruz Roja Mexicana es una institución de asistencia privada no gubernamental, 
-                  humanitaria, imparcial, neutral e independiente; que moviliza redes de voluntarios, 
-                  comunidades y donantes para operar programas y servicios que tienen como objetivo el 
-                  preservar la salud, la vida y aliviar el sufrimiento humano de la población en situación 
-                  de vulnerabilidad.
+                  La Cruz Roja Mexicana es una institución de asistencia privada
+                  no gubernamental, humanitaria, imparcial, neutral e
+                  independiente; que moviliza redes de voluntarios, comunidades
+                  y donantes para operar programas y servicios que tienen como
+                  objetivo el preservar la salud, la vida y aliviar el
+                  sufrimiento humano de la población en situación de
+                  vulnerabilidad.
                 </p>
                 <ul role="list" className="mt-8 space-y-8 text-gray-600">
                   <li className="flex gap-x-3">
-                    <img src={servicios} alt="" className='mt-1 h-10 w-10 flex-none text-indigo-600'/>
+                    <img
+                      src={servicios}
+                      alt=""
+                      className="mt-1 h-10 w-10 flex-none text-indigo-600"
+                    />
                     <span>
-                      <strong className="font-semibold text-gray-900"></strong> Atiende a personas o comunidades 
-                      afectadas por situaciones de emergencia o desastre, problemáticas de salud, enfermedades y 
-                      lesiones por accidentes, así como a los fenómenos de la migración y la exclusión social.
+                      <strong className="font-semibold text-gray-900"></strong>{' '}
+                      Atiende a personas o comunidades afectadas por situaciones
+                      de emergencia o desastre, problemáticas de salud,
+                      enfermedades y lesiones por accidentes, así como a los
+                      fenómenos de la migración y la exclusión social.
                     </span>
                   </li>
                   <li className="flex gap-x-3">
-                    <img src={programas} alt="" className='mt-1 h-10 w-10 flex-none text-indigo-600'/>
+                    <img
+                      src={programas}
+                      alt=""
+                      className="mt-1 h-10 w-10 flex-none text-indigo-600"
+                    />
                     <span>
-                      <strong className="font-semibold text-gray-900"></strong> Todos los programas 
-                      y servicios consideran en sus acciones internas y de acercamiento comunitario los enfoques 
-                      de inclusión social y educación humanitaria.
+                      <strong className="font-semibold text-gray-900"></strong>{' '}
+                      Todos los programas y servicios consideran en sus acciones
+                      internas y de acercamiento comunitario los enfoques de
+                      inclusión social y educación humanitaria.
                     </span>
                   </li>
                   <li className="flex gap-x-3">
-                    <img src={seguro} alt="" className='mt-1 h-10 w-10 flex-none text-indigo-600'/>
+                    <img
+                      src={seguro}
+                      alt=""
+                      className="mt-1 h-10 w-10 flex-none text-indigo-600"
+                    />
                     <span>
-                      <strong className="font-semibold text-gray-900"></strong> Damos especial énfasis 
-                      a la prevención y al aumento de capacidades individuales y colectivas, para que los beneficiarios 
-                      de nuestras acciones, se organicen socialmente, estén preparados y sean resilientes ante amenazas 
-                      y adversidades.
+                      <strong className="font-semibold text-gray-900"></strong>{' '}
+                      Damos especial énfasis a la prevención y al aumento de
+                      capacidades individuales y colectivas, para que los
+                      beneficiarios de nuestras acciones, se organicen
+                      socialmente, estén preparados y sean resilientes ante
+                      amenazas y adversidades.
                     </span>
                   </li>
                 </ul>
@@ -95,8 +123,7 @@ const QuienesSomos = () => {
         </div>
       </div>
     </div>
-    
-  )
-}
+  );
+};
 
-export default QuienesSomos
+export default QuienesSomos;

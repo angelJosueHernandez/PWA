@@ -5,7 +5,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwindcss/forms;
+@tailwindcss /forms;
 
 /*...................Custom styles.............. */
 * {
@@ -22,11 +22,11 @@
   --color-primary: #e62a11;
   --color-black: #773030;
   --color-black-Ex: #d31b1b;
-  --color-dark: #7A7A7A;
+  --color-dark: #7a7a7a;
   --color-dark-Ex2: #b1a1a1;
   --color-dark-Ex: #ffffff;
   --color-light: #ffffff;
-  --color-negro:  #575555;
+  --color-negro: #575555;
 
   --color-bg-1: #ffffff;
   --color-bg-2: #ffffff;
@@ -36,7 +36,7 @@
   --font-family-prata: 'Oswald', sans-serif;
   --font-family-Jakarta: 'Plus Jakarta Sans', sans-serif;
 
-  --transition: .4s ease;
+  --transition: 0.4s ease;
 }
 
 html {
@@ -50,7 +50,11 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--font-family-prata);
   text-transform: capitalize;
 }
@@ -93,7 +97,7 @@ p {
   color: var(--color-negro) !important;
   font-size: 14px;
   line-height: 220%;
-  letter-spacing: 4%;    
+  letter-spacing: 4%;
 }
 
 small {
@@ -166,7 +170,7 @@ section {
 
 /*...................Max-width:1024px.................... */
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   h1 {
     font-size: 60px !important;
   }
@@ -186,7 +190,7 @@ section {
 
 /*...................Max-width:600px.................... */
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   h1 {
     font-size: 40px !important;
   }
@@ -197,15 +201,12 @@ section {
     font-size: 24px !important;
   }
   h4 {
-    font-size: 20px ;
+    font-size: 20px;
   }
   section {
     padding: 70px 0 !important;
   }
 }
-
-
-
 
 .main-content {
   opacity: 0;
