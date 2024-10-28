@@ -40,8 +40,13 @@ export default defineConfig({
   ],
   test: {
     globals: true,
-    environment: 'jsdom', // Simula el DOM en un entorno de pruebas
-    setupFiles: './src/setupTests.js', // O .ts, si usas TypeScript
-    exclude: ['node_modules', 'dist'], // Excluye estas carpetas de las pruebas
+    environment: 'jsdom', // Define el entorno para pruebas de DOM
+    setupFiles: './src/setupTests.js', // O .ts si usas TypeScript
+    server: {
+      deps: {
+        inline: ['workbox-background-sync'] // Fuerza la inclusión de este paquete
+      }
+    },
+    exclude: ['node_modules', 'dist'] // Excluye estas carpetas de las pruebas
   },
 });

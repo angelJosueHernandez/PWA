@@ -36,7 +36,7 @@ export default function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
+    validateEmail(email);
     const captchaValue = captcha.current.getValue();
   
     if (!captchaValue) {
@@ -181,16 +181,19 @@ export default function Form() {
 
 
   const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === '') {
+    if (!email) {
       setEmailError('No puede estar vacío');
-    } else if (emailRegex.test(email)) {
-      setEmailError('');
-      return true;
-    } else {
+      return false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       setEmailError('Correo electrónico no válido');
       return false;
     }
+    
+    setEmailError('');
+    return true;
   };
 
   const validatePassword = (password) => {
@@ -264,7 +267,7 @@ export default function Form() {
   return (
     <div className={containerClass} id="container">
       <div className="form-containerLogin sign-in">
-        <form onSubmit={handleSubmit}>
+        <form role="form" onSubmit={handleSubmit}>
           <div className='tituloScreen'>
           <h3 className='title-form titulo'>Inicio de Sesión</h3></div>
           
@@ -285,8 +288,8 @@ export default function Form() {
                   className={`correo block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${emailError ? 'input-error' : ''}`} />
               </div>
               <div className='InputsCon'>
-              <div className="erroresInicio">
-              {emailError && <span className="error-messageInicio absolute  left-30">{emailError}</span>}
+              <div className="erroresInicio" data-testid="error-container">
+              {emailError && <p className="error-messageInicio absolute  left-30">{emailError}</p>}
               </div>
               </div>
             </div>
@@ -319,7 +322,7 @@ export default function Form() {
               <div className='InputsCon2'>
              <div className="erroresInicio">
              {passwordError && (
-                <span className="error-messageInicio absolute  left-30">{passwordError}</span>
+                <p className="error-messageInicio absolute  left-30">{passwordError}</p>
               )}
              </div>
              </div>
@@ -330,7 +333,7 @@ export default function Form() {
             <ReCAPTCHA
               ref={captcha}
              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
-               //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb    
+               //sitekey=6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb
               onChange={handleChangeCaptcha}
             />
           </div>

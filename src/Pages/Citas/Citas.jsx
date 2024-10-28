@@ -41,6 +41,36 @@ const CustomCalendar = ({ onChange, value }) => {
   );
 };
 
+
+async function scheduleReminderNotification(date, time) {
+  const appointmentDate = moment(date + ' ' + time, 'YYYY-MM-DD HH:mm').subtract(1, 'day');
+  const reminderTime = appointmentDate.toDate();
+
+  // Almacena la fecha de recordatorio en el localStorage
+  localStorage.setItem('reminderTime', reminderTime.toISOString());
+}
+
+// Función para verificar si es el momento de mostrar el recordatorio
+function checkReminder() {
+  const reminderTime = new Date(localStorage.getItem('reminderTime'));
+  const now = new Date();
+
+  if (now >= reminderTime) {
+    if ('serviceWorker' in navigator && 'showNotification' in ServiceWorkerRegistration.prototype) {
+      navigator.serviceWorker.ready.then(reg => {
+        reg.showNotification('Recordatorio de Cita', {
+          body: `No olvides tu cita programada para mañana.`,
+          icon: '/icon.png',
+          tag: 'cita-reminder'
+        });
+        localStorage.removeItem('reminderTime'); // Elimina el recordatorio una vez que se ha mostrado
+      });
+    }
+  }
+}
+
+
+
 export default function Citas() {
 
 
@@ -55,20 +85,11 @@ export default function Citas() {
     }
   }
 
-  
-  async function scheduleReminderNotification(date, time) {
-    const appointmentDate = moment(date + ' ' + time, 'YYYY-MM-DD HH:mm').subtract(1, 'day');
-    const reminderTime = appointmentDate.toDate();
+  useEffect(() => {
+    const intervalId = setInterval(checkReminder, 3600000); // cada hora
+    return () => clearInterval(intervalId); // Limpia el intervalo cuando se desmonta el componente
+  }, []);
 
-    if ('serviceWorker' in navigator && 'showNotification' in ServiceWorkerRegistration.prototype) {
-      const reg = await navigator.serviceWorker.ready;
-      reg.showNotification('Recordatorio de Cita', {
-        body: `No olvides tu cita programada para el ${moment(date).format('LL')} a las ${time}`,
-        tag: 'cita-reminder',
-        icon: '/icon.png'
-      });
-    }
-  }
 
 
 
