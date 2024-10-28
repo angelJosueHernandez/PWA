@@ -33,11 +33,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
- 
+  test:
+    runs-on: ubuntu-latest
+    needs: [setup]
+
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4.2.1
+
+      - name: Instalar Dependencias
+        run: npm install
+
+      - name: Ejecutar Pruebas con Vitest
+        run: npm run test  # Asegúrate de que el script de pruebas esté configurado como "test": "vitest" en tu package.json
 
   build:
     runs-on: ubuntu-latest
-    needs: [setup]
+    needs: [test]
 
     steps:
       - name: Checkout Código
@@ -73,4 +85,4 @@ jobs:
           subject: "Despliegue exitoso de tu aplicación"
           body: "El commit se ha construido y desplegado correctamente."
           to: "20210672@uthh.edu.mx"  # Reemplaza con el correo de destino
-          from: ${{ secrets.MAIL_USERNAME }}
+          from: ${{ secrets.MAIL_USERNAME }}
