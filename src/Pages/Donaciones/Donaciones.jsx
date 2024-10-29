@@ -385,7 +385,7 @@ export default function Donaciones() {
                 <div className="mt-6">
                   <ReCAPTCHA
                     ref={captcha}
-                    //sitekey=6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf
+                    
                     sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf    "
                     onChange={handleChangeCaptcha}
                   />

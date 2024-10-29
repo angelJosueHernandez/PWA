@@ -303,7 +303,7 @@ export default function Doblefactor() {
     setErrorPresent(anyError);
   }, [tokenUser]);
 
-  const containerClass = `container2 ${errorPresent ? 'error-present' : ''}`;
+  const containerClass = `container2Doble ${errorPresent ? 'error-present' : ''}`;
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -383,9 +383,9 @@ export default function Doblefactor() {
     <div className={containerClass} id="container">
       <Spin spinning={spinning} fullscreen />
       <div className="form-container sign-in">
-        <form onSubmit={handleSubmit}>
+        <form className='formulario' onSubmit={handleSubmit}>
           <h3 className="title-form">Verificacion Doble Factor</h3>
-          <span>
+          <span className='nota'>
             Favor de introducir el Token que fue enviado a{' '}
             <strong>{correo}</strong> . En caso de que no le haya llegado revise
             su span o recargue su bandeja de recibidos, agredecemos su
@@ -420,13 +420,13 @@ export default function Doblefactor() {
               Volver a enviar token
             </button>
           ) : (
-            <span>{`Volver a enviar token en ${Math.floor(remainingTime / 60)}:${remainingTime % 60}`}</span>
+            <span className='button5'>{`Volver a enviar token en ${Math.floor(remainingTime / 60)}:${remainingTime % 60}`}</span>
           )}
 
           <div className="cont-remen">
             <ReCAPTCHA
               ref={captcha}
-              //sitekey=6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf
+              
               sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
