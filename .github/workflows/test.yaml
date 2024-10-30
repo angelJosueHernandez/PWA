@@ -99,7 +99,18 @@ jobs:
           server_port: ${{ secrets.MAIL_PORT }}
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "Despliegue exitoso de tu aplicación"
-          body: "El commit se ha construido y desplegado correctamente."
-          to: "20210672@uthh.edu.mx"  # Reemplaza con el correo de destino
+          subject: "🚀 Despliegue Exitoso de la Aplicación Móvil"
+          body: |
+            El despliegue ha sido completado exitosamente.
+
+            **Detalles del Despliegue:**
+            - **Commit:** ${{ github.event.head_commit.message }}
+            - **Autor:** ${{ github.event.head_commit.author.name }}
+            - **Hash del Commit:** ${{ github.sha }}
+            - **Rama:** ${{ github.ref_name }}
+
+            Puedes ver los detalles del commit [aquí](${{ github.event.head_commit.url }}).
+
+            ¡Buen trabajo! 🎉
+          to: "20210672@uthh.edu.mx"  # Correo de destino
           from: ${{ secrets.MAIL_USERNAME }}
