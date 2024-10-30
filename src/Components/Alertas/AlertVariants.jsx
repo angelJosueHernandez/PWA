@@ -6,11 +6,12 @@ import { Alert } from '@material-tailwind/react';
 export function AlertVariants({ alertType, alertMessage }) {
   return (
     <div
-      className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-in-out ${alertMessage ? 'opacity-100 translate-y-12' : 'opacity-0 -translate-y-full'}`}
+      className={`fixed top-5 left-1/2 transform -translate-x-1/2 z-[1050] transition-all 
+      duration-500 ease-in-out ${alertMessage ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`}
     >
       <Alert
         variant={alertType === 'error' ? 'filled' : 'gradient'}
-        className="w-full max-w-md mx-auto"
+        className="w-full max-w-md mx-auto shadow-lg"
       >
         <span>{alertMessage}</span>
       </Alert>
