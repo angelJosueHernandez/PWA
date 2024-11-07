@@ -99,7 +99,7 @@ jobs:
           server_port: ${{ secrets.MAIL_PORT }}
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "🚀 Despliegue Exitoso de la Aplicación Móvil"
+          subject: "🚀 Despliegue Exitoso de la PWA"
           body: |
             El despliegue ha sido completado exitosamente.
 
