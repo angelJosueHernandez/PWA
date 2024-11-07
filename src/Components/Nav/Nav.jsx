@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.png';
 import { FiMenu } from 'react-icons/fi';
@@ -9,7 +9,7 @@ import { LuLogOut } from 'react-icons/lu';
 import { FaUserCircle } from 'react-icons/fa';
 import { jwtDecode } from 'jwt-decode';
 import { Avatar, Badge, Space, message } from 'antd';
-import './Nav.css'; // Importa tus estilos personalizados aquí
+import './Nav.css';
 import {
   IconButton,
   Navbar,
@@ -39,24 +39,8 @@ import {
 import Cookies from 'js-cookie';
 
 const profileMenuItems = [
-  {
-    label: 'Mi Perfil',
-    icon: UserCircleIcon,
-    path: 'Perfil',
-  },
-  /**
-   * 
-   *{
-    label: "Editar Perfil",
-    icon: Cog6ToothIcon,
-    path: "EditarP"
-  },
-   */
-  {
-    label: 'Ayuda',
-    icon: LifebuoyIcon,
-    path: 'Conocenos',
-  },
+  { label: 'Mi Perfil', icon: UserCircleIcon, path: 'Perfil' },
+  { label: 'Ayuda', icon: LifebuoyIcon, path: 'Conocenos' },
 ];
 
 export default function Nav() {
@@ -72,8 +56,18 @@ export default function Nav() {
   const [userName, setUserName] = useState(null);
   const [avatarColor, setAvatarColor] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null); // Referencia al menú
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleLogout = () => {
+    localStorage.setItem('Autentificado', 'false');
+    message.loading('Cerrando Sesión', 1.5).then(() => {
+      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      setIsAuthenticated(false);
+      navigate('/Iniciar Sesion');
+    });
+  };
 
   const getCookie = (name) => {
     const cookies = document.cookie.split(';');
@@ -134,14 +128,19 @@ export default function Nav() {
     return () => clearInterval(interval);
   }, [setIsAuthenticated]);
 
-  const handleLogout = () => {
-    localStorage.setItem('Autentificado', 'false');
-    message.loading('Cerrando Sesión', 1.5).then(() => {
-      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      setIsAuthenticated(false);
-      navigate('/Iniciar Sesion');
-    });
-  };
+  // Cerrar el menú automáticamente cuando se hace clic fuera de él en modo responsivo
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isNavLinksShowing && menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsNavLinksShowing(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isNavLinksShowing]);
 
   const getRandomColor2 = () => {
     const colorList = ['#f56a00', '#7265e6', '#ffbf00', '#00a2ae'];
@@ -178,7 +177,7 @@ export default function Nav() {
 
   return (
     <nav className="navShadow">
-      <div className="container nav-container">
+      <div className="container nav-container" ref={menuRef}>
         <Link to={'/'} className="logo">
           <img src={Logo} alt="Logo" />
         </Link>
@@ -190,6 +189,7 @@ export default function Nav() {
               <NavLink
                 to={item.path}
                 className={({ isActive }) => (isActive ? 'active' : '')}
+                onClick={() => setIsNavLinksShowing(false)} // Cierra el menú al hacer clic en una opción
               >
                 <item.icon className="icon-navs" />
                 <span className="name-navs">{item.name}</span>
@@ -244,7 +244,7 @@ export default function Nav() {
                         <NavLink to={path} key={label} onClick={closeMenu}>
                           <MenuItem className="flex items-center gap-2 rounded menu-item hover:bg-gray-500/10 focus:bg-gray-500/10 active:bg-gray-500/10">
                             {React.createElement(icon, {
-                              className: 'h-4 w-4 colorM',
+                              className: 'h-5 w-5 md:h-6 md:w-6 lg:h-6 lg:w-6 colorM',
                               strokeWidth: 2,
                             })}
                             <Typography

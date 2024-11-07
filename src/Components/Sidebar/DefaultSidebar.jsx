@@ -6,16 +6,11 @@ import {
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from '@material-tailwind/react';
 import {
   PresentationChartBarIcon,
   ShoppingBagIcon,
   UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
 } from '@heroicons/react/24/solid';
 import QuienesSomos from './QuienesSomos';
 import Principios from './Principios';
@@ -38,29 +33,38 @@ export function DefaultSidebar() {
   };
 
   return (
-    <div className="flex">
-      <Card className="sticky top-0 z-10 h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <div className="flex flex-col md:flex-row min-h-screen">
+      <Card className="top-0 z-10 h-[45vh] md:h-[calc(100vh-32rem)] w-full md:max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 flex flex-col">
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray">
             Menú de Sección
           </Typography>
         </div>
-        <List>
-          <ListItem onClick={() => setSelectedOption('QuienesSomos')}>
+        <List className="flex-grow space-y-2">
+          <ListItem
+            onClick={() => setSelectedOption('QuienesSomos')}
+            className="hover:bg-gray-200 p-4 cursor-pointer w-full flex-shrink-0"
+          >
             <ListItemPrefix>
-              <PresentationChartBarIcon className="h-5 w-5" />
+              <PresentationChartBarIcon className="h-6 w-6" />
             </ListItemPrefix>
             ¿Quiénes somos?
           </ListItem>
-          <ListItem onClick={() => setSelectedOption('Principios')}>
+          <ListItem
+            onClick={() => setSelectedOption('Principios')}
+            className="hover:bg-gray-200 p-4 cursor-pointer w-full flex-shrink-0"
+          >
             <ListItemPrefix>
-              <ShoppingBagIcon className="h-5 w-5" />
+              <ShoppingBagIcon className="h-6 w-6" />
             </ListItemPrefix>
             7 Principios Fundamentales
           </ListItem>
-          <ListItem onClick={() => setSelectedOption('MisionVision')}>
+          <ListItem
+            onClick={() => setSelectedOption('MisionVision')}
+            className="hover:bg-gray-200 p-4 cursor-pointer w-full flex-shrink-0"
+          >
             <ListItemPrefix>
-              <UserCircleIcon className="h-5 w-5" />
+              <UserCircleIcon className="h-6 w-6" />
             </ListItemPrefix>
             Misión y Visión
           </ListItem>

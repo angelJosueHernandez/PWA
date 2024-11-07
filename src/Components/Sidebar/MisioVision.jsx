@@ -26,9 +26,9 @@ const MisioVision = () => {
     <div className="p-4 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-2xl mx-auto lg:text-center">
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <span className="text-3xl font-bold tracking-tight text-red-900 sm:text-4xl">
             Misión y Visión
-          </p>
+          </span>
         </div>
         <div className="mt-16 max-w-2xl mx-auto sm:mt-20 lg:mt-24 lg:max-w-4xl">
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
@@ -43,8 +43,8 @@ const MisioVision = () => {
                   </div>
                   {feature.name}
                 </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">
-                  {feature.description}
+                <dd className="mt-4 text-base leading-7 text-gray-600">
+                  <span>{feature.description}</span>
                 </dd>
               </div>
             ))}

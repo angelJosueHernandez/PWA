@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import './ServicionAnuncio.css';
 import doc2 from '../../assets/img/doc2.png'; // Imagen del doctor
 import fondo from '../../assets/img/fondoM.png'; // Fondo
 import { FaAmbulance, FaCalendarAlt } from 'react-icons/fa';
+import { useAuth } from '../Contexts/AuthContexts';
 
 export default function ServicionAnuncio() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,7 +21,7 @@ export default function ServicionAnuncio() {
           setIsVisible(true); // Muestra la animación al entrar en el viewport
         }
       },
-      { threshold: 0.2 }, // El componente se considera visible cuando el 20% es visible
+      { threshold: 0.2 } // El componente se considera visible cuando el 20% es visible
     );
 
     if (sectionRef.current) {
@@ -29,6 +34,15 @@ export default function ServicionAnuncio() {
       }
     };
   }, []);
+
+  // Función para manejar el clic en el enlace de contratación de ambulancias
+  const handleAmbulanceClick = (e) => {
+    if (!isAuthenticated) {
+      e.preventDefault(); // Evita la navegación
+      message.warning('Debe iniciar sesión para acceder a este servicio.');
+      navigate('/Iniciar Sesion');
+    }
+  };
 
   return (
     <section
@@ -69,7 +83,7 @@ export default function ServicionAnuncio() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
             {/* Contratación de Ambulancias */}
             <div className="text-center lg:text-left">
-              <Link to="/ContratacionAmbulancias">
+              <Link to="/ContratacionAmbulancias" onClick={handleAmbulanceClick}>
                 <div className="w-20 h-20 bg-red-500 text-white rounded-full mx-auto lg:mx-0 mb-4 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow transform hover:scale-110">
                   <FaAmbulance className="text-3xl" />
                 </div>

@@ -12,12 +12,10 @@ export default function Perfil() {
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   useEffect(() => {
-    // Simula un retardo de 3 segundos antes de ocultar el skeleton
     const timer = setTimeout(() => {
       setShowSkeleton(false);
     }, 3000);
 
-    // Limpia el temporizador cuando el componente se desmonte
     return () => clearTimeout(timer);
   }, []);
 
@@ -30,12 +28,11 @@ export default function Perfil() {
   }
 
   return (
-    <div>
-      <div className="contenedorPerfil">
-        <TablePerfil />
-        <TableCitas />
-        <TableContratacion />
-      </div>
+    <div className="contenedorPerfil">
+      <br />
+      <TablePerfil /><br />
+      <TableCitas /><br />
+      <TableContratacion /><br />
     </div>
   );
 }

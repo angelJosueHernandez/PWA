@@ -314,6 +314,27 @@ select {
   border-radius: 5px;
 }
 .btn-primary {
-  background-color: #007bff;
+  background-color: #ff0000;
   color: white;
+  height: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.btn-primary2 {
+  background-color: #ffffff;
+  color: rgb(3, 3, 3);
+  border: 1px solid #ec0c0c;
+  height: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  
+}
+
+.btn-primary2:hover {
+  background-color: #ec0c0c;
+  color: rgb(255, 255, 255);
+  border: 1px solid #ec0c0c;
+  height: 10px;
+  font-size: 12px;
+  font-weight: bold;
 }

@@ -21,6 +21,9 @@ import {
 } from '@ant-design/icons';
 
 export default function Form() {
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Nuevo estado para deshabilitar el botón
+
   const { setCorreoGuardar } = useAuth();
 
   const navigate = useNavigate();
@@ -49,6 +52,9 @@ export default function Form() {
       });
       return;
     }
+
+    setIsButtonDisabled(true); // Deshabilitar el botón al hacer clic
+    setTimeout(() => setIsButtonDisabled(false), 10000); // Habilitar el botón después de 10 segundos
 
     if (attemptCount >= maxAttempts) {
       message.error(
@@ -320,7 +326,7 @@ export default function Form() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onBlur={() => validatePassword(password)}
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? '' : 'password'}
                   autoComplete="password"
                   className={`block w-full contrasena rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${passwordError ? 'input-error' : ''}`}
                 />
@@ -351,7 +357,7 @@ export default function Form() {
           <div className="cont-remenLogin">
             <ReCAPTCHA
               ref={captcha}
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               
               onChange={handleChangeCaptcha}
             />
@@ -360,7 +366,7 @@ export default function Form() {
             <Link to={'/Recuperacion'}>Olvidaste tu Contraseña?</Link>
           </div>
           <div className="BotonIniciar">
-            <button className="button2Login" type="submit">
+            <button className="button2Login" type="submit" disabled={isButtonDisabled} >
               Iniciar Sesión
             </button>
           </div>

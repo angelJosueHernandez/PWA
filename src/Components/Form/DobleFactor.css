@@ -204,6 +204,24 @@
   margin-top: 10px;
   cursor: pointer;
 }
+.button52 {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: .8rem;
+  color: #d31212;
+  background-color: #ffffff;
+  border: 1px solid #df0303;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  align-self: center;
+  grid-column: span 4;
+  margin-bottom: 14px;
+}
+.button52:hover {
+  background-color: #df0303; /* Color de fondo al pasar el cursor */
+  color: white; /* Color del texto al pasar el cursor */
+}
 .otp-container {
   display: flex;
   flex-wrap: wrap;

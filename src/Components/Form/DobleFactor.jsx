@@ -194,23 +194,7 @@ export default function Doblefactor() {
         .then((response) => response.json())
         .then((result) => {
           if (result.mensaje === 'El token de verificación es válido') {
-            /**   const token = Cookies.get('jwt');
-            
-           //const token = Cookies.get('jwt');
-            let nombre; // Declarar la variable fuera de try
-            let Authenticated;
-            let id;
-            let correo;
-            if (token) {
-              try {
-                // Decodifica el token JWT
-                const decodedToken = jwtDecode(token);
-                nombre = decodedToken.nombre
-                Authenticated =decodedToken.IsAuthenticated 
-                correo = decodedToken.correo
-                id = decodedToken.id
- */
-
+       
             const token = result.token;
             Cookies.set('jwt', token, { secure: true, sameSite: 'None' });
 
@@ -315,12 +299,21 @@ export default function Doblefactor() {
   const [hasExpiredOnce, setHasExpiredOnce] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setRemainingTime((prevTime) => prevTime - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+    // Solo inicia el temporizador si el botón de reenvío está deshabilitado
+    if (!isResendEnabled && remainingTime > 0) {
+      const timer = setInterval(() => {
+        setRemainingTime((prevTime) => prevTime - 1);
+      }, 1000);
+  
+      // Limpia el temporizador cuando se desmonta o cuando cambia `remainingTime`
+      return () => clearInterval(timer);
+    } else if (remainingTime <= 0) {
+      // Cuando el tiempo llega a 0, habilita el botón y reinicia el temporizador para el próximo uso
+      setIsResendEnabled(true);
+      setRemainingTime(60); // Reinicia el contador para el próximo ciclo de reenvío
+    }
+  }, [remainingTime, isResendEnabled]);
+  
 
   useEffect(() => {
     if (remainingTime <= 0 && !hasExpiredOnce) {
@@ -349,6 +342,10 @@ export default function Doblefactor() {
   }, [remainingTime, hasExpiredOnce]);
 
   const handleResend = () => {
+
+    setIsResendEnabled(false); // Deshabilita el botón inmediatamente después de hacer clic
+    setRemainingTime(60); // Reinicia el temporizador para la próxima cuenta regresiva
+  
     const requestBody = {
       correo: correoGuardar,
     };
@@ -368,8 +365,7 @@ export default function Doblefactor() {
           throw new Error('Error al enviar el correo de verificación'); // Manejar errores de solicitud HTTP
         }
         console.log('Correo de verificación enviado exitosamente');
-        setRemainingTime(60);
-        setIsResendEnabled(false);
+      
         setHasExpiredOnce(false);
         // Puedes agregar aquí cualquier manejo adicional después de enviar el correo
       })
@@ -413,7 +409,7 @@ export default function Doblefactor() {
           {isResendEnabled ? (
             <button
               type="button"
-              className="button5"
+              className="button52"
               onClick={handleResend}
               disabled={!isResendEnabled}
             >
@@ -427,7 +423,7 @@ export default function Doblefactor() {
             <ReCAPTCHA
               ref={captcha}
               
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               onChange={handleChangeCaptcha}
             />
           </div>

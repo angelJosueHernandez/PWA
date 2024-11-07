@@ -139,6 +139,27 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
+
+// Función para verificar y mostrar el recordatorio
+function checkReminder() {
+  const reminderTime = new Date(localStorage.getItem('reminderTime'));
+  const now = new Date();
+
+  if (now >= reminderTime) {
+    self.registration.showNotification('Recordatorio de Cita', {
+      body: 'Tienes una cita programada en 3 horas.',
+      icon: '/icon.png',
+      tag: 'cita-reminder',
+    });
+    localStorage.removeItem('reminderTime'); // Elimina el recordatorio una vez que se ha mostrado
+  }
+}
+
+// Verifica el recordatorio cada 15 minutos
+setInterval(checkReminder, 900000); // 15 minutos
+
+
+
 self.addEventListener('push', function (event) {
   const data = event.data.json();
   const options = {
@@ -149,3 +170,5 @@ self.addEventListener('push', function (event) {
 
   event.waitUntil(self.registration.showNotification(data.title, options));
 });
+
+

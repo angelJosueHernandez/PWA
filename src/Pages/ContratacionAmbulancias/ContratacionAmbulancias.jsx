@@ -64,18 +64,28 @@ export default function ContratacionForm() {
   }, [correoCookieUser]);
 
   useEffect(() => {
-    fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles')
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchAmbulancias = async () => {
+      try {
+        const response = await fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles');
+        const data = await response.json();
         if (data.length > 0) {
           setAmbulanciasDisponibles(data);
+          setAmbulanciaError(''); // Limpia cualquier mensaje de error anterior
         } else {
           setAmbulanciaError('Por el momento no hay ambulancias disponibles');
         }
-      })
-      .catch((error) => console.error('Error fetching ambulances:', error));
+      } catch (error) {
+        console.error('Error fetching ambulances:', error);
+      }
+    };
+  
+    // Llama a la función inmediatamente y luego cada 5 segundos
+    fetchAmbulancias();
+    const intervalId = setInterval(fetchAmbulancias, 5000);
+  
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
-
+  
   const validateNombre = (value) => {
     const regex = /^[a-zA-Z\s]*$/;
     if (!regex.test(value)) {
@@ -223,7 +233,7 @@ export default function ContratacionForm() {
     }
 
     setIsSubmitting(true);
-    message.loading('Verficando...', 7);
+    message.loading('Verficando...', 4);
     setTimeout(() => {}, 1000);
 
     const requestBody = {

@@ -42,16 +42,16 @@ const CustomCalendar = ({ onChange, value }) => {
   );
 };
 
-async function scheduleReminderNotification(date, time) {
-  const appointmentDate = moment(
-    date + ' ' + time,
-    'YYYY-MM-DD HH:mm',
-  ).subtract(1, 'day');
-  const reminderTime = appointmentDate.toDate();
 
-  // Almacena la fecha de recordatorio en el localStorage
-  localStorage.setItem('reminderTime', reminderTime.toISOString());
+async function scheduleReminderNotification(date, time) {
+  const appointmentDate = moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm').subtract(3, 'hours');
+  const reminderTime = appointmentDate.toISOString();
+
+  // Almacena el recordatorio en localStorage
+  localStorage.setItem('reminderTime', reminderTime);
 }
+
+
 
 // Función para verificar si es el momento de mostrar el recordatorio
 function checkReminder() {
@@ -76,6 +76,8 @@ function checkReminder() {
 }
 
 export default function Citas() {
+
+
   function sendNotification(title, options) {
     if (Notification.permission === 'granted') {
       navigator.serviceWorker.getRegistration().then((reg) => {
@@ -227,6 +229,39 @@ export default function Citas() {
       fetchAvailableHorarios();
     }
   }, [selectedDate]);
+
+
+  useEffect(() => {
+    const fetchAvailableHorarios = async () => {
+      try {
+        const dateInMexico = moment
+          .tz(selectedDate, 'America/Mexico_City')
+          .format('YYYY-MM-DD');
+        const response = await fetch(
+          `https://api-beta-mocha-59.vercel.app/horas-disponibles/${dateInMexico}`
+        );
+        if (!response.ok) {
+          throw new Error('Error al obtener los horarios disponibles');
+        }
+        const data = await response.json();
+        setAvailableHorarios(data);
+        setSelectedHorario(null);
+        setIsFormDisabled(data.length === 0);
+      } catch (error) {
+        console.error('Error fetching available hours:', error);
+        setIsFormDisabled(true);
+      }
+    };
+  
+    // Llama a la función inmediatamente y luego cada 10 segundos
+    fetchAvailableHorarios();
+    const intervalId = setInterval(fetchAvailableHorarios, 10000);
+  
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+  }, [selectedDate]);
+
+  
+  
 
   const validateForm = () => {
     const today = moment.tz('America/Mexico_City').startOf('day');

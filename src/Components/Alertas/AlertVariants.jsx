@@ -16,13 +16,7 @@ export function AlertVariants({ alertType, alertMessage }) {
         <span>{alertMessage}</span>
       </Alert>
 
-      {/*<Stack sx={{ width: '100%' }} spacing={2}>
-      {alertType && (
-        <Alert severity={alertType}>
-          {alertMessage}
-        </Alert>
-      )}
-    </Stack>*/}
+
     </div>
   );
 }

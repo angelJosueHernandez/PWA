@@ -32,20 +32,20 @@ const Principios = () => {
     <div className="p-4 bg-white">
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-2 sm:px-6 sm:py-2 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-red-900 sm:text-4xl">
             Principios Fundamentales
-          </h2>
-          <p className="mt-4 text-gray-500">
+          </h2><br /><br />
+          <span className="mt-4 text-gray-600">
             Los principios fundamentales garantizan continuidad del movimiento
             de la Cruz Roja y de la Media Luna Roja y su labor humanitaria.
-          </p>
+          </span>
 
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
             {features.map((feature) => (
               <div key={feature.name} className="border-t border-gray-200 pt-4">
                 <dt className="font-medium text-gray-900">{feature.name}</dt>
-                <dd className="mt-2 text-sm text-gray-500">
-                  {feature.description}
+                <dd className="mt-3 text-base leading-7 text-gray-600">
+                  <span>{feature.description}</span>
                 </dd>
               </div>
             ))}

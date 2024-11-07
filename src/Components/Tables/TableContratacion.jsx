@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../Contexts/AuthContexts';
 import moment from 'moment';
-import { AlertVariants } from '../Alertas/AlertVariants'; // Importa tu componente de alertas
+import { AlertVariants } from '../Alertas/AlertVariants';
 
 export default function TableContratacion() {
   const [contratacionData, setContratacionData] = useState([]);
@@ -13,9 +13,9 @@ export default function TableContratacion() {
   });
   const [alertType, setAlertType] = useState(null);
   const [alertMessage, setAlertMessage] = useState('');
-  const [showAlert, setShowAlert] = useState(false); // Estado para mostrar/ocultar alerta
+  const [showAlert, setShowAlert] = useState(false);
 
-  const { idCookieUser, setContratacionLoaded } = useAuth(); // Asegúrate de obtener setContratacionLoaded del contexto
+  const { idCookieUser, setContratacionLoaded } = useAuth();
 
   const fetchContratacionData = () => {
     if (idCookieUser) {
@@ -27,41 +27,29 @@ export default function TableContratacion() {
           return response.json();
         })
         .then((data) => {
-          if (Array.isArray(data)) {
-            setContratacionData(data);
-            setContratacionLoaded(true); // Cargar con éxito
-          } else if (data) {
-            setContratacionData([data]);
-            setContratacionLoaded(true); // Cargar con éxito
-          } else {
-            setContratacionData([]);
-            setContratacionLoaded(false); // No hay datos, pero indicar que terminó la carga
-          }
+          setContratacionData(Array.isArray(data) ? data : [data]);
+          setContratacionLoaded(!!data);
         })
         .catch((error) => {
           console.error('Error fetching contratacion data:', error);
-          setContratacionLoaded(false); // Error en la carga
+          setContratacionLoaded(false);
         });
     }
   };
 
   useEffect(() => {
-    fetchContratacionData();
+    fetchContratacionData(); // Llamada inicial para cargar los datos de contratación al montar el componente
+  
+    const intervalId = setInterval(fetchContratacionData, 2000); // Actualiza cada 5 segundos
+  
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, [idCookieUser, setContratacionLoaded]);
-
-  useEffect(() => {
-    const interval = setInterval(fetchContratacionData, 1000); // Actualiza cada 60 segundos
-    return () => clearInterval(interval); // Limpiar el intervalo cuando el componente se desmonte
-  }, [idCookieUser, setContratacionLoaded]);
+  
 
   const handleEditContratacion = (item) => {
-    const fechaFormateada = moment(item.fecha, 'DD/MM/YYYY').format(
-      'YYYY-MM-DD',
-    );
-    const horaFormateada = moment(item.horario, 'hh:mm A').format('HH:mm');
     setEditContratacionData({
-      fecha: fechaFormateada,
-      horario: horaFormateada,
+      fecha: moment(item.fecha, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      horario: moment(item.horario, 'hh:mm A').format('HH:mm'),
       ID_Contratacion: item.ID_Contratacion,
     });
     setEditModalOpen(true);
@@ -88,9 +76,7 @@ export default function TableContratacion() {
             ? {
                 ...item,
                 fecha: moment(fecha).format('DD/MM/YYYY'),
-                horario: moment(horarioFormateado, 'HH:mm:ss').format(
-                  'hh:mm A',
-                ),
+                horario: moment(horarioFormateado, 'HH:mm:ss').format('hh:mm A'),
               }
             : item,
         );
@@ -99,21 +85,18 @@ export default function TableContratacion() {
         setAlertType('success');
         setAlertMessage(result.msg);
       } else {
-        console.error('Error updating contratacion:', result.msg);
         setAlertType('error');
         setAlertMessage(result.msg);
       }
     } catch (error) {
-      console.error('Error updating contratacion:', error);
       setAlertType('error');
       setAlertMessage('Error al actualizar la contratación');
     } finally {
       setShowAlert(true);
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 5000); // La alerta desaparecerá después de 5 segundos
+      setTimeout(() => setShowAlert(false), 5000);
     }
   };
+
 
   const handleCancel = async (ID_Contratacion) => {
     try {
@@ -145,128 +128,72 @@ export default function TableContratacion() {
   };
 
   return (
-    <div>
-      <AlertVariants
-        alertType={alertType}
-        alertMessage={showAlert ? alertMessage : ''}
-      />
-
-      <div className="other-container">
-        {isEditModalOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3>Editar Contratación</h3>
-                <button onClick={() => setEditModalOpen(false)}>&times;</button>
-              </div>
-              <div className="modal-body">
-                <label>
-                  Fecha:
-                  <input
-                    type="date"
-                    value={editContratacionData.fecha}
-                    onChange={(e) =>
-                      setEditContratacionData({
-                        ...editContratacionData,
-                        fecha: e.target.value,
-                      })
-                    }
-                  />
-                </label>
-                <label>
-                  Horario:
-                  <input
-                    type="time"
-                    value={editContratacionData.horario}
-                    onChange={(e) =>
-                      setEditContratacionData({
-                        ...editContratacionData,
-                        horario: e.target.value,
-                      })
-                    }
-                  />
-                </label>
-              </div>
-              <div className="modal-footer">
-                <button className="save-button" onClick={handleSaveEdit}>
-                  Guardar
-                </button>
-                <button
-                  className="cancel-button"
-                  onClick={() => setEditModalOpen(false)}
-                >
-                  Cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-        <h3>Contratación de Ambulancias</h3> <br />
-        <div className="tabla-container">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
+    <div className="p-4 bg-white shadow-md rounded-lg max-w-full md:max-w-3xl mx-auto">
+      <AlertVariants alertType={alertType} alertMessage={showAlert ? alertMessage : ''} />
+      <h3 className="text-xl font-semibold mb-4">Contratación de Ambulancias</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-full table-auto text-left">
+          <thead>
+            <tr>
+              <th className="border-b p-4">Motivo</th>
+              <th className="border-b p-4">Destino</th>
+              <th className="border-b p-4">Fecha</th>
+              <th className="border-b p-4">Horario</th>
+              <th className="border-b p-4">Estado</th>
+              <th className="border-b p-4">Editar</th>
+              <th className="border-b p-4">Cancelar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contratacionData.length === 0 ? (
               <tr>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Motivo
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Destino
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Fecha
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Horario
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Estado
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Editar
-                </th>
-                <th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Cancelar
-                </th>
+                <td colSpan="7" className="p-4 text-center">No hay datos de contratación de ambulancias.</td>
               </tr>
-            </thead>
-            <tbody>
-              {contratacionData.length === 0 ? (
-                <tr>
-                  <td colSpan="7" className="p-4 text-[13px]">
-                    No hay datos de contratación de ambulancias.
+            ) : (
+              contratacionData.map((item, index) => (
+                <tr key={index} className="even:bg-blue-gray-50/50">
+                  <td className="p-4">{item.motivo}</td>
+                  <td className="p-4">{item.destino_Traslado}</td>
+                  <td className="p-4">{item.fecha}</td>
+                  <td className="p-4">{item.horario}</td>
+                  <td className="p-4">{item.estado}</td>
+                  <td className="p-4">
+                    <button className="text-blue-600" onClick={() => handleEditContratacion(item)}>Editar</button>
+                  </td>
+                  <td className="p-4">
+                    <button className="text-red-600" onClick={() => handleCancel(item.ID_Contratacion)}>Cancelar</button>
                   </td>
                 </tr>
-              ) : (
-                contratacionData.map((item, index) => (
-                  <tr key={index} className="even:bg-blue-gray-50/50">
-                    <td className="p-4">{item.motivo}</td>
-                    <td className="p-4">{item.destino_Traslado}</td>
-                    <td className="p-4">{item.fecha}</td>
-                    <td className="p-4">{item.horario}</td>
-                    <td className="p-4">{item.estado}</td>
-                    <td className="p-4">
-                      <button
-                        className="button-edit"
-                        onClick={() => handleEditContratacion(item)}
-                      >
-                        Editar
-                      </button>
-                    </td>
-                    <td className="p-4">
-                      <button
-                        className="button-cancel"
-                        onClick={() => handleCancel(item.ID_Contratacion)}
-                      >
-                        Cancelar
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
+
+      {isEditModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-xs sm:max-w-md mx-4 md:mx-0">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-medium text-gray-900">Editar Contratación</h3>
+              <button className="text-gray-500" onClick={() => setEditModalOpen(false)}>&times;</button>
+            </div>
+            <div>
+              <label className="block mb-4">
+                Fecha:
+                <input type="date" value={editContratacionData.fecha} onChange={(e) => setEditContratacionData({ ...editContratacionData, fecha: e.target.value })} className="w-full mt-1 rounded-md border-gray-300" />
+              </label>
+              <label className="block mb-4">
+                Horario:
+                <input type="time" value={editContratacionData.horario} onChange={(e) => setEditContratacionData({ ...editContratacionData, horario: e.target.value })} className="w-full mt-1 rounded-md border-gray-300" />
+              </label>
+            </div>
+            <div className="flex justify-end space-x-2 mt-4">
+              <button className="bg-green-500 text-white px-4 py-2 rounded-md" onClick={handleSaveEdit}>Guardar</button>
+              <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => setEditModalOpen(false)}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,4 @@
 import React from 'react';
-import {
-  CloudArrowUpIcon,
-  LockClosedIcon,
-  ServerIcon,
-} from '@heroicons/react/20/solid';
 import quienes_somos from '../../assets/img/quienes_somos.png';
 import servicios from '../../assets/img/servicios.png';
 import seguro from '../../assets/img/seguro.png';
@@ -48,13 +43,13 @@ const QuienesSomos = () => {
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
-                <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <h1 className="mt-2 text-3xl font-bold tracking-tight text-red-900 sm:text-4xl">
                   ¿Quiénes somos?
                 </h1>
               </div>
             </div>
           </div>
-          <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+          <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden hidden lg:block">
             <img
               alt=""
               src={quienes_somos}
@@ -64,15 +59,15 @@ const QuienesSomos = () => {
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-                <p>
-                  La Cruz Roja Mexicana es una institución de asistencia privada
+                <span className='font-semibold text-gray-600'>
+                La Cruz Roja Mexicana es una institución de asistencia privada
                   no gubernamental, humanitaria, imparcial, neutral e
                   independiente; que moviliza redes de voluntarios, comunidades
                   y donantes para operar programas y servicios que tienen como
                   objetivo el preservar la salud, la vida y aliviar el
                   sufrimiento humano de la población en situación de
                   vulnerabilidad.
-                </p>
+                </span>
                 <ul role="list" className="mt-8 space-y-8 text-gray-600">
                   <li className="flex gap-x-3">
                     <img
