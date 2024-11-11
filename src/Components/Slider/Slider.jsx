@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import TitleTypeOne from '../../Ui/TitleTypeOne/TitleTypeOne';
+import { Link } from 'react-router-dom';
 
 import co1 from '../../assets/img/Colectas/co1.jpg';
 import co2 from '../../assets/img/Colectas/co2.jpg';
@@ -59,9 +60,9 @@ const SwiperDemo = () => {
             zIndex: 1,
           }}
         >
-          <a href="/donaciones" className="donation-button">
+          <Link to="/Donaciones" className="donation-button">
             Ir a Donar <span className="icon">💖</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

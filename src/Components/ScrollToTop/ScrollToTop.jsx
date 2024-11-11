@@ -2,11 +2,14 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation(); // Obtener la ruta actual
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Forzar el desplazamiento al inicio de la página
-  }, [pathname]); // Ejecutar cada vez que cambie la ruta
+    // Solo desplaza hacia arriba si el usuario no está ya en la parte superior
+    if (window.scrollY !== 0) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname]);
 
   return null;
 };

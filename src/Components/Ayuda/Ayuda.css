@@ -1,4 +1,7 @@
+
+
 header {
+
   width: 100%;
   overflow: hidden;
 }
@@ -247,14 +250,15 @@ header {
 }
 
 .bubbles-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position: fixed; /* O 'absolute' según el diseño */
   top: 0;
   left: 0;
-  overflow: hidden;
-  z-index: -1;
+  width: 100%;
+  height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+  pointer-events: none; /* Evita que interfiera con los clics */
+  z-index: -1; /* Coloca las burbujas detrás de otros elementos */
 }
+
 
 .red-bubble {
   position: absolute;
