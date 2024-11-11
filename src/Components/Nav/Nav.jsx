@@ -239,7 +239,7 @@ export default function Nav() {
                         />
                       </Button>
                     </MenuHandler>
-                    <MenuList className="p-1 menuUser">
+                    <MenuList className="p-1 ">
                       {profileMenuItems.map(({ label, icon, path }, key) => (
                         <NavLink to={path} key={label} onClick={closeMenu}>
                           <MenuItem className="flex items-center gap-2 rounded menu-item hover:bg-gray-500/10 focus:bg-gray-500/10 active:bg-gray-500/10">
