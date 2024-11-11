@@ -266,14 +266,14 @@ export default function Nav() {
                           className="flex items-center gap-2 rounded hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10 menu-item2"
                         >
                           <PowerIcon
-                            className="h-4 w-4"
+                            className= 'h-5 w-5 md:h-6 md:w-6 lg:h-6 lg:w-6'
                             strokeWidth={2}
                             color="red"
                           />
                           <Typography
                             as="span"
                             variant="small"
-                            className="font-normal"
+                            className="font-normal "
                             color="red"
                           >
                             Cerrar Sesión

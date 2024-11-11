@@ -10,3 +10,17 @@
   margin-top: 3.6px !important;
   color: red !important;
 }
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInDown 1s forwards;
+}
+
+@keyframes fadeInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

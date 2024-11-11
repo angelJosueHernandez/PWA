@@ -388,7 +388,13 @@
   .img-Login, .img-Login4, .feature-border, .title-form2 {
     display: none !important;
   }
-}
+  .button52 {
+    font-size: 10px;
+    display: inline-block !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    margin-top: 10px !important;
+}}
 
 
 
