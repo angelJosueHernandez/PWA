@@ -9,7 +9,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { GoArrowRight, GoArrowLeft } from 'react-icons/go';
 import headerShape from '../../assets/header-shape.svg';
 import { Link } from 'react-router-dom';
-
+import { useRef } from 'react';
 export default function Ayuda() {
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState('');
@@ -17,6 +17,14 @@ export default function Ayuda() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [bubbles, setBubbles] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Estado de carga del botón
+  const modalRef = useRef(null); // Referencia para el modal
+
+  useEffect(() => {
+    if (modalIsOpen && modalRef.current) {
+      modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [modalIsOpen]);
+
 
   const cruzRojaLocation = { latitude: 21.1435, longitude: -98.4197 };
 
@@ -195,7 +203,7 @@ export default function Ayuda() {
       </div>
 
       {modalIsOpen && (
-        <div className="fixed inset-0 flex mt-[-340rem] lg:mt-[-240rem] items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-out">
+        <div   ref={modalRef} className="fixed inset-0 flex mt-[-300rem] lg:mt-[-240rem] items-center justify-center bg-black bg-opacity-50 z-50  duration-300 ease-out">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl transition-all transform duration-300 ease-in-out scale-100 modal-container">
             {/* Icono de advertencia */}
             <div className="text-center mb-4">
