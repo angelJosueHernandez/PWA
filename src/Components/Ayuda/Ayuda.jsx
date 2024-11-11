@@ -195,7 +195,7 @@ export default function Ayuda() {
       </div>
 
       {modalIsOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-out">
+        <div className="fixed inset-0 flex mt-[-340rem] lg:mt-[-240rem] items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-out">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg md:max-w-xl lg:max-w-2xl transition-all transform duration-300 ease-in-out scale-100 modal-container">
             {/* Icono de advertencia */}
             <div className="text-center mb-4">
