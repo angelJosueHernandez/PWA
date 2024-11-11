@@ -51,7 +51,7 @@ const CheckoutForm = ({ amount, clearForm, validateFields }) => {
 
       if (!error) {
         const { id } = paymentMethod;
-        const response = await fetch("http://localhost:3000/checkout", {
+        const response = await fetch("https://api-beta-mocha-59.vercel.app/checkout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
