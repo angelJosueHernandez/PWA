@@ -106,7 +106,7 @@ export const headerBooks2 = [
     id: 1,
     img: HBook1,
     title: 'Necesitas Ayuda',
-    info: '"¡Un Clic para la Ayuda Vital! Con nuestro botón de emergencia,<br> la Cruz Roja está a tu lado en segundos. Tu seguridad es nuestra<br> prioridad, presiona ahora y deja que la asistencia llegue volando."',
+    info: '"¡Un Clic para la Ayuda Vital! Con nuestro botón de emergencia,<br> la Cruz Roja está a tu lado en segundos. Tu seguridad es nuestra<br> prioridad, presiona ahora y deja que la asistencia llegue volando. HOLA MUNDO"',
     btnLink: '*',
   },
 ];
