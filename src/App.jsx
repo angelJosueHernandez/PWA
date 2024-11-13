@@ -40,10 +40,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    // Dentro de algún componente o en la consola del navegador
-
-
-
     const showMessage = (type, content) => {
       message[type]({
         content,
