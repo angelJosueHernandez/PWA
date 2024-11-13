@@ -11,7 +11,7 @@ const root = createRoot(container);
 root.render(
   <AuthProvider>
     <App />
-    <Analytics />
+     <Analytics />
   </AuthProvider>,
 );
 
