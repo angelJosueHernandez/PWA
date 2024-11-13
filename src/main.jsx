@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { AuthProvider } from './Components/Contexts/AuthContexts.jsx';
+import { Analytics } from '@vercel/analytics/react';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -10,6 +11,7 @@ const root = createRoot(container);
 root.render(
   <AuthProvider>
     <App />
+    <Analytics />
   </AuthProvider>,
 );
 
