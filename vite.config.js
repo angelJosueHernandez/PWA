@@ -2,9 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// Importa el plugin de Sentry (si usas la integración con Vite para Sentry)
-import sentryVitePlugin from '@sentry/vite-plugin';
-
 export default defineConfig({
   plugins: [
     react(),
@@ -39,12 +36,6 @@ export default defineConfig({
           },
         ],
       },
-    }),
-    sentryVitePlugin({  // Agregar el plugin de Sentry para Vite
-      authToken: process.env.SENTRY_AUTH_TOKEN,  // Usa el token de autenticación
-      org: 'uthh-ql',
-      project: 'pwa',
-      release: process.env.GITHUB_SHA,  // Usualmente se usa el SHA del commit
     }),
   ],
   test: {
