@@ -8,7 +8,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 
 import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/browser';  // Actualizado a @sentry/browser
+import { BrowserTracing } from '@sentry/tracing'; 
 
 
 // Inicializar Sentry
