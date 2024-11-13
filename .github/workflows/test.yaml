@@ -87,32 +87,31 @@ jobs:
           name: build-artifact
           path: ./dist
 
-    deploy:
-      runs-on: ubuntu-latest
-      needs: [build]
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
 
-      steps:
-        - name: Checkout Código
-          uses: actions/checkout@v4.2.1
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4.2.1
 
-        - name: Desplegar en Vercel
-          env:
-            VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          run: npx vercel --prod --yes --token $VERCEL_TOKEN
+      - name: Desplegar en Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx vercel --prod --yes --token $VERCEL_TOKEN
 
-        - name: Descargar y configurar sentry-cli
-          run: |
-            curl -sL https://sentry.io/get-cli/ | bash
-            export PATH="$HOME/.sentry-cli:$PATH"
+      - name: Descargar y configurar sentry-cli
+        run: |
+          curl -sL https://sentry.io/get-cli/ | bash
+          export PATH="$HOME/.sentry-cli:$PATH"
 
-        - name: Sentry Release
-          env:
-            SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          run: |
-            sentry-cli releases new "$GITHUB_SHA"
-            sentry-cli releases set-commits "$GITHUB_SHA" --auto
-            sentry-cli releases finalize "$GITHUB_SHA"
-
+      - name: Sentry Release
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        run: |
+          sentry-cli releases new "$GITHUB_SHA"
+          sentry-cli releases set-commits "$GITHUB_SHA" --auto
+          sentry-cli releases finalize "$GITHUB_SHA"
 
   notify:
     runs-on: ubuntu-latest
@@ -141,5 +140,3 @@ jobs:
             ¡Buen trabajo! 🎉
           to: "20210672@uthh.edu.mx"  # Correo de destino
           from: ${{ secrets.MAIL_USERNAME }}
-
-          
