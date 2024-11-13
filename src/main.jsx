@@ -11,8 +11,7 @@ import * as Sentry from '@sentry/react';
 // Inicializar Sentry (sin BrowserTracing)
 Sentry.init({
   dsn: "https://003a22cd1fff1364065ad7941094c945@o4508289853947904.ingest.us.sentry.io/4508290685075456",
-  integrations: [],
-  tracesSampleRate: 1.0, // Mantén esto como 1.0 para asegurar la captura de errores
+  integrations: []
 });
 
 const container = document.getElementById('root');
