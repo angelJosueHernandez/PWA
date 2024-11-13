@@ -377,7 +377,7 @@ export default function Doblefactor() {
 
   return (
     <div className={containerClass} id="container">
-      <Spin spinning={spinning} fullscreen />
+      <Spin className='w-full h-full' spinning={spinning} fullscreen />
       <div className="form-container sign-in">
         <form className='formulario' onSubmit={handleSubmit}>
           <h3 className="title-form">Verificacion Doble Factor</h3>
