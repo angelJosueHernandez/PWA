@@ -14,8 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Código
+      - name: Checkout Código con historial completo
         uses: actions/checkout@v4.2.1
+        with:
+          fetch-depth: 0  # Asegura que se clonen todos los commits en lugar de solo el último
 
       - name: Configurar Node.js
         uses: actions/setup-node@v3
@@ -108,12 +110,12 @@ jobs:
       - name: Sentry Release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: uthh-ql           # Reemplaza con el slug de tu organización en Sentry
-          SENTRY_PROJECT: pwa           # Reemplaza con el slug de tu proyecto en Sentry
+          SENTRY_ORG: <slug-de-tu-organizacion>           # Reemplaza con el slug de tu organización en Sentry
+          SENTRY_PROJECT: <slug-del-proyecto>             # Reemplaza con el slug de tu proyecto en Sentry
         run: |
-          sentry-cli releases new "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT"
-          sentry-cli releases set-commits "$GITHUB_SHA" --auto --org "$SENTRY_ORG" --project "$SENTRY_PROJECT"
-          sentry-cli releases finalize "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT"
+          sentry-cli releases new "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
+          sentry-cli releases set-commits "$GITHUB_SHA" --auto --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
+          sentry-cli releases finalize "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
 
   notify:
     runs-on: ubuntu-latest
