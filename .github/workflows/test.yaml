@@ -110,12 +110,17 @@ jobs:
       - name: Sentry Release
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: uthh-ql          # Reemplaza con el slug de tu organización en Sentry
-          SENTRY_PROJECT: pwa            # Reemplaza con el slug de tu proyecto en Sentry
+          SENTRY_ORG: <slug-de-tu-organizacion>  # Reemplaza con el slug de tu organización en Sentry
+          SENTRY_PROJECT: <slug-del-proyecto>    # Reemplaza con el slug de tu proyecto en Sentry
         run: |
-          sentry-cli releases new "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
+          # Crear una nueva versión en Sentry
+          sentry-cli releases new "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT"
+          
+          # Asociar los commits a la nueva versión
           sentry-cli releases set-commits "$GITHUB_SHA" --auto --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
-          sentry-cli releases finalize "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT" --ignore-missing
+          
+          # Finalizar la versión en Sentry
+          sentry-cli releases finalize "$GITHUB_SHA" --org "$SENTRY_ORG" --project "$SENTRY_PROJECT"
 
   notify:
     runs-on: ubuntu-latest
