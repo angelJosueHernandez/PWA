@@ -1,4 +1,4 @@
-import * as Sentry from '@sentry/react';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
@@ -7,11 +7,16 @@ import { AuthProvider } from './Components/Contexts/AuthContexts.jsx';
 import { Analytics } from '@vercel/analytics/react';
 
 
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/browser';  // Actualizado a @sentry/browser
+
+
+// Inicializar Sentry
 Sentry.init({
   dsn: "https://003a22cd1fff1364065ad7941094c945@o4508289853947904.ingest.us.sentry.io/4508290685075456",
-  integrations: [],
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 1.0, // Ajusta según sea necesario
 });
-
 
 
 const container = document.getElementById('root');
