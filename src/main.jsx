@@ -4,6 +4,17 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { AuthProvider } from './Components/Contexts/AuthContexts.jsx';
 import { Analytics } from '@vercel/analytics/react';
+import * as Sentry from "@sentry/react";
+
+Sentry.init({
+  dsn: "https://003a22cd1fff1364065ad7941094c945@o4508289853947904.ingest.us.sentry.io/4508290685075456",
+  integrations: [new BrowserTracing()],
+  
+  // Ajusta la tasa de muestreo para el monitoreo de rendimiento
+  tracesSampleRate: 1.0, // Puedes ajustar a 0.1 en producción para reducir el muestreo
+});
+
+
 
 const container = document.getElementById('root');
 const root = createRoot(container);

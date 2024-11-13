@@ -40,6 +40,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Dentro de algún componente o en la consola del navegador
+Sentry.captureException(new Error("Este es un error de prueba"));
+
+
     const showMessage = (type, content) => {
       message[type]({
         content,
