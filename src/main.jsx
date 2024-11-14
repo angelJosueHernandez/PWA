@@ -11,7 +11,20 @@ import * as Sentry from '@sentry/react';
 // Inicializar Sentry (sin BrowserTracing)
 Sentry.init({
   dsn: "https://003a22cd1fff1364065ad7941094c945@o4508289853947904.ingest.us.sentry.io/4508290685075456",
-  integrations: []
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.browserProfilingIntegration(),
+  ],
+   // Tracing
+   tracesSampleRate: 1.0, //  Capture 100% of the transactions
+   // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+   tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
+   // Set profilesSampleRate to 1.0 to profile every transaction.
+   // Since profilesSampleRate is relative to tracesSampleRate,
+   // the final profiling rate can be computed as tracesSampleRate * profilesSampleRate
+   // For example, a tracesSampleRate of 0.5 and profilesSampleRate of 0.5 would
+   // results in 25% of transactions being profiled (0.5*0.5=0.25)
+   profilesSampleRate: 1.0,
 });
 
 const container = document.getElementById('root');
