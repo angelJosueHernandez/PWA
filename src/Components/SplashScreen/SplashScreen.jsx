@@ -62,7 +62,7 @@ const SplashScreen = () => {
         <div className="progress-bar">
           <div className="progress" style={{ width: `${progress}%` }}></div>
         </div>
-        <p className="message">{message}</p>
+        <span className="message">{message}</span>
       </div>
     </div>
   );

@@ -21,9 +21,9 @@ function CookieBanner({ onAccept }) {
         experiencia en nuestro sitio web. Para obtener más información sobre
         cómo utilizamos las cookies, consulta nuestra política de cookies.
       </p>
-      <a href="#" className="confirm-button" onClick={handleAcceptClick}>
+      <span  className="confirm-button" onClick={handleAcceptClick}>
         Aceptar
-      </a>
+      </span>
       <a className="second-button">
         <Link className="second-button" to={'/Cookies'}>
           Consulta nuestra política de Cookies.
