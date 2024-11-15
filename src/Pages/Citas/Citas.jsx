@@ -8,9 +8,10 @@ import './Citas.css';
 import { useAuth } from '../../Components/Contexts/AuthContexts';
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
-import { message } from 'antd';
+import { message} from 'antd';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment-timezone';
+import Logo from '../../assets/logo.png';
 
 const holidays = [
   { month: 0, day: 1 }, // Año Nuevo
@@ -77,6 +78,53 @@ function checkReminder() {
 
 export default function Citas() {
 
+
+
+
+   // Estados para feedback
+   const [isFeedbackModalVisible, setIsFeedbackModalVisible] = useState(false);
+   const [feedbackRating, setFeedbackRating] = useState(0);
+   const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
+
+ 
+   const showFeedbackModal = () => {
+     setIsFeedbackModalVisible(true);
+   };
+ 
+   const handleFeedbackSubmit = async () => {
+    setIsSubmittingFeedback(true); // Iniciar carga
+    try {
+      const feedbackData = {
+        correo: formData.correo, // Usa el correo del usuario para obtener el ID en el backend
+        rating: feedbackRating,
+      };
+  
+      const response = await fetch('https://api-beta-mocha-59.vercel.app/registrarFeedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(feedbackData),
+      });
+  
+      if (response.ok) {
+        message.success('¡Gracias por tu calificación!');
+        setIsFeedbackModalVisible(false); // Cierra el modal
+        setFeedbackRating(0);
+      } else {
+        const errorData = await response.json();
+        message.error(`Error: ${errorData.mensaje}`);
+      }
+    } catch (error) {
+      console.error('Error al enviar el feedback:', error);
+      message.error('Error al enviar el feedback. Inténtalo más tarde.');
+    } finally {
+      setIsSubmittingFeedback(false); // Finalizar carga
+    }
+  };
+  
+
+   
 
   const saveCitaToLocalStorage = (fecha, horario) => {
     const citas = JSON.parse(localStorage.getItem('citas')) || [];
@@ -404,6 +452,7 @@ export default function Citas() {
 
         if (response.ok) {
 
+          showFeedbackModal();
 
           sendNotification('Servicio contratado con éxito', {
             body: `Tu servicio está programado para el ${formData.fecha} a las ${horarioSeleccionado}.`,
@@ -415,8 +464,8 @@ export default function Citas() {
         saveCitaToLocalStorage(formData.fecha, horarioSeleccionado);
 
           scheduleReminderNotification(formData.fecha, horarioSeleccionado);
-          message.success('Cita registrada exitosamente', 3);
-          navigate('/Perfil');
+          message.success('Cita registrada exitosamente, puedes entrar a tu perfil para ver tu cita', 4);
+         // navigate('/Perfil');
         } else {
           const errorData = await response.json();
           message.error(`Error: ${errorData.msg}`, 3);
@@ -701,6 +750,65 @@ export default function Citas() {
           </div>
         </form>
       </div>
+
+
+{/* Modal de Feedback */}
+{isFeedbackModalVisible && (
+  <div className="fixed inset-0 z-50 flex items-center h-full w-full justify-center bg-gray-800 bg-opacity-75">
+    <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full space-y-4">
+      {/* Título y Logo */}
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-semibold text-red-600">Calificación del Servicio</h2>
+        <img
+          src={Logo} // Asegúrate de colocar correctamente la ruta al logo
+          alt="Cruz Roja"
+          className="w-24 h-8"
+        />
+      </div>
+
+      {/* Instrucción */}
+      <p className="text-gray-700">Por favor, califica nuestro servicio:</p>
+
+      {/* Botones de Calificación */}
+      <div className="flex justify-center space-x-2">
+        {[1, 2, 3, 4, 5].map((value) => (
+          <button
+            key={value}
+            className={`w-10 h-10 rounded-full text-white font-bold ${
+              feedbackRating >= value ? 'bg-red-500' : 'bg-gray-300'
+            } hover:bg-red-400 transition`}
+            onClick={() => setFeedbackRating(value)}
+          >
+            {value}
+          </button>
+        ))}
+      </div>
+
+      {/* Botones de Acción */}
+      <div className="flex justify-end space-x-2">
+        <button
+          onClick={() => setIsFeedbackModalVisible(false)}
+          className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
+        >
+          Cancelar
+        </button>
+        <button
+          onClick={handleFeedbackSubmit}
+          disabled={isSubmittingFeedback} // Deshabilita el botón mientras se envía
+          className={`px-4 py-2 text-white rounded-md transition ${
+            isSubmittingFeedback
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-red-600 hover:bg-red-700'
+          }`}
+        >
+          {isSubmittingFeedback ? 'Enviando respuesta...' : 'Enviar'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
     </div>
   );
 }

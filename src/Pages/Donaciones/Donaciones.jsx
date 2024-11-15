@@ -18,17 +18,57 @@ import p6 from '../../assets/img/Servicios/work-7.jpeg';
 import p7 from '../../assets/img/Servicios/work-8.jpeg';
 import p8 from '../../assets/img/Servicios/work-3.jpeg';
 import { PaymentElement } from '@stripe/react-stripe-js';
+import { useAuth } from '../../Components/Contexts/AuthContexts';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const stripePromise = loadStripe('pk_test_51QJQ5uDIWznX38uOqRNbGsjduSvo12H8NQBCqVdIMS3U28yXBQyk6TW8NReNgcZMWfQWayD2i2pXtFIvYJoIUsZf00eIziHzHG');
 
 const CheckoutForm = ({ amount, clearForm, validateFields }) => {
+
+
+  const navigate = useNavigate();
+
+  const registrarDonacion = async () => {
+    try {
+      const response = await fetch("https://api-beta-mocha-59.vercel.app/registrarDonacion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          correo: correoGuardar, // El correo del usuario autenticado
+          monto: amount, // El monto de la donación
+        }),
+      });
+  
+      if (response.ok) {
+        message.success("Donación registrada exitosamente");
+      } else {
+        const errorData = await response.json();
+        message.error(`Error al registrar la donación: ${errorData.mensaje}`);
+      }
+    } catch (error) {
+      console.error("Error al registrar la donación:", error);
+      message.error("Error al registrar la donación. Inténtalo más tarde.");
+    }
+  };
+
+  
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
-
+  const { correoGuardar, isAuthenticated } = useAuth();
   const handleSubmitDonar = async (e) => {
     e.preventDefault();
+
+     // Verificar si el usuario está autenticado
+  if (!isAuthenticated) {
+    message.warning("Debe iniciar sesión para realizar una donación.", 2);
+    navigate("/Iniciar Sesion");
+    return;
+  }
 
     // Verificar que todos los campos estén completos y sin errores
     if (!validateFields()) {
@@ -71,6 +111,9 @@ const CheckoutForm = ({ amount, clearForm, validateFields }) => {
         elements.getElement(CardElement).clear();
         message.success("Pago exitoso");
 
+
+          // Registrar la donación en tu API
+          await registrarDonacion();
         // Limpiar el formulario después de un pago exitoso
         clearForm();
       } else {

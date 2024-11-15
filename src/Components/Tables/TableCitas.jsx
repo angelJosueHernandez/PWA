@@ -32,15 +32,14 @@ export default function TableCitas() {
     const fetchAndUpdateCitas = () => {
       // Primero, mostramos el contenido actual del localStorage
       const citasLocalStorage = JSON.parse(localStorage.getItem('citas')) || [];
-      console.log('Contenido actual del localStorage:', citasLocalStorage);
-  
+
       if (userData.correo) {
         // Luego, hacemos la petición para obtener las citas del servidor
         fetch(`https://api-beta-mocha-59.vercel.app/citasPagina/correo?correo=${userData.correo}`)
           .then((response) => response.json())
           .then((data) => {
             // Mostramos el contenido que devuelve la API
-            console.log('Contenido de la API:', data);
+
   
             // Solo extraemos la fecha y hora de cada cita
             const citasArray = data.map((cita) => ({
@@ -48,8 +47,7 @@ export default function TableCitas() {
               horario: cita.horario,
             }));
   
-            // Verifica el contenido de las citas antes de almacenarlas en localStorage
-            console.log('Citas a almacenar en localStorage:', citasArray);
+
   
             // Guardar solo la fecha y hora en el localStorage
             localStorage.setItem('citas', JSON.stringify(citasArray));
