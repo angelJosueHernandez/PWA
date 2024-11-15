@@ -78,15 +78,30 @@ function checkReminder() {
 export default function Citas() {
 
 
-  function sendNotification(title, options) {
+  const saveCitaToLocalStorage = (fecha, horario) => {
+    const citas = JSON.parse(localStorage.getItem('citas')) || [];
+    citas.push({ fecha, horario });
+    localStorage.setItem('citas', JSON.stringify(citas));
+  };
+  
+
+  function sendNotification(title, options, cita) {
+    // Generar un tag único basado en la fecha y hora de la cita
+    const tag = `cita-${cita.fecha}-${cita.horario}`;
+  
     if (Notification.permission === 'granted') {
       navigator.serviceWorker.getRegistration().then((reg) => {
         if (reg) {
-          reg.showNotification(title, options);
+          reg.showNotification(title, {
+            body: options.body,
+            icon: options.icon,
+            tag: tag, // Usar el tag único
+          });
         }
       });
     }
   }
+  
 
   useEffect(() => {
     const intervalId = setInterval(checkReminder, 3600000); // cada hora
@@ -388,11 +403,17 @@ export default function Citas() {
         );
 
         if (response.ok) {
+
+
           sendNotification('Servicio contratado con éxito', {
             body: `Tu servicio está programado para el ${formData.fecha} a las ${horarioSeleccionado}.`,
             icon: '/icon.png',
-            tag: 'service-contratado',
-          });
+          }, citaData); // Pasar la cita completa para usar en el tag
+
+          
+           // Guarda solo la fecha y la hora en el localStorage
+        saveCitaToLocalStorage(formData.fecha, horarioSeleccionado);
+
           scheduleReminderNotification(formData.fecha, horarioSeleccionado);
           message.success('Cita registrada exitosamente', 3);
           navigate('/Perfil');

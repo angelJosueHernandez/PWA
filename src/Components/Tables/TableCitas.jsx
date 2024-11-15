@@ -26,6 +26,51 @@ export default function TableCitas() {
   
   const { idCookieUser } = useAuth();
 
+
+
+  useEffect(() => {
+    const fetchAndUpdateCitas = () => {
+      // Primero, mostramos el contenido actual del localStorage
+      const citasLocalStorage = JSON.parse(localStorage.getItem('citas')) || [];
+      console.log('Contenido actual del localStorage:', citasLocalStorage);
+  
+      if (userData.correo) {
+        // Luego, hacemos la petición para obtener las citas del servidor
+        fetch(`https://api-beta-mocha-59.vercel.app/citasPagina/correo?correo=${userData.correo}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Mostramos el contenido que devuelve la API
+            console.log('Contenido de la API:', data);
+  
+            // Solo extraemos la fecha y hora de cada cita
+            const citasArray = data.map((cita) => ({
+              fecha: cita.fecha,
+              horario: cita.horario,
+            }));
+  
+            // Verifica el contenido de las citas antes de almacenarlas en localStorage
+            console.log('Citas a almacenar en localStorage:', citasArray);
+  
+            // Guardar solo la fecha y hora en el localStorage
+            localStorage.setItem('citas', JSON.stringify(citasArray));
+          })
+          .catch((error) => console.error('Error fetching citas data:', error));
+      }
+    };
+  
+    // Llama a la función para actualizar las citas al inicio
+    fetchAndUpdateCitas();
+  
+    // Configura un intervalo para actualizar las citas cada medio segundo
+    const interval = setInterval(fetchAndUpdateCitas, 500); // 500ms = 0.5 segundos
+  
+    // Limpia el intervalo cuando el componente se desmonta
+    return () => clearInterval(interval);
+  }, [userData.correo]); // Solo depende de las citas del usuario
+  
+  
+
+
   useEffect(() => {
     if (idCookieUser) {
       fetch(`https://api-beta-mocha-59.vercel.app/MiPerfil/${idCookieUser}`)
@@ -46,7 +91,7 @@ export default function TableCitas() {
     };
 
     fetchCitasData();
-    const interval = setInterval(fetchCitasData, 2000);
+    const interval = setInterval(fetchCitasData, 1000);
     return () => clearInterval(interval);
   }, [userData.correo]);
 
@@ -87,7 +132,7 @@ export default function TableCitas() {
 
     if (editCitaData.fecha) {
       fetchAvailableHorarios();
-      const interval = setInterval(fetchAvailableHorarios, 2000);
+      const interval = setInterval(fetchAvailableHorarios, 1000);
       return () => clearInterval(interval);
     }
   }, [editCitaData.fecha]);
@@ -121,6 +166,9 @@ export default function TableCitas() {
             : cita
         );
         setCitasData(updatedCitas);
+
+
+        
         setEditModalOpen(false);
         setAlertType('success');
         setAlertMessage(result.msg || 'Cita actualizada con éxito');
