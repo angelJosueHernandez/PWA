@@ -50,10 +50,6 @@ export default function Form() {
       message.warning({
         content: 'Por favor, Realiza el captcha para proseguir.',
         duration: 2, // Duración en segundos antes de que el mensaje desaparezca automáticamente
-        style: {
-          marginTop: '70px', // Ajusta la distancia vertical desde la parte superior
-          marginRight: '-990px', // Ajusta la distancia horizontal desde el borde derecho
-        },
       });
       return;
     }
