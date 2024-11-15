@@ -27,7 +27,7 @@ export default function VideoY() {
     height: videoSize.height,
     width: videoSize.width,
     playerVars: {
-      autoplay: 1,
+      autoplay: 0, // Cambio aquí para que no se reproduzca automáticamente
     },
   };
 

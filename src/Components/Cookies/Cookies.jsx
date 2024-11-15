@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Cookies.css';
 import cookieimg from './cookie.png';
@@ -8,10 +8,19 @@ function CookieBanner({ onAccept }) {
 
   const handleAcceptClick = () => {
     setHidden(true);
+    localStorage.setItem('cookiesAccepted', 'true'); // Guardar aceptación
     setTimeout(() => {
       onAccept();
-    }, 2000); // Espera 2 segundos antes de ejecutar la acción de aceptar, ajusta según la duración de tu animación de cookies
+    }, 2000);
   };
+  
+  // Verificar si ya fue aceptado
+  useEffect(() => {
+    if (localStorage.getItem('cookiesAccepted')) {
+      setHidden(true); // Ocultar el banner si ya se aceptaron las cookies
+    }
+  }, []);
+  
 
   return (
     <div className={`cookie-banner-container ${hidden ? 'hide' : ''}`}>
@@ -24,11 +33,11 @@ function CookieBanner({ onAccept }) {
       <span  className="confirm-button" onClick={handleAcceptClick}>
         Aceptar
       </span>
-      <a className="second-button">
+      <span className="second-button">
         <Link className="second-button" to={'/Cookies'}>
           Consulta nuestra política de Cookies.
         </Link>
-      </a>
+      </span>
     </div>
   );
 }

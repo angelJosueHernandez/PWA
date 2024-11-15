@@ -6,11 +6,17 @@ import { Textarea } from '@material-tailwind/react';
 import { InfoPopover } from './InfoPopover'; // Asegúrate de ajustar la ruta de importación
 import './ContratacionAmbulancias.css';
 import { message } from 'antd';
+import { Navigate } from 'react-router-dom';
 
 export default function ContratacionForm() {
-  const { idCookieUser, correoCookieUser } = useAuth();
+  const { idCookieUser, correoCookieUser, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const ID_Usuario = idCookieUser;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/Iniciar Sesion" />;
+  }
+
 
   const [nombre, setNombre] = useState('');
   const [apellido_Paterno, setApellido_Paterno] = useState('');
