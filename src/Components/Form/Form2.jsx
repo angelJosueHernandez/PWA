@@ -37,6 +37,10 @@ export default function Form2() {
   const [country, setCountry] = useState(0);
   const { name, flags, countryCallingCode } = countries[country];
 
+
+  const [loading, setLoading] = useState(false);
+
+
   const navigate = useNavigate();
   const [agreed, setAgreed] = useState(true);
   const [agreed2, setAgreed2] = useState(true);
@@ -131,6 +135,7 @@ export default function Form2() {
           emailData.deliverability == 'UNDELIVERABLE' &&
           telefonoData.valid == false
         ) {
+          setLoading(false);
           message.warning(
             'El correo electrónico y Teléfono proporcionado no son válidos, introduzca datos reales y existentes',
           );
@@ -138,6 +143,7 @@ export default function Form2() {
           emailData.deliverability == 'UNDELIVERABLE' &&
           telefonoData.valid == true
         ) {
+          setLoading(false);
           message.warning(
             'El correo electrónico proporcionado no es válido, introduzca uno real existente',
           );
@@ -145,6 +151,7 @@ export default function Form2() {
           telefonoData.valid == false &&
           emailData.deliverability == 'DELIVERABLE'
         ) {
+          setLoading(false);
           message.warning(
             'El número de teléfono proporcionado no es válido, introduzca uno real y verifique el Prefijo del Numero',
           );
@@ -210,11 +217,12 @@ export default function Form2() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setLoading(true);
     const captchaValue = captcha.current.getValue();
 
     if (!captchaValue) {
       message.error('Por favor, realiza el captcha');
+      setLoading(false);
       return;
     }
 
@@ -261,6 +269,7 @@ export default function Form2() {
       ) {
         // Si el teléfono no es válido, detener el envío del formulario
         message.warning('Rellene Correctamente los Campos');
+        setLoading(false);
         return;
       }
 
@@ -273,6 +282,7 @@ export default function Form2() {
         .then((result) => {
           if (result.mensaje === 'Este correo ya está registrado') {
             message.warning('Este correo ya está registrado');
+            setLoading(false);
           } else {
             validateData(email, telefono, selectedCountryCallingCode)
               .then((valid) => {
@@ -297,7 +307,8 @@ export default function Form2() {
                       showLoader();
                       setTimeout(() => {
                         message.success('Usuario registrado exitosamente', 2);
-                        navigate('/Login');
+                        navigate('/Iniciar Sesion');
+                        setLoading(false);
                       }, 2000);
                     });
                 } else {
@@ -500,7 +511,7 @@ export default function Form2() {
 
   return (
     <div className={containerClass} id="container">
-      <Spin spinning={spinning} fullscreen />
+      <Spin className='w-full h-full' spinning={spinning} fullscreen />
 
       <div className="form-container sign-in">
         <form onSubmit={handleSubmit}>
@@ -775,8 +786,8 @@ export default function Form2() {
           <div className="remen">
             <ReCAPTCHA
               ref={captcha}
-              //sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
               sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              
               onChange={handleChangeCaptcha}
             />
           </div>
@@ -846,9 +857,32 @@ export default function Form2() {
           <button
             className={`button ${buttonDisabled ? 'button-disabled2' : ''}`}
             type="submit"
-            disabled={buttonDisabled}
+            disabled={buttonDisabled || loading }
           >
-            Registrarse
+             {loading ? (
+          <svg
+            className="animate-spin h-5 w-5 text-white mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            ></path>
+          </svg>
+        ) : (
+          "Registrar"
+        )}
           </button>
           <div className="Google">
             <button

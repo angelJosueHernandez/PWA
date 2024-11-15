@@ -23,6 +23,7 @@ import {
 export default function Form() {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false); // Nuevo estado para deshabilitar el botón
+  const [loading, setLoading] = useState(false);
 
   const { setCorreoGuardar } = useAuth();
 
@@ -39,9 +40,13 @@ export default function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
     validateEmail(email);
+    
+    setLoading(true);
     const captchaValue = captcha.current.getValue();
 
     if (!captchaValue) {
+      
+    setLoading(false);
       message.warning({
         content: 'Por favor, Realiza el captcha para proseguir.',
         duration: 2, // Duración en segundos antes de que el mensaje desaparezca automáticamente
@@ -57,6 +62,7 @@ export default function Form() {
     setTimeout(() => setIsButtonDisabled(false), 10000); // Habilitar el botón después de 10 segundos
 
     if (attemptCount >= maxAttempts) {
+      setLoading(false);
       message.error(
         'Has excedido el límite de intentos. Tu cuenta ha sido bloqueada por seguridad.',
       );
@@ -81,23 +87,28 @@ export default function Form() {
         .then((response) => response.json())
         .then((result) => {
           if (result.mensaje === 'Autenticación exitosa') {
+          
             verificacionCorreoTokenEnviar(email);
             setCorreoGuardar(email);
             message.loading('Verficando...', 2);
             setTimeout(() => {
+              setLoading(false);
               navigate('/DobleFactor');
             }, 2200);
           } else if (
             result.mensaje ===
             'Este correo no coincide con ningún correo registrado'
           ) {
+            setLoading(false);
             message.error(
               'Este correo no coincide con ningún correo registrado',
             );
           } else {
             // Autenticación fallida
             if (result.mensaje === 'Tu cuenta está bloqueada') {
+              
               message.loading('Verficando...', 1);
+              setLoading(false);
               setTimeout(() => {
                 message.error(
                   'Tu cuenta está bloqueada. No puedes iniciar sesión.',
@@ -105,6 +116,7 @@ export default function Form() {
               }, 1200);
             } else if (attemptCount < maxAttempts - 1) {
               message.loading('Verficando...', 1);
+              setLoading(false);
               setTimeout(() => {
                 setAttemptCount((prevCount) => prevCount + 1);
                 message.error(
@@ -113,7 +125,9 @@ export default function Form() {
               }, 1200);
             } else {
               message.loading('Verficando...', 1);
+              setLoading(false);
               setTimeout(() => {
+                
                 message.error(
                   'Has excedido el límite de intentos. Tu cuenta ha sido bloqueada por seguridad.',
                 );
@@ -133,6 +147,7 @@ export default function Form() {
     } else {
       console.log('Formulario no válido');
       message.warning('Para continuar Acomplete todo los campos');
+      setLoading(false);
     }
   };
 
@@ -357,7 +372,7 @@ export default function Form() {
           <div className="cont-remenLogin">
             <ReCAPTCHA
               ref={captcha}
-              sitekey="6Le7_38pAAAAAGL9nCevqF8KzHl6qzULlBArgfMb"
+              sitekey="6LfXgm0pAAAAAA6yN5NyGT_RfPXZ_NLXu1eNoaQf"
               
               onChange={handleChangeCaptcha}
             />
@@ -366,8 +381,31 @@ export default function Form() {
             <Link to={'/Recuperacion'}>Olvidaste tu Contraseña?</Link>
           </div>
           <div className="BotonIniciar">
-            <button className="button2Login" type="submit" disabled={isButtonDisabled} >
-              Iniciar Sesión
+            <button className="button2Login" type="submit" disabled={isButtonDisabled || loading} >
+            {loading ? (
+          <svg
+            className="animate-spin h-5 w-5 text-white mr-3"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            ></path>
+          </svg>
+        ) : (
+          "Iniciar Sesion"
+        )}
             </button>
           </div>
           <div className="logoGogle">
