@@ -10,7 +10,7 @@ import * as Sentry from '@sentry/react';
 
 // Inicializar Sentry (sin BrowserTracing)
 Sentry.init({
-  dsn: "https://de44698c686a7cec475ca59fc575bb7b@o4508289853947904.ingest.us.sentry.io/4508301081116672",
+  dsn: "https://003a22cd1fff1364065ad7941094c945@o4508289853947904.ingest.us.sentry.io/4508290685075456",
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.browserProfilingIntegration(),
@@ -20,14 +20,16 @@ Sentry.init({
    // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
 
    tracePropagationTargets: [
-    /^https:\/\/pwa-alpha-blue\.vercel\.app/, // Rastrear tu PWA
-    /^https:\/\/api-beta-mocha-59\.vercel\.app/ // Rastrear tu API (opcional)
+    /^https:\/\/pwa-alpha-blue\.vercel\.app/,
+    /^https:\/\/api-beta-mocha-59\.vercel\.app/,
+    "localhost", /^https:\/\/yourserver\.io\/api/
   ],
-   profilesSampleRate: 1.0, 
+   profilesSampleRate: 1.0,
+   environment: "production",
    replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
    replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
- });
- 
+});
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 

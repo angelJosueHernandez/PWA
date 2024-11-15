@@ -46,7 +46,7 @@ export default function TableCitas() {
     };
 
     fetchCitasData();
-    const interval = setInterval(fetchCitasData, 5000);
+    const interval = setInterval(fetchCitasData, 2000);
     return () => clearInterval(interval);
   }, [userData.correo]);
 
@@ -87,7 +87,7 @@ export default function TableCitas() {
 
     if (editCitaData.fecha) {
       fetchAvailableHorarios();
-      const interval = setInterval(fetchAvailableHorarios, 5000);
+      const interval = setInterval(fetchAvailableHorarios, 2000);
       return () => clearInterval(interval);
     }
   }, [editCitaData.fecha]);
