@@ -224,7 +224,8 @@ export default function Citas() {
   }, []);
 
   useEffect(() => {
-    const token = Cookies.get('jwt');
+   // const token = Cookies.get('jwt');
+    const token = Cookies.get('jwt') || localStorage.getItem('jwt');
     if (token) {
       try {
         fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {

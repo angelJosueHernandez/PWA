@@ -197,6 +197,7 @@ export default function Doblefactor() {
        
             const token = result.token;
             Cookies.set('jwt', token, { secure: true, sameSite: 'None' });
+            localStorage.setItem('jwt', token);
 
             let nombre;
             let Authenticated;

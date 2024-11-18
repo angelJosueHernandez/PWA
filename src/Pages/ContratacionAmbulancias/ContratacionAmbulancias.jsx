@@ -87,7 +87,7 @@ export default function ContratacionForm() {
   
     // Llama a la función inmediatamente y luego cada 5 segundos
     fetchAmbulancias();
-    const intervalId = setInterval(fetchAmbulancias, 5000);
+    const intervalId = setInterval(fetchAmbulancias, 1000);
   
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);

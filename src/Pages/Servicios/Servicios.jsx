@@ -90,7 +90,8 @@ const Servicios = () => {
   }, []);
 
   useEffect(() => {
-    const token = Cookies.get('jwt');
+    const token = Cookies.get('jwt') || localStorage.getItem('jwt');
+    //const token = Cookies.get('jwt');
     if (token) {
       try {
         fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {

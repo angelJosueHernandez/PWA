@@ -64,6 +64,7 @@ export default function Nav() {
     localStorage.setItem('Autentificado', 'false');
     message.loading('Cerrando Sesión', 1.5).then(() => {
       document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      localStorage.removeItem('jwt');
       setIsAuthenticated(false);
       navigate('/Iniciar Sesion');
     });
@@ -82,7 +83,8 @@ export default function Nav() {
 
   useEffect(() => {
     const fetchData = () => {
-      const token = Cookies.get('jwt');
+  //  const token = Cookies.get('jwt');
+      const token = Cookies.get('jwt') || localStorage.getItem('jwt');
       if (token) {
         try {
           fetch('https://api-beta-mocha-59.vercel.app/verifyToken', {

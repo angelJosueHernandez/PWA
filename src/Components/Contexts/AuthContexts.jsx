@@ -33,7 +33,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     // Simula la verificación inicial del estado de autenticación
     const checkAuth = async () => {
-      const token = Cookies.get('jwt');
+      //const token = Cookies.get('jwt');
+      const token = Cookies.get('jwt') || localStorage.getItem('jwt');
 
       if (token) {
         try {
