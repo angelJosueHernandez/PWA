@@ -72,11 +72,11 @@ export default function ContratacionForm() {
   useEffect(() => {
     const fetchAmbulancias = async () => {
       try {
-        const response = await fetch('https://api-beta-mocha-59.vercel.app/ambulancias-disponibles');
+        const response = await fetch(`https://api-beta-mocha-59.vercel.app/ambulancias-disponibles?_=${new Date().getTime()}`);
         const data = await response.json();
         if (data.length > 0) {
           setAmbulanciasDisponibles(data);
-          setAmbulanciaError(''); // Limpia cualquier mensaje de error anterior
+          setAmbulanciaError('');
         } else {
           setAmbulanciaError('Por el momento no hay ambulancias disponibles');
         }
@@ -84,6 +84,7 @@ export default function ContratacionForm() {
         console.error('Error fetching ambulances:', error);
       }
     };
+    
   
     // Llama a la función inmediatamente y luego cada 5 segundos
     fetchAmbulancias();
@@ -277,6 +278,8 @@ export default function ContratacionForm() {
         throw new Error(data.msg || 'Error en la solicitud');
       }
 
+
+      
       await fetch(
         'https://api-beta-mocha-59.vercel.app/enviar-correo-contratacion',
         {
